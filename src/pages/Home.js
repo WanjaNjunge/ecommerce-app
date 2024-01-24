@@ -23,6 +23,7 @@ import brandImg6 from '../assets/images/brand-06.png';
 import brandImg7 from '../assets/images/brand-07.png';
 import brandImg8 from '../assets/images/brand-08.png';
 import BlogCard from '../components/BlogCard';
+import ProjectCard from '../components/ProjectCard';
 
 
 const Home = () => {
@@ -265,10 +266,10 @@ const Home = () => {
               Featured Collection
               </h3>
             </div>
-            <BlogCard />
-            <BlogCard />
-            <BlogCard />
-            <BlogCard />
+            <ProjectCard />
+            <ProjectCard />
+            <ProjectCard />
+            <ProjectCard />
           </div>
         </div>
       </section>

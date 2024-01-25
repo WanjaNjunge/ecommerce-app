@@ -282,6 +282,12 @@ footer:not(:first-child) {
   right: 15px;
 }
 
+/* Special Products Section */
+.special-product-card {
+  padding: 20px 10px;
+  border-radius: 10px;
+  background-color: white;
+}
 
 /*Home wrapper 2 END*/
 /*Home END*/

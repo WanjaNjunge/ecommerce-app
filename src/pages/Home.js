@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Marquee from "react-fast-marquee";
+import BlogCard from '../components/BlogCard';
+import ProjectCard from '../components/ProjectCard';
+import SpecialProduct from '../components/SpecialProduct';
 import mainBannerImg1 from '../assets/images/main-banner-1.jpg';
 import catBannerImg1 from '../assets/images/catbanner-01.jpg';
 import catBannerImg2 from '../assets/images/catbanner-02.jpg';
@@ -22,8 +25,6 @@ import brandImg5 from '../assets/images/brand-05.png';
 import brandImg6 from '../assets/images/brand-06.png';
 import brandImg7 from '../assets/images/brand-07.png';
 import brandImg8 from '../assets/images/brand-08.png';
-import BlogCard from '../components/BlogCard';
-import ProjectCard from '../components/ProjectCard';
 
 
 const Home = () => {
@@ -233,6 +234,21 @@ const Home = () => {
             <ProjectCard />
             <ProjectCard />
             <ProjectCard />
+          </div>
+        </div>
+      </section>
+
+      <section className='special-wrapper py-5 home-wrapper-2'>
+        <div className='container-xxl'>
+          <div className='row'>
+            <div className='col-12'>
+              <h3 className='section-heading'>Special Products</h3>
+            </div>
+          </div>
+          <div className='row'>
+            <SpecialProduct />
+            <SpecialProduct />
+            <SpecialProduct />
           </div>
         </div>
       </section>

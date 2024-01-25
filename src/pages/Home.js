@@ -25,6 +25,8 @@ import brandImg5 from '../assets/images/brand-05.png';
 import brandImg6 from '../assets/images/brand-06.png';
 import brandImg7 from '../assets/images/brand-07.png';
 import brandImg8 from '../assets/images/brand-08.png';
+import famousImg1 from '../assets/images/famous-1.jpg';
+import famousImg2 from '../assets/images/famous-2.webp';
 
 
 const Home = () => {
@@ -238,6 +240,33 @@ const Home = () => {
         </div>
       </section>
 
+      <section className='featured-wrapper py-5 home-wrapper-2'>
+        <div className="container-xxl">
+          <div className="row">
+            <div className="col-3">
+              <div className='famous-card position-relative'>
+              <img className='img-fluid' src={famousImg1} alt='famous'/>
+                <div className='famous-content position-absolute'>
+                    <h5>Big Screen</h5>
+                    <h6>Smart Watch Series 7</h6>
+                    <p>From $699 or $116.58/mo. for 12 mo.*</p>
+                </div>
+              </div>
+            </div>
+            <div className="col-3">
+              <div className='famous-card position-relative'>
+              <img className='img-fluid' src={famousImg2} alt='famous'/>
+                <div className='famous-content position-absolute'>
+                    <h5 className='text-dark' >Big Screen</h5>
+                    <h6 className='text-dark' >Smart Watch Series 7</h6>
+                    <p className='text-dark'>From $699 or $116.58/mo. for 12 mo.*</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className='special-wrapper py-5 home-wrapper-2'>
         <div className='container-xxl'>
           <div className='row'>
@@ -249,6 +278,24 @@ const Home = () => {
             <SpecialProduct />
             <SpecialProduct />
             <SpecialProduct />
+          </div>
+        </div>
+      </section>
+
+      <section className='popular-wrapper py-5 home-wrapper-2'>
+        <div className='container-xxl'>
+          <div className='row'>
+            <div className='col-12'>
+              <h3 className='section-heading'>
+              Our Popular Products
+              </h3>
+            </div>
+            <div className='row'>
+            <ProjectCard />
+            <ProjectCard />
+            <ProjectCard />
+            <ProjectCard />
+            </div>
           </div>
         </div>
       </section>

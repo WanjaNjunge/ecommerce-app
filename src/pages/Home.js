@@ -27,6 +27,11 @@ import brandImg7 from '../assets/images/brand-07.png';
 import brandImg8 from '../assets/images/brand-08.png';
 import famousImg1 from '../assets/images/famous-1.jpg';
 import famousImg2 from '../assets/images/famous-2.webp';
+import laptopImg from '../assets/images/laptop.jpg';
+import monitorImg from '../assets/images/monitor-01.jpg';
+import phoneImg from '../assets/images/phone-01.jpg';
+import tabletImg from '../assets/images/tab4.webp';
+import watchImg from '../assets/images/watch-2.jpg';
 
 
 const Home = () => {
@@ -164,7 +169,7 @@ const Home = () => {
               <div className='categories d-flex justify-content-between flex-wrap align-items-center'>
                 <div className='d-flex gap align-items-center'>
                   <div>
-                    <h6>Camera</h6>
+                    <h6>Cameras</h6>
                     <p>10 items</p>
                   </div>
                   <img src={cameraImg} alt='camera'/>
@@ -178,45 +183,45 @@ const Home = () => {
                 </div>
                 <div className='d-flex gap align-items-center'>
                   <div>
-                    <h6>Cameras</h6>
+                    <h6>Laptops</h6>
                     <p>10 items</p>
                   </div>
-                  <img src={cameraImg} alt='camera'/>
+                  <img src={laptopImg} alt='camera'/>
                 </div>
                 <div className='d-flex gap align-items-center'>
                   <div>
-                    <h6>Music & Gaming</h6>
+                    <h6>Headphones</h6>
                     <p>10 items</p>
                   </div>
                   <img src={headPhoneImg} alt='camera'/>
                 </div>
                 <div className='d-flex gap align-items-center'>
                   <div>
-                    <h6>Camera</h6>
+                    <h6>All-in-Ones</h6>
                     <p>10 items</p>
                   </div>
-                  <img src={cameraImg} alt='camera'/>
+                  <img src={monitorImg} alt='camera'/>
                 </div>
                 <div className='d-flex gap align-items-center'>
                   <div>
-                    <h6>Smart Tvs</h6>
+                    <h6>Mobile Phones</h6>
                     <p>10 items</p>
                   </div>
-                  <img src={tvImg} alt='camera'/>
+                  <img src={phoneImg} alt='camera'/>
                 </div>
                 <div className='d-flex gap align-items-center'>
                   <div>
-                    <h6>Cameras</h6>
+                    <h6>Tablets</h6>
                     <p>10 items</p>
                   </div>
-                  <img src={cameraImg} alt='camera'/>
+                  <img src={tabletImg} alt='camera'/>
                 </div>
                 <div className='d-flex gap align-items-center'>
                   <div>
-                    <h6>Music & Gaming</h6>
+                    <h6>Smart Watches</h6>
                     <p>10 items</p>
                   </div>
-                  <img src={headPhoneImg} alt='camera'/>
+                  <img src={watchImg} alt='camera'/>
                 </div>
               </div>
             </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Marquee from "react-fast-marquee";
-import BlogCard from '../components/BlogCard';
+//import BlogCard from '../components/BlogCard';
 import ProjectCard from '../components/ProjectCard';
 import SpecialProduct from '../components/SpecialProduct';
 import mainBannerImg1 from '../assets/images/main-banner-1.jpg';
@@ -344,7 +344,7 @@ const Home = () => {
 
       
 
-      <section className='blog-wrapper py-5 home-wrapper-2'>
+      {/* <section className='blog-wrapper py-5 home-wrapper-2'>
         <div className='container-xxl'>
           <div className='row'>
             <div className='col-12'>
@@ -358,7 +358,7 @@ const Home = () => {
             <BlogCard />
           </div>
         </div>
-      </section>
+      </section> */}
     </>
   )
 }

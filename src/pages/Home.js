@@ -32,6 +32,8 @@ import monitorImg from '../assets/images/monitor-01.jpg';
 import phoneImg from '../assets/images/phone-01.jpg';
 import tabletImg from '../assets/images/tab4.webp';
 import watchImg from '../assets/images/watch-2.jpg';
+import phoneImg1 from '../assets/images/phone-03.webp';
+import speakerImg3 from '../assets/images/speaker-3.webp';
 
 
 const Home = () => {
@@ -262,8 +264,29 @@ const Home = () => {
               <div className='famous-card position-relative'>
               <img className='img-fluid' src={famousImg2} alt='famous'/>
                 <div className='famous-content position-absolute'>
-                    <h5 className='text-dark' >Big Screen</h5>
-                    <h6 className='text-dark' >Smart Watch Series 7</h6>
+                    <h5 className='text-dark' >Studio Display</h5>
+                    <h6 className='text-dark' >600 nits of brightness</h6>
+                    <p className='text-dark'>27-inch 5K Retina display</p>
+                </div>
+              </div>
+            </div>
+            <div className="col-3">
+              <div className='famous-card position-relative'>
+              <img className='img-fluid' src={phoneImg1} alt='famous'/>
+                <div className='famous-content position-absolute'>
+                    <h5 className='text-dark' >Smart Phones</h5>
+                    <h6 className='text-dark' >Smart Phone 13 pro</h6>
+                    <p className='text-dark'>Now in Green. From $999.00 or $41.62/mo.
+                    for 24 mo. Footnote*</p>
+                </div>
+              </div>
+            </div>
+            <div className="col-3">
+              <div className='famous-card position-relative'>
+              <img className='img-fluid' src={speakerImg3} alt='famous'/>
+                <div className='famous-content position-absolute'>
+                    <h5 className='text-dark' >Home Speakers</h5>
+                    <h6 className='text-dark' >Room-filling sound</h6>
                     <p className='text-dark'>From $699 or $116.58/mo. for 12 mo.*</p>
                 </div>
               </div>
@@ -280,6 +303,7 @@ const Home = () => {
             </div>
           </div>
           <div className='row'>
+            <SpecialProduct />
             <SpecialProduct />
             <SpecialProduct />
             <SpecialProduct />

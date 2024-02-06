@@ -7,8 +7,8 @@ import watchImg from '../assets/images/watch-01.jpg'
 const Wishlist = () => {
   return (
     <>
-        <Meta title={'Compare Products'}/>
-        <BreadCrumb title="Compare Products"
+        <Meta title={'Wishlist'}/>
+        <BreadCrumb title="Wishlist"
         />
 
         <div className='wishlist-wrapper home-wrapper-2 py-5'>

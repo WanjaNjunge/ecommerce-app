@@ -8,6 +8,7 @@ import gridImg1 from '../assets/images/gr.svg';
 import gridImg2 from '../assets/images/gr2.svg';
 import gridImg3 from '../assets/images/gr3.svg';
 import gridImg4 from '../assets/images/gr4.svg';
+import Color from '../components/Color';
 
 const OurStore = () => {
     const [grid, setGrid] = useState(4);
@@ -89,19 +90,7 @@ const OurStore = () => {
                   </h5>
 
                   <div>
-                    <ul className='colors ps-0'>
-                      <li></li>
-                      <li></li>
-                      <li></li>
-                      <li></li>
-                      <li></li>
-                      <li></li>
-                      <li></li>
-                      <li></li>
-                      <li></li>
-                      <li></li>
-                      <li></li>
-                    </ul>
+                    <Color />
                   </div>
 
                   <h5 className='sub-title'>

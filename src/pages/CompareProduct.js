@@ -68,7 +68,7 @@ const CompareProduct = () => {
                             </div>
 
                             <div className='compare-product-details'>
-                                <h5 className='ttle'>
+                                <h5 className='title'>
                                 APPLE Watch Series 2 – 42 mm Stainless Steel Case 
                                 </h5>
                                 <h6 className='price mb-3 mt-3'>$ 100</h6>

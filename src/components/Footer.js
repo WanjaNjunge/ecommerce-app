@@ -57,20 +57,20 @@ const Footer = () => {
             </div>
             </div>
             <div className='col-3'>
-            <h4 className='text-white mb-4'>Information</h4>
+            <h4 className='text-white mb-4'>Terms</h4>
             <div className='footer-links d-flex flex-column'>
-              <Link className='text-white py-2 mb-1'>Privacy Policy</Link>
-              <Link className='text-white py-2 mb-1'>Refund Policy</Link>
-              <Link className='text-white py-2 mb-1'>Shipping Policy</Link>
-              <Link className='text-white py-2 mb-1'>Terms & Conditions</Link>
+              <Link to='/privacy-policy' className='text-white py-2 mb-1'>Privacy Policy</Link>
+              <Link to='/warranty-refund' className='text-white py-2 mb-1'>Warranty & Refund Policy</Link>
+              <Link to='/delivery-policy' className='text-white py-2 mb-1'>Delivery Policy</Link>
+              <Link to='/terms-service' className='text-white py-2 mb-1'>Terms Of Service</Link>
             </div>
             </div>
             <div className='col-3'>
-            <h4 className='text-white mb-4'>Account</h4>
+            <h4 className='text-white mb-4'>About</h4>
             <div className='footer-links d-flex flex-column'>
               <Link className='text-white py-2 mb-1'>About Us</Link>
               <Link className='text-white py-2 mb-1'>FAQ</Link>
-              <Link className='text-white py-2 mb-1'>Contact</Link>
+              <Link className='text-white py-2 mb-1'>Customer Reviews</Link>
             </div>
             </div>
             <div className='col-2'>

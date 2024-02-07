@@ -12,6 +12,10 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+import DeliveryPolicy from './pages/DeliveryPolicy';
+import WarrantyRefundPolicy from './pages/WarrantyRefundPolicy';
+import TermsOfService from './pages/TermsOfService';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 function App() {
   return (
@@ -29,6 +33,10 @@ function App() {
             <Route path="signup" element={<Signup />} />
             <Route path="forgot-password" element={<ForgotPassword />} />
             <Route path="reset-password" element={<ResetPassword/>} />
+            <Route path="delivery-policy" element={<DeliveryPolicy />} />
+            <Route path="warranty-refund" element={<WarrantyRefundPolicy />} />
+            <Route path="terms-service" element={<TermsOfService />} />
+            <Route path="privacy-policy" element={<PrivacyPolicy />} />
           </Route>
         </Routes>
       </BrowserRouter>

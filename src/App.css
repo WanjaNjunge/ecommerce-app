@@ -538,3 +538,10 @@ footer:not(:first-child) {
   color: white;
 }
 /*Auth Card Ends*/
+
+/** Policy Pages **/
+.policy {
+  background-color: white;
+  padding: 30px;
+}
+/*Policy Pages Ends*/

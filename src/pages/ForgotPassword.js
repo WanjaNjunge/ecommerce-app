@@ -10,6 +10,7 @@ const ForgotPassword = () => {
       <BreadCrumb title="Forgot Password"/>
 
       <div className='login-wrapper py-5 home-wrapper-2'>
+            <div className='container-xxl'>
             <div className='row'>
                 <div className='col-12'>
                     <div className='auth-card'>
@@ -35,6 +36,7 @@ const ForgotPassword = () => {
                         </form>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
 

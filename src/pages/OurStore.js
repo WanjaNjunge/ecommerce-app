@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import BreadCrumb from '../components/BreadCrumb';
-import ProductCard from '../components/ProjectCard';
+import ProductCard from '../components/ProductCard';
 import Meta from '../components/Meta';
 import ReactStars from "react-rating-stars-component";
 import watchImg from '../assets/images/watch.jpg';

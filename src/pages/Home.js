@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Marquee from "react-fast-marquee";
 //import BlogCard from '../components/BlogCard';
-import ProjectCard from '../components/ProjectCard';
+import ProductCard from '../components/ProductCard';
 import SpecialProduct from '../components/SpecialProduct';
 import mainBannerImg1 from '../assets/images/main-banner-1.jpg';
 import catBannerImg1 from '../assets/images/catbanner-01.jpg';
@@ -239,10 +239,10 @@ const Home = () => {
               Featured Collection
               </h3>
             </div>
-            <ProjectCard />
-            <ProjectCard />
-            <ProjectCard />
-            <ProjectCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
           </div>
         </div>
       </section>
@@ -320,10 +320,10 @@ const Home = () => {
               </h3>
             </div>
             <div className='row'>
-            <ProjectCard />
-            <ProjectCard />
-            <ProjectCard />
-            <ProjectCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
             </div>
           </div>
         </div>

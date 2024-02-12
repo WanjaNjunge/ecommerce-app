@@ -16,6 +16,7 @@ import DeliveryPolicy from './pages/DeliveryPolicy';
 import WarrantyRefundPolicy from './pages/WarrantyRefundPolicy';
 import TermsOfService from './pages/TermsOfService';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import SingleProduct from './pages/SingleProduct';
 
 function App() {
   return (
@@ -26,7 +27,8 @@ function App() {
             <Route index element={<Home />} />
             <Route path="about" element={<About />} />
             <Route path="contact" element={<Contact />} />
-            <Route path="store" element={<OurStore />} />
+            <Route path="product" element={<OurStore />} />
+            <Route path="/product/:id" element={<SingleProduct />} />
             <Route path="compare-product" element={<CompareProduct />} />
             <Route path="wishlist" element={<Wishlist />} />
             <Route path="login" element={<Login />} />

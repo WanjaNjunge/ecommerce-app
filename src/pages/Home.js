@@ -4,16 +4,17 @@ import Marquee from "react-fast-marquee";
 //import BlogCard from '../components/BlogCard';
 import ProductCard from '../components/ProductCard';
 import SpecialProduct from '../components/SpecialProduct';
-import mainBannerImg1 from '../assets/images/main-banner-1.jpg';
-import catBannerImg1 from '../assets/images/catbanner-01.jpg';
-import catBannerImg2 from '../assets/images/catbanner-02.jpg';
-import catBannerImg3 from '../assets/images/catbanner-03.jpg';
-import catBannerImg4 from '../assets/images/catbanner-04.jpg';
+import Container from '../components/Container';
 import serviceImg1 from '../assets/images/service.png';
 import serviceImg2 from '../assets/images/service-02.png';
 import serviceImg3 from '../assets/images/service-03.png';
 import serviceImg4 from '../assets/images/service-04.png';
 import serviceImg5 from '../assets/images/service-05.png';
+import mainBannerImg1 from '../assets/images/main-banner-1.jpg';
+import catBannerImg1 from '../assets/images/catbanner-01.jpg';
+import catBannerImg2 from '../assets/images/catbanner-02.jpg';
+import catBannerImg3 from '../assets/images/catbanner-03.jpg';
+import catBannerImg4 from '../assets/images/catbanner-04.jpg';
 import cameraImg from '../assets/images/camera.jpg';
 import tvImg from '../assets/images/tv.jpg';
 import headPhoneImg from '../assets/images/headphone.jpg';
@@ -39,9 +40,8 @@ import speakerImg3 from '../assets/images/speaker-3.webp';
 const Home = () => {
   return (
     <>
-      <section className='home-wrapper-1 py-5'>
-        <div className='container-xxl'>
-          <div className='row'>
+    <Container class1='home-wrapper-1 py-5'>
+    <div className='row'>
             <div className="col-6">
               <div className='main-banner position-relative'>
                 <img
@@ -114,16 +114,13 @@ const Home = () => {
               </div>
             </div>
           </div>
-
-        </div>
-      </section>
-
-      <section className='home-wrapper-2 py-5'>
-        <div className="container-xxl">
-          <div className="row">
+    </Container>
+      
+    <Container class1='home-wrapper-2 py-5'>
+    <div className="row">
             <div className="col-12">
               <div className='services d-flex align-items-center justify-content-between'>
-                <div className='d-flex align-items-center gap-15'>
+              <div className='d-flex align-items-center gap-15'>
                   <img src={serviceImg1} alt='services'/>
                   <div>
                     <h6>Free Shipping</h6>
@@ -159,13 +156,13 @@ const Home = () => {
                   </div>
                 </div>
               </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </section>
+    </Container>
+      
 
-      <section className='home-wrapper-2 py-5'>
-        <div className="container-xxl">
+      <Container class1='home-wrapper-2 py-5'>
+        
           <div className="row">
             <div className="col-12">
               <div className='categories d-flex justify-content-between flex-wrap align-items-center'>
@@ -228,11 +225,9 @@ const Home = () => {
               </div>
             </div>
           </div>
-        </div>
-      </section>
+      </Container>
 
-      <section className='featured-wrapper py-5 home-wrapper-2'>
-        <div className='container-xxl'>
+      <Container class1='featured-wrapper py-5 home-wrapper-2'>
           <div className='row'>
             <div className='col-12'>
               <h3 className='section-heading'>
@@ -244,11 +239,9 @@ const Home = () => {
             <ProductCard />
             <ProductCard />
           </div>
-        </div>
-      </section>
+      </Container>
 
-      <section className='featured-wrapper py-5 home-wrapper-2'>
-        <div className="container-xxl">
+      <Container class1='featured-wrapper py-5 home-wrapper-2'>
           <div className="row">
             <div className="col-3">
               <div className='famous-card position-relative'>
@@ -292,11 +285,9 @@ const Home = () => {
               </div>
             </div>
           </div>
-        </div>
-      </section>
+      </Container>
 
-      <section className='special-wrapper py-5 home-wrapper-2'>
-        <div className='container-xxl'>
+      <Container class1='special-wrapper py-5 home-wrapper-2'>
           <div className='row'>
             <div className='col-12'>
               <h3 className='section-heading'>Special Products</h3>
@@ -308,11 +299,9 @@ const Home = () => {
             <SpecialProduct />
             <SpecialProduct />
           </div>
-        </div>
-      </section>
+      </Container>
 
-      <section className='popular-wrapper py-5 home-wrapper-2'>
-        <div className='container-xxl'>
+      <Container class1='popular-wrapper py-5 home-wrapper-2'>
           <div className='row'>
             <div className='col-12'>
               <h3 className='section-heading'>
@@ -326,11 +315,9 @@ const Home = () => {
             <ProductCard />
             </div>
           </div>
-        </div>
-      </section>
+      </Container>
 
-      <section className='marquee-wrapper py-5'>
-        <div className='container-xxl'>
+      <Container class1='marquee-wrapper py-5'>
           <div className='row'>
             <div className="col-12">
               <div className='marquee-inner-wrapper card-wrapper'>
@@ -363,13 +350,11 @@ const Home = () => {
               </div>
             </div>
           </div>
-        </div>
-      </section>
+      </Container>
 
       
 
-      {/* <section className='blog-wrapper py-5 home-wrapper-2'>
-        <div className='container-xxl'>
+      {/* <Container class1='blog-wrapper py-5 home-wrapper-2'>
           <div className='row'>
             <div className='col-12'>
               <h3 className='section-heading'>
@@ -381,8 +366,7 @@ const Home = () => {
             <BlogCard />
             <BlogCard />
           </div>
-        </div>
-      </section> */}
+      </Container> */}
     </>
   )
 }

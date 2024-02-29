@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Container from '../components/Container';
 import BreadCrumb from '../components/BreadCrumb';
 import ProductCard from '../components/ProductCard';
 import Meta from '../components/Meta';
@@ -19,8 +20,7 @@ const OurStore = () => {
       <Meta title={'Our Store'}/>
       <BreadCrumb title="Our Store" />
 
-      <div className='store-wrapper home-wrapper-2 py-5'>
-        <div className='container-xxl'>
+      <Container class1='store-wrapper home-wrapper-2 py-5'>
           <div className='row'>
             <div className='col-3'>
               <div className='filter-card mb-3'>
@@ -119,11 +119,11 @@ const OurStore = () => {
                         value=""
                         id='color-1'
                       />
-                      <lable
+                      <label
                       className='form-check-label'
                       htmlFor="color-1">
                         M (2)
-                        </lable>
+                        </label>
                     </div>
                   </div>
                 </div>
@@ -198,9 +198,9 @@ const OurStore = () => {
                 <div className='d-flex  justify-content-between align-items-center'>
                   <div className='d-flex align-items-center gap-10'>
                     <p className='mb-0 d-block' style={{ width: "100px" }}>Sort By:</p>
-                    <select name="" className="form-control form-select" id="">
+                    <select name="" className="form-control form-select" id="" defaultValue="best-selling">
                     <option value="manual">Featured</option>
-                    <option value="best-selling" selected="selected">Best selling</option>
+                    <option value="best-selling">Best selling</option>
                     <option value="title-ascending">Alphabetically, A-Z</option>
                     <option value="title-descending">Alphabetically, Z-A</option>
                     <option value="price-ascending">Price, low to high</option>
@@ -255,8 +255,7 @@ const OurStore = () => {
               </div>
             </div>
           </div>
-        </div>
-      </div>
+      </Container>
     </>
   )
 }

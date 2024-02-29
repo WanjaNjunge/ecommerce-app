@@ -9,18 +9,18 @@ import addCartImg from '../assets/images/add-cart.svg';
 import wishListImg from '../assets/images/wish.svg';
 
 
-const ProjectCard = (props) => {
+const ProductCard = (props) => {
     const location = useLocation();
     const { grid } = props;
 
   return (
     <>
         <div className={`${location.pathname === "/product" ? `gr-${grid}` : "col-3"}`}>
-        <Link to=":id" className='product-card position-relative'>
+        <Link to="/product" className='product-card position-relative'>
             <div className='wishlist-icon position-absolute'>
-                <Link>
+                <button className='border-0 bg-transparent'>
                     <img src={wishListImg} alt="wish list" />
-                </Link>
+                </button>
             </div>
             <div className='product-image'>
                 <img className='img-fluid' src={watchImg1} alt='product'/>
@@ -43,25 +43,25 @@ const ProjectCard = (props) => {
             </div>
             <div className='action-bar position-absolute'>
                 <div className='d-flex flex-column gap-15'>
-                    <Link to='/'>
+                    <button className='border-0 bg-transparent'>
                         <img src={prodCompareImg} alt='compare'/>
-                    </Link>
-                    <Link to='/'>
+                    </button>
+                    <button className='border-0 bg-transparent'>
                         <img src={viewImg} alt='view'/>
-                    </Link>
-                    <Link to='/'>
+                    </button>
+                    <button className='border-0 bg-transparent'>
                         <img src={addCartImg} alt='add cart'/>
-                    </Link>
+                    </button>
                 </div>
             </div>
         </Link>
     </div>
-    <div className={`${location.pathname === "/store" ? `gr-${grid}` : "col-3"}`}>
+    <div className={`${location.pathname === "/product" ? `gr-${grid}` : "col-3"}`}>
         <Link className='product-card position-relative'>
             <div className='wishlist-icon position-absolute'>
-                <Link>
+                <button className='border-0 bg-transparent'>
                     <img src={wishListImg} alt="wish list" />
-                </Link>
+                </button>
             </div>
             <div className='product-image'>
                 <img className='img-fluid' src={watchImg1} alt='product'/>
@@ -83,16 +83,16 @@ const ProjectCard = (props) => {
                 <p className="price">$24.99</p>
             </div>
             <div className='action-bar position-absolute'>
-                <div className='d-flex flex-column gap-15'>
-                    <Link to='/'>
+                <div className='d-flex flex-column gap-15'> 
+                    <button className='border-0 bg-transparent'>
                         <img src={prodCompareImg} alt='compare'/>
-                    </Link>
-                    <Link to='/'>
+                    </button>
+                    <button className='border-0 bg-transparent'>
                         <img src={viewImg} alt='view'/>
-                    </Link>
-                    <Link to='/'>
+                    </button>
+                    <button className='border-0 bg-transparent'>
                         <img src={addCartImg} alt='add cart'/>
-                    </Link>
+                    </button>
                 </div>
             </div>
         </Link>
@@ -101,4 +101,4 @@ const ProjectCard = (props) => {
   )
 }
 
-export default ProjectCard
+export default ProductCard

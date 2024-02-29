@@ -1,4 +1,5 @@
 import React from 'react'
+import Container from '../components/Container';
 // import { useState } from 'react';
 import { Link } from 'react-router-dom'
 import { IoIosArrowBack } from "react-icons/io";
@@ -15,8 +16,7 @@ const Checkout = (/*{ initialSubtotal }*/) => {
 
 
   return <>
-    <div className='checkout-wrapper py-5 home-wrapper-2'>
-      <div className='container-xxl'>
+    <Container class1='checkout-wrapper py-5 home-wrapper-2'>
         <div className='row'>
           <div className='col-7'>
             <div className='checkout-left-data'>
@@ -156,7 +156,7 @@ const Checkout = (/*{ initialSubtotal }*/) => {
               <p className='total'>Delivery</p>
                 <div className="form-check mb-2">
                   <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"
-                  checked
+                  defaultChecked
                   // onChange={() => handleDeliveryChange(0)} 
                   />
                   <label className="form-check-label" for="flexRadioDefault1">
@@ -164,7 +164,7 @@ const Checkout = (/*{ initialSubtotal }*/) => {
                   </label>
                 </div>
                 <div className="form-check mb-2">
-                  <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked
+                  <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" 
                   // onChange={() => handleDeliveryChange(100)}
                    />
                   <label className="form-check-label" for="flexRadioDefault2">
@@ -172,7 +172,7 @@ const Checkout = (/*{ initialSubtotal }*/) => {
                   </label>
                 </div>
                 <div className="form-check mb-2">
-                  <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked
+                  <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" 
                   // onChange={() => handleDeliveryChange(200)}
                    />
                   <label className="form-check-label" for="flexRadioDefault2">
@@ -195,8 +195,7 @@ const Checkout = (/*{ initialSubtotal }*/) => {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+    </Container>
   </>
 }
 

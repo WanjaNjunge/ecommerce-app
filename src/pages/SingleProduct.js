@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Container from '../components/Container';
 import BreadCrumb from '../components/BreadCrumb';
 import Meta from '../components/Meta';
 import ProductCard from '../components/ProductCard';
@@ -29,8 +30,7 @@ const SingleProduct = () => {
         <Meta title={'Product Name'}/>
       <BreadCrumb title="Product Name" />
 
-      <div className='main-product-wrapper py-5 home-wrapper-2'>
-        <div className='container-xxl'>
+      <Container class1='main-product-wrapper py-5 home-wrapper-2'>
             <div className='row'>
                 <div className='col-6'>
                   <div className='main-product-image'>
@@ -140,10 +140,9 @@ const SingleProduct = () => {
                   </div>
                 </div>
             </div>
-        </div>
-      </div>
-      <div className='description-wrapper py-5 home-wrapper-2'>
-        <div className='container-xxl'>
+      </Container>
+
+      <Container class1='description-wrapper py-5 home-wrapper-2'>
           <div className='row'>
             <div className='col-12'>
               <h4>Description</h4>
@@ -155,10 +154,8 @@ const SingleProduct = () => {
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <section className='reviews-wrapper home-wrapper-2'>
-        <div className='container-xxl'>
+      </Container>
+      <Container class1='reviews-wrapper home-wrapper-2'>
           <div className='row'>
             <div className='col-12'>
               <h3 id='review'>Reviews</h3>
@@ -241,10 +238,8 @@ const SingleProduct = () => {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-      <section className='popular-wrapper py-5 home-wrapper-2'>
-        <div className='container-xxl'>
+      </Container>
+      <Container class1='popular-wrapper py-5 home-wrapper-2'>
           <div className='row'>
             <div className='col-12'>
               <h3 className='section-heading'>
@@ -255,8 +250,7 @@ const SingleProduct = () => {
             <ProductCard />
             </div>
           </div>
-        </div>
-      </section>
+      </Container>
     </>
   )
 }

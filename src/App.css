@@ -695,3 +695,17 @@ footer:not(:first-child) {
   color: var(--color-1c1c1b);
 }
 /* Cart Page Ends */
+
+/* Checkout Page */
+.total {
+  font-size: 18px;
+  color: var(--color-777777);
+}
+.total-price {
+  font-size: 16px;
+  color: var(--color-1c1c1b);
+}
+span.delivery-price {
+  font-weight: 500;
+}
+/* Checkout Page Ends */

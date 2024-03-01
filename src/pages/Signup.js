@@ -10,7 +10,7 @@ import { registerUser } from '../features/user/userSlice';
 
 const signUpSchema = yup.object({
   username: yup.string().defined("Username is required").min(3, "Must be at least 3 characters"),
-  email: yup.string().nullable().email("Invalid Email Address").required("Email is required"),
+  email: yup.string().email("Invalid Email Address").required("Email is required"),
   password: yup.string().required( "Password is required"),
 });
 

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import { addToWishlist } from '../features/products/productSlice';
 import ReactStars from "react-rating-stars-component";
 import watchImg from '../assets/images/watch.jpg';
 import watchImg1 from '../assets/images/watch-01.jpg';
@@ -12,7 +14,11 @@ import wishListImg from '../assets/images/wish.svg';
 const ProductCard = (props) => {
     let location = useLocation();
     const { grid, data } = props;
-    console.log(data)
+    const dispatch = useDispatch();
+
+    const addToWish = (id)=> {
+        dispatch(addToWishlist(id));
+    }
 
 
   return (
@@ -24,9 +30,11 @@ const ProductCard = (props) => {
                     key={index}
                     className={`${location.pathname === "/product" ? `gr-${grid}` : "col-3"}`}>
         {/**REVISIT */}
-        <Link to={`${location.pathname === "/" ? "/product/:id" : location.pathname === "/product/:id" ? "/product/:id" : ":id"}`} className='product-card position-relative'>
+        <Link 
+        to={`${location.pathname === "/" ? "/product/:id" : location.pathname === "/product/:id" ? "/product/:id" : ":id"}`} 
+        className='product-card position-relative'>
             <div className='wishlist-icon position-absolute'>
-                <button className='border-0 bg-transparent'>
+                <button className='border-0 bg-transparent' onClick={(e)=>{addToWish(item?._id)}}>
                     <img src={wishListImg} alt="wish list" />
                 </button>
             </div>

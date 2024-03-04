@@ -20,12 +20,14 @@ const OurStore = () => {
     
 
     const dispatch = useDispatch();
-    useEffect(()=>{
-        getProducts();
-    },[])
     const getProducts = ()=>{
       dispatch(getAllProducts())
     }
+    
+    useEffect(()=>{
+        getProducts();
+    },[])
+    
 
     
 

@@ -23,11 +23,9 @@ const OurStore = () => {
     const getProducts = ()=>{
       dispatch(getAllProducts())
     }
-    
     useEffect(()=>{
-        getProducts();
-    },[])
-    
+      getProducts();
+  },[])
 
     
 

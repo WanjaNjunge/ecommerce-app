@@ -4,9 +4,35 @@ import Meta from '../components/Meta'
 import BreadCrumb from '../components/BreadCrumb'
 import { FaHome, FaPhoneAlt, FaInfo } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { createQuery } from '../features/contact/contactSlice';
+
+const contactSchema = yup.object({
+  name: yup.string().required("Name is required").min(3, "Must be at least 3 characters"),
+  email: yup.string().email("Invalid Email Address").required("Email is required"),
+  mobile: yup.string().min(10, "Must be at least 3 characters"),
+  comment: yup.string().required("Comment is required").min(3, "Must be at least 3 characters"),
+})
 
 
 const Contact = () => {
+  const dispatch =useDispatch();
+  const formik = useFormik({
+    initialValues: {
+      name: '',
+      email: '',
+      mobile: '',
+      comment: ''
+    },
+    validationSchema: contactSchema,
+    onSubmit: values => {
+      dispatch(createQuery(values));
+    },
+  });
+
+
   return (
     <>
       <Meta title={'Contact Us'}/>
@@ -22,27 +48,45 @@ const Contact = () => {
               <div className='contact-inner-wrapper d-flex justify-content-between'>
                 <div>
                   <h3 className='contact-title mb-4'>Send us an email</h3>
-                  <form action='' className='d-flex flex-column gap-15'>
+                  <form action='' onSubmit={formik.handleSubmit} className='d-flex flex-column gap-15'>
                     <div>
                       <input 
                         type='text'
                         className='form-control'
                         placeholder='Name'
+                        onChange={formik.handleChange('name')}
+                        onBlur={formik.handleBlur('name')}
+                        value={formik.values.name}
                       />
+                      <div className='error'>
+                          {formik.touched.name && formik.errors.name}
+                      </div>
                     </div>
                     <div>
                       <input 
                         type='email'
                         className='form-control'
                         placeholder='Email'
+                        onChange={formik.handleChange('email')}
+                        onBlur={formik.handleBlur('email')}
+                        value={formik.values.email}
                       />
+                      <div className='error'>
+                        {formik.touched.email && formik.errors.email}
+                      </div>
                     </div>
                     <div>
                       <input 
                         type='tel'
                         className='form-control'
                         placeholder='Mobile Number'
+                        onChange={formik.handleChange('mobile')}
+                        onBlur={formik.handleBlur('mobile')}
+                        value={formik.values.mobile}
                       />
+                      <div className='error'>
+                          {formik.touched.mobile && formik.errors.mobile}
+                      </div>
                     </div>
                     <div>
                       <textarea
@@ -52,10 +96,16 @@ const Contact = () => {
                       cols="30"
                       rows="4"
                       placeholder='Comments'
+                      onChange={formik.handleChange('comment')}
+                        onBlur={formik.handleBlur('comment')}
+                        value={formik.values.comment}
                       ></textarea>
+                      <div className='error'>
+                          {formik.touched.comment && formik.errors.comment}
+                      </div>
                     </div>
                     <div>
-                      <button className='button border-0'>Send</button>
+                      <button type="submit" className='button border-0'>Send</button>
                     </div>
                   </form>
                 </div>

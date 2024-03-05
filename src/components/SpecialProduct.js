@@ -1,11 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import ReactStars from "react-rating-stars-component";
 import watchImg from '../assets/images/watch.jpg';
 
 
 const SpecialProduct = (props) => {
-    const { title, brand, totalrating, price, quantity } = props;
+    const navigate = useNavigate();
+    const { title, brand, totalrating, price, quantity, id } = props;
   return (
     <div className='col-6 mb-3'>
         <div className='special-product-card'>
@@ -46,9 +47,9 @@ const SpecialProduct = (props) => {
                             <div className="progress-bar" role="progressbar" style={{ width: "25%" }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
-                    <Link className='button'>
-                        Add to cart
-                    </Link>
+                    <button className='button' onClick={()=>navigate("/product/"+id)} >
+                        View
+                    </button>
                 </div>
             </div>
         </div>

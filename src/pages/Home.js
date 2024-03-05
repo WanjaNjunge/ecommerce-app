@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Marquee from "react-fast-marquee";
 //import BlogCard from '../components/BlogCard';
-import ProductCard from '../components/ProductCard';
 import SpecialProduct from '../components/SpecialProduct';
 import Container from '../components/Container';
 import serviceImg1 from '../assets/images/service.png';
@@ -45,7 +44,9 @@ import addCartImg from '../assets/images/add-cart.svg';
 import wishListImg from '../assets/images/wish.svg';
 
 
+
 const Home = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const productState = useSelector((state)=> state.product.product);
 
@@ -258,11 +259,70 @@ const Home = () => {
               Featured Collection
               </h3>
             </div>
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
           </div>
+          <div className='row'>
+            {Array.isArray(productState) && productState?.map((item, index) => {
+              let hasFeaturedProduct = false;
+              for (let i = 0; i < item.tags.length; i++) {
+                if (item.tags[i] === 'featured') {
+                  hasFeaturedProduct = true;
+                  break; // Exit the loop since we found a special product
+                }
+              }
+
+                return( hasFeaturedProduct ? 
+                    <div
+                    key={index}
+                    className="col-3">
+        {/**REVISIT */}
+        <div
+        className='product-card position-relative'>
+            <div className='wishlist-icon position-absolute'>
+                <button className='border-0 bg-transparent' onClick={(e)=>{addToWish(item?._id)}}>
+                    <img src={wishListImg} alt="wish list" />
+                </button>
+            </div>
+            <div className='product-image'>
+                <img className='img-fluid mx-auto' src={watchImg1} alt='product'/>
+                <img className='img-fluid mx-auto' src={watchImg} alt='product'/>
+            </div>
+            <div className='product-details'>
+                <h6 className='brand'>{item?.brand}</h6>
+                <h5 className='product-title'>
+                    {item?.title}
+                </h5>
+                <ReactStars
+                    count={5}
+                    size={24}
+                    value={parseFloat(item?.totalrating)}
+                    edit={false}
+                    activeColor="#ffd700"
+                />
+                
+                <p className="price">KSh. {item?.price}</p>
+            </div>
+            <div className='action-bar position-absolute'>
+                <div className='d-flex flex-column gap-15'>
+                    <button className='border-0 bg-transparent'>
+                        <img src={prodCompareImg} alt='compare'/>
+                    </button>
+                    <button className='border-0 bg-transparent'>
+                        <img onClick={()=>navigate("/product/"+item?._id)} src={viewImg} alt='view'/>
+                    </button>
+                    <button className='border-0 bg-transparent'>
+                        <img src={addCartImg} alt='add cart'/>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div> : null
+                )
+            })
+        }
+
+        
+
+    </div>
       </Container>
 
       <Container class1='featured-wrapper py-5 home-wrapper-2'>
@@ -318,7 +378,7 @@ const Home = () => {
             </div>
           </div>
           <div className='row'>
-            {productState && productState.map((item, index) => {
+            {Array.isArray(productState) && productState?.map((item, index) => {
               let hasSpecialProduct = false;
               for (let i = 0; i < item.tags.length; i++) {
                 if (item.tags[i] === 'special') {
@@ -326,7 +386,7 @@ const Home = () => {
                   break; // Exit the loop since we found a special product
                 }
               }
-              return hasSpecialProduct ? <SpecialProduct key={index} title={item?.title} brand={item?.brand} price={item?.price} quantity={item?.quantity} totalrating={parseFloat(item?.totalrating, 10)} /> : null;
+              return hasSpecialProduct ? <SpecialProduct key={index} id={item?._id} title={item?.title} brand={item?.brand} price={item?.price} quantity={item?.quantity} totalrating={parseFloat(item?.totalrating, 10)} /> : null;
             })}
             {(!productState || productState.length === 0) && <p>No Products Available</p>}
           </div>
@@ -341,7 +401,7 @@ const Home = () => {
             </div>
           </div>
             <div className='row'>
-            {productState && productState.map((item, index) => {
+            {Array.isArray(productState) && productState.map((item, index) => {
               let hasPopularProduct = false;
               for (let i = 0; i < item.tags.length; i++) {
                 if (item.tags[i] === 'popular') {
@@ -355,8 +415,7 @@ const Home = () => {
                     key={index}
                     className="col-3">
         {/**REVISIT */}
-        <Link 
-        // to={`${location.pathname === "/" ? "/product/:id" : location.pathname === "/product/:id" ? "/product/:id" : ":id"}`} 
+        <div
         className='product-card position-relative'>
             <div className='wishlist-icon position-absolute'>
                 <button className='border-0 bg-transparent' onClick={(e)=>{addToWish(item?._id)}}>
@@ -387,7 +446,7 @@ const Home = () => {
                     <button className='border-0 bg-transparent'>
                         <img src={prodCompareImg} alt='compare'/>
                     </button>
-                    <button className='border-0 bg-transparent'>
+                    <button onClick={()=>navigate("/product/"+item?._id)} className='border-0 bg-transparent'>
                         <img src={viewImg} alt='view'/>
                     </button>
                     <button className='border-0 bg-transparent'>
@@ -395,12 +454,11 @@ const Home = () => {
                     </button>
                 </div>
             </div>
-        </Link>
+        </div>
     </div> : null
                 )
             })
         }
-        {(!productState || productState.length === 0) && <p>No Products Available</p>}
 
         
 

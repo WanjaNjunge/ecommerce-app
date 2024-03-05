@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Marquee from "react-fast-marquee";
 //import BlogCard from '../components/BlogCard';
@@ -35,9 +35,33 @@ import tabletImg from '../assets/images/tab4.webp';
 import watchImg from '../assets/images/watch-2.jpg';
 import phoneImg1 from '../assets/images/phone-03.webp';
 import speakerImg3 from '../assets/images/speaker-3.webp';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToWishlist, getAllProducts } from '../features/products/productSlice';
+import ReactStars from "react-rating-stars-component";
+import watchImg1 from '../assets/images/watch.jpg';
+import prodCompareImg from '../assets/images/prodcompare.svg';
+import viewImg from '../assets/images/view.svg';
+import addCartImg from '../assets/images/add-cart.svg';
+import wishListImg from '../assets/images/wish.svg';
 
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const productState = useSelector((state)=> state.product.product);
+
+  const getProducts = () => {
+    dispatch(getAllProducts());
+  }
+
+  const addToWish = (id)=> {
+    dispatch(addToWishlist(id));
+}
+
+
+  useEffect(()=>{
+    getProducts();
+  },[])
+
   return (
     <>
     <Container class1='home-wrapper-1 py-5'>
@@ -294,10 +318,17 @@ const Home = () => {
             </div>
           </div>
           <div className='row'>
-            <SpecialProduct />
-            <SpecialProduct />
-            <SpecialProduct />
-            <SpecialProduct />
+            {productState && productState.map((item, index) => {
+              let hasSpecialProduct = false;
+              for (let i = 0; i < item.tags.length; i++) {
+                if (item.tags[i] === 'special') {
+                  hasSpecialProduct = true;
+                  break; // Exit the loop since we found a special product
+                }
+              }
+              return hasSpecialProduct ? <SpecialProduct key={index} title={item?.title} brand={item?.brand} price={item?.price} quantity={item?.quantity} totalrating={parseFloat(item?.totalrating, 10)} /> : null;
+            })}
+            {(!productState || productState.length === 0) && <p>No Products Available</p>}
           </div>
       </Container>
 
@@ -308,13 +339,75 @@ const Home = () => {
               Our Popular Products
               </h3>
             </div>
-            <div className='row'>
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            </div>
           </div>
+            <div className='row'>
+            {productState && productState.map((item, index) => {
+              let hasPopularProduct = false;
+              for (let i = 0; i < item.tags.length; i++) {
+                if (item.tags[i] === 'popular') {
+                  hasPopularProduct = true;
+                  break; // Exit the loop since we found a special product
+                }
+              }
+
+                return( hasPopularProduct ? 
+                    <div
+                    key={index}
+                    className="col-3">
+        {/**REVISIT */}
+        <Link 
+        // to={`${location.pathname === "/" ? "/product/:id" : location.pathname === "/product/:id" ? "/product/:id" : ":id"}`} 
+        className='product-card position-relative'>
+            <div className='wishlist-icon position-absolute'>
+                <button className='border-0 bg-transparent' onClick={(e)=>{addToWish(item?._id)}}>
+                    <img src={wishListImg} alt="wish list" />
+                </button>
+            </div>
+            <div className='product-image'>
+                <img className='img-fluid mx-auto' src={watchImg1} alt='product'/>
+                <img className='img-fluid mx-auto' src={watchImg} alt='product'/>
+            </div>
+            <div className='product-details'>
+                <h6 className='brand'>{item?.brand}</h6>
+                <h5 className='product-title'>
+                    {item?.title}
+                </h5>
+                <ReactStars
+                    count={5}
+                    size={24}
+                    value={parseFloat(item?.totalrating)}
+                    edit={false}
+                    activeColor="#ffd700"
+                />
+                
+                <p className="price">KSh. {item?.price}</p>
+            </div>
+            <div className='action-bar position-absolute'>
+                <div className='d-flex flex-column gap-15'>
+                    <button className='border-0 bg-transparent'>
+                        <img src={prodCompareImg} alt='compare'/>
+                    </button>
+                    <button className='border-0 bg-transparent'>
+                        <img src={viewImg} alt='view'/>
+                    </button>
+                    <button className='border-0 bg-transparent'>
+                        <img src={addCartImg} alt='add cart'/>
+                    </button>
+                </div>
+            </div>
+        </Link>
+    </div> : null
+                )
+            })
+        }
+        {(!productState || productState.length === 0) && <p>No Products Available</p>}
+
+        
+
+    </div>
+            
+            
+          
       </Container>
 
       <Container class1='marquee-wrapper py-5'>

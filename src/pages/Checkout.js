@@ -5,11 +5,28 @@ import { Link } from 'react-router-dom'
 import { IoIosArrowBack } from "react-icons/io";
 import watch from "../assets/images/watch.jpg";
 import { useDispatch, useSelector } from 'react-redux';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+
+const billingInfoSchema = yup.object({
+  firstname: yup.string().required("Email is required"),
+  lastname: yup.string().required( "lastname is required"),
+  county: yup.string().required( "county is required"),
+  city: yup.string().required( "city is required"),
+  address: yup.string().required( "address is required"),
+  pincode: yup.number().required( "pincode is required"),
+  phonenumber: yup.number().required( "phonenumber is required"),
+  email: yup.string().email("Invalid Email Address").required("Email is required"),
+  other: yup.string(),
+  
+});
+
 
 const Checkout = (/*{ initialSubtotal }*/) => {
   const dispatch = useDispatch();
   const [totalAmount, setTotalAmount] = useState(null);
   const [deliveryPrice, setDeliveryPrice] = useState(0);
+  const [billingInfo, setBillingInfo] = useState(null)
   const cartState = useSelector(state=>state?.auth?.cartProducts);
 
   useEffect(() => {
@@ -23,6 +40,24 @@ const Checkout = (/*{ initialSubtotal }*/) => {
   const handleDeliveryChange = (amount) => {
     setDeliveryPrice(amount);
   };
+  const formik = useFormik({
+    initialValues: {
+      firstname:"",
+      lastname:"",
+      county:"",
+      city:"",
+      address:"",
+      pincode:"",
+      phonenumber:"" ,
+      email:"",
+      other:""
+    },
+    validationSchema: billingInfoSchema,
+    onSubmit: values => {
+      alert(JSON.stringify(values))
+      setBillingInfo(values)
+    },
+  });
     // const [subtotal, setSubtotal] = useState(initialSubtotal);
     
   
@@ -48,15 +83,27 @@ const Checkout = (/*{ initialSubtotal }*/) => {
                 </ol>
               </nav>
               <h4 className='total-price'>BILLING DETAILS</h4>
-              <form action="" className='d-flex gap-15 flex-wrap justify-content-between'>
+              <form action="" onSubmit={formik.handleSubmit} className='d-flex gap-15 flex-wrap justify-content-between'>
                 <div>
-                  <input type="text" className='form-control'  placeholder='First Name' />
+                  <input type="text" className='form-control'  placeholder='First Name' name='firstname' onChange={formik.handleChange("firstname")}
+                              onBlur={formik.handleBlur('firstname')}
+                                value={formik.values.firstname} />
                 </div>
+                <div className='error'>
+                                {formik.touched.firstname && formik.errors.firstname}
+                            </div>
                 <div>
-                  <input type="text" className='form-control'  placeholder='Last Name' />
+                  <input type="text" className='form-control'  placeholder='Last Name' name='lastname' onChange={formik.handleChange("lastname")}
+                              onBlur={formik.handleBlur('lastname')}
+                                value={formik.values.lastname} />
                 </div>
+                <div className='error'>
+                                {formik.touched.lastname && formik.errors.lastname}
+                            </div>
                 <div className='w-100'>
-                  <select id="county"     name="county"   className="form-control">
+                  <select id="county"     name="county"   className="form-control" onChange={formik.handleChange("county")}
+                              onBlur={formik.handleBlur('county')}
+                                value={formik.values.county}>
                   <option value="" selected disabled>Select County</option>
       <option value="baringo">Baringo</option>
       <option value="bomet">Bomet</option>
@@ -107,39 +154,77 @@ const Checkout = (/*{ initialSubtotal }*/) => {
       <option value="pokot">West Pokot</option>
                   </select>
                 </div>
+                <div className='error'>
+                                {formik.touched.county && formik.errors.county}
+                            </div>
                 <div>
-                  <input type="text" className='form-control'  placeholder='Town/City' />
+                  <input type="text" className='form-control'  placeholder='Town/City' name='city' onChange={formik.handleChange("city")}
+                              onBlur={formik.handleBlur('city')}
+                                value={formik.values.city} />
                 </div>
+                <div className='error'>
+                                {formik.touched.city && formik.errors.city}
+                            </div>
                 <div>
-                  <input type="text" className='form-control'  placeholder='Postcode/ZIP' />
+                  <input type="text" className='form-control'  placeholder='Postcode/ZIP' name="pincode" onChange={formik.handleChange("pincode")}
+                              onBlur={formik.handleBlur('pincode')}
+                                value={formik.values.pincode} />
                 </div>
-                
+                <div className='error'>
+                                {formik.touched.pincode && formik.errors.pincode}
+                            </div>
                 <div>
-                  <input type="text" className='form-control'  placeholder='Street Address' />
+                  <input type="text" className='form-control'  placeholder='Street Address' name='address' onChange={formik.handleChange("address")}
+                              onBlur={formik.handleBlur('address')}
+                                value={formik.values.address} />
                 </div>
+                <div className='error'>
+                                {formik.touched.address && formik.errors.address}
+                            </div>
                 <div>
-                  <input type="text" className='form-control'  placeholder='Apartment/Suite (optional)' />
+                  <input type="text" className='form-control'  placeholder='Apartment/Suite (optional)' name="other" onChange={formik.handleChange("other")}
+                              onBlur={formik.handleBlur('other')}
+                                value={formik.values.other} />
                 </div>
+                <div className='error'>
+                                {formik.touched.other && formik.errors.other}
+                            </div>
                 <div>
-                  <input type="text" className='form-control'  placeholder='Phone Number' />
+                  <input type="text" className='form-control'  placeholder='Phone Number' name='phonenumber' onChange={formik.handleChange("phonenumber")}
+                              onBlur={formik.handleBlur('phonenumber')}
+                                value={formik.values.phonenumber} />
                 </div>
+                <div className='error'>
+                                {formik.touched.phonenumber && formik.errors.phonenumber}
+                            </div>
                 <div>
-                  <input type="text" className='form-control'  placeholder='Email Address' />
+                  <input type="text" className='form-control'  placeholder='Email Address' name='email' onChange={formik.handleChange("email")}
+                              onBlur={formik.handleBlur('email')}
+                                value={formik.values.email} />
                 </div>
+                <div className='error'>
+                                {formik.touched.email && formik.errors.email}
+                            </div>
                 <div>
                       <textarea
-                      name=''
+                      name='other'
                       id=''
                       className='w-100 form-control'
                       cols="30"
                       rows="4"
                       placeholder='Order notes (optional)'
-                      ></textarea>
+                      
+                      onChange={formik.handleChange("other")}
+                      onBlur={formik.handleBlur('other')}
+                      value={formik.values.other} ></textarea>
                     </div>
+                    <div className='error'>
+                                {formik.touched.other && formik.errors.other}
+                            </div>
                 <div className='w-100'>
                   <div className='d-flex justify-content-between align-items-center'>
                     <Link to='/cart' className='text-dark'><IoIosArrowBack /> Return to Cart</Link>
-                    <Link to='/payment' className='button'>Place Order</Link>
+                    <button className='button' type='submit'>Place Order</button>
                   </div>
                 </div>
               </form>

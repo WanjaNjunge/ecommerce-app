@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import BreadCrumb from '../components/BreadCrumb';
 import Meta from '../components/Meta';
 import watchImg from '../assets/images/watch.jpg';
@@ -6,7 +6,7 @@ import { AiFillDelete } from "react-icons/ai";
 import { Link } from 'react-router-dom';
 import Container from '../components/Container';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteCartProd, getCartDetails } from '../features/user/userSlice';
+import { deleteCartProd, getCartDetails, updateCartProd } from '../features/user/userSlice';
 
 const Cart = () => {
     const dispatch = useDispatch();
@@ -22,6 +22,14 @@ const Cart = () => {
             dispatch(getCartDetails());
         }, 200)
     }
+
+    const updateCartItemQuantity = (cartItemId, quantity) => {
+        dispatch(updateCartProd({ cartItemId, quantity }));
+        setTimeout (()=>{
+            dispatch(getCartDetails());
+        }, 200);
+    }
+    
 
   return (
     <>
@@ -60,7 +68,8 @@ const Cart = () => {
                             <div className='cart-col-3 d-flex align-items-center gap-15'>
                                 <div>
                                     <input type='number' min={1} max={10} id='' className='form-control' name=''
-                                    value={item?.quantity} />
+                                    value={item?.quantity}
+                                    onChange={(e)=>{updateCartItemQuantity(item?._id, e.target.value)}} />
                                 </div>
                                 <div>
                                 <AiFillDelete onClick={()=>{removeCartItem(item?._id)}} className='text-danger'/>

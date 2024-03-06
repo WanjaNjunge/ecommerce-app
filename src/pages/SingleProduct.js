@@ -60,8 +60,8 @@ const SingleProduct = () => {
 
   const props = {width: 400, height: 600, zoomWidth: 600, img: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg"};
 
-  const [orderedProduct, setorderedProduct] = useState(true);
-  console.log(setorderedProduct);
+  // const [orderedProduct, setorderedProduct] = useState(true);
+  // console.log(setorderedProduct);
 
   const copyToClipboard = (text) => {
     console.log('text', text)
@@ -234,11 +234,11 @@ const SingleProduct = () => {
                     <p className='mb-0'>Based on 2 reviews</p>
                   </div>
                 </div>
-                {orderedProduct && (
+                {/* {orderedProduct && ( */}
                   <div>
                   <Link className='text-dark text-decoration-underline'>Write a review</Link>
                 </div>
-                )}
+                {/* )} */}
               </div>
               <div className='review-form py-4'>
               <h4>Write a review</h4>

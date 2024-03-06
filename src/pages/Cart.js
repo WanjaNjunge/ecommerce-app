@@ -16,7 +16,7 @@ const Cart = () => {
 
     useEffect(() => {
         dispatch(getCartDetails());
-      }, []);
+      }, [dispatch]);
 
     const removeCartItem = (id) => {
         dispatch(deleteCartProd(id))

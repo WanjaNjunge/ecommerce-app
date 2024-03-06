@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Container from '../components/Container';
 import BreadCrumb from '../components/BreadCrumb';
 import ProductCard from '../components/ProductCard';
@@ -20,13 +20,13 @@ const OurStore = () => {
     
 
     const dispatch = useDispatch();
-    const getProducts = ()=>{
-      dispatch(getAllProducts())
-    }
-    useEffect(()=>{
+    const getProducts = useCallback(() => {
+      dispatch(getAllProducts());
+    }, [dispatch]);
+  
+    useEffect(() => {
       getProducts();
-  },[])
-
+    }, [getProducts]);
     
 
   return (

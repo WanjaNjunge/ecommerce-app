@@ -33,9 +33,11 @@ const SingleProduct = () => {
   }, []);
 
   useEffect(() => {
-    for (let index = 0; index < cartState.length; index++) {
-      if (getProductId === cartState[index]?.productId?._id) {
-        setAlreadyAdded(true)
+    if (cartState) {
+      for (let index = 0; index < cartState.length; index++) {
+        if (getProductId === cartState[index]?.productId?._id) {
+          setAlreadyAdded(true)
+        }
       }
     }
   }, []);

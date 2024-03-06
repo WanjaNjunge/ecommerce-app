@@ -1,11 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Container from '../components/Container';
 // import { useState } from 'react';
 import { Link } from 'react-router-dom'
 import { IoIosArrowBack } from "react-icons/io";
-import watch from "../assets/images/watch.jpg"
+import watch from "../assets/images/watch.jpg";
+import { useDispatch, useSelector } from 'react-redux';
 
 const Checkout = (/*{ initialSubtotal }*/) => {
+  const dispatch = useDispatch();
+  const [totalAmount, setTotalAmount] = useState(null);
+  const [deliveryPrice, setDeliveryPrice] = useState(0);
+  const cartState = useSelector(state=>state?.auth?.cartProducts);
+
+  useEffect(() => {
+    let sum = 0;
+    for (let index = 0; index < cartState?.length; index++) {
+        sum = sum +(Number(cartState[index].quantity)*cartState[index].price)
+        setTotalAmount(sum)
+    }
+  }, [cartState]);
+
+  const handleDeliveryChange = (amount) => {
+    setDeliveryPrice(amount);
+  };
     // const [subtotal, setSubtotal] = useState(initialSubtotal);
     
   
@@ -130,34 +147,41 @@ const Checkout = (/*{ initialSubtotal }*/) => {
           </div>
           <div className='col-5'>
             <div className='border-bottom py-4'>
-              <div className='d-flex gap-10 mb-2 align-items-center'>
+            {
+              cartState && cartState?.map((item, index)=>{
+                return(
+                  <div key={index} className='d-flex gap-10 mb-2 align-items-center'>
                 <div className='w-75 d-flex gap-10'>
                   <div className='w-25 position-relative'>
-                    <span style={{top: "-10px", right: "2px"}} className='badge bg-secondary text-white rounded-circle p-2 position-absolute'>1</span>
+                    <span style={{top: "-10px", right: "2px"}} className='badge bg-secondary text-white rounded-circle p-2 position-absolute'>{item?.quantity}</span>
                     <img className='img-fluid' src={watch} alt='product'/>
                   </div>
                   <div>
-                    <h5 className='title total'>Watch</h5>
-                    <p className='total'>Smart watch</p>
+                    <h5 className='title total'>{item?.productId?.title}</h5>
+                    <p className='total'>{item?.productId?.description}</p>
                   </div>
                 </div>
                 
                 <div className='flex-grow-1'>
-                  <h5 className='total-price'>$ 500</h5>
+                  <h5 className='total-price'>KSh. {item?.price * item?.quantity}</h5>
                 </div>
               </div>
+                )
+              })
+            }
+              
             </div>
             <div className='border-bottom py-4'>
             <div className='d-flex justify-content-between align-items-center border-bottom'>
               <p className='total'>Subtotal</p>
-              <h5 className='total-price'>$ 9000{/*{subtotal}*/}</h5>
+              <h5 className='total-price'>KSh. {totalAmount ? totalAmount : 0}</h5>
             </div>
             <div className='mb-4 mt-3'>
               <p className='total'>Delivery</p>
                 <div className="form-check mb-2">
                   <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"
                   defaultChecked
-                  // onChange={() => handleDeliveryChange(0)} 
+                  onChange={() => handleDeliveryChange(0)}
                   />
                   <label className="form-check-label" for="flexRadioDefault1">
                   Self Pickup
@@ -165,7 +189,7 @@ const Checkout = (/*{ initialSubtotal }*/) => {
                 </div>
                 <div className="form-check mb-2">
                   <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" 
-                  // onChange={() => handleDeliveryChange(100)}
+                  onChange={() => handleDeliveryChange(100)}
                    />
                   <label className="form-check-label" for="flexRadioDefault2">
                   Nairobi CBD: <span className='delivery-price'>KShs 100.00</span>
@@ -173,7 +197,7 @@ const Checkout = (/*{ initialSubtotal }*/) => {
                 </div>
                 <div className="form-check mb-2">
                   <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" 
-                  // onChange={() => handleDeliveryChange(200)}
+                  onChange={() => handleDeliveryChange(200)}
                    />
                   <label className="form-check-label" for="flexRadioDefault2">
                   Pick up mtaani: <span className='delivery-price'>KShs 200.00</span>
@@ -181,7 +205,7 @@ const Checkout = (/*{ initialSubtotal }*/) => {
                 </div>
                 <div className="form-check mb-2">
                   <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
-                  // onChange={() => handleDeliveryChange(550)}
+                  onChange={() => handleDeliveryChange(550)}
                    />
                   <label className="form-check-label" for="flexRadioDefault2">
                   Rest of Kenya: <span className='delivery-price'>KShs 550.00</span>
@@ -191,7 +215,7 @@ const Checkout = (/*{ initialSubtotal }*/) => {
             </div>
             <div className='d-flex justify-content-between align-items-center border-bottom py-4'>
               <h4 className='total'>Total</h4>
-              <h5 className='total-price'>$ 10000{/*{subtotal}*/}</h5>
+              <h5 className='total-price'>KSh. {totalAmount ? totalAmount + deliveryPrice : 0}</h5>
             </div>
           </div>
         </div>

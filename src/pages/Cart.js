@@ -8,9 +8,11 @@ import Container from '../components/Container';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteCartProd, getCartDetails, updateCartProd } from '../features/user/userSlice';
 
+
 const Cart = () => {
     const dispatch = useDispatch();
-    const userCartState = useSelector(state=>state.auth.cartProducts);
+    const [totalAmount, setTotalAmount] = useState(null);
+    const userCartState = useSelector(state=>state?.auth?.cartProducts);
 
     useEffect(() => {
         dispatch(getCartDetails());
@@ -29,6 +31,14 @@ const Cart = () => {
             dispatch(getCartDetails());
         }, 200);
     }
+
+    useEffect(() => {
+        let sum = 0;
+        for (let index = 0; index < userCartState?.length; index++) {
+            sum = sum +(Number(userCartState[index].quantity)*userCartState[index].price)
+            setTotalAmount(sum)
+        }
+      }, [userCartState]);
     
 
   return (
@@ -89,11 +99,13 @@ const Cart = () => {
                         <Link to='/product' className='button'>
                             Continue Shopping
                         </Link>
-                        <div className='d-flex flex-column align-items-end'>
-                            <h4>Subtotal: $ 1000</h4>
-                            <p>Taxes and shipping calculated at checkout</p>
+                       {
+                        (totalAmount !== null ||  totalAmount > 0) &&  <div className='d-flex flex-column align-items-end'>
+                            <h4>Subtotal: KSh.  {totalAmount}</h4>
+                            <p>Delivery Charges calculated at checkout</p>
                             <Link to='/checkout' className='button'>Checkout</Link>
                         </div>
+                        }
                         </div>
                     </div>
                 </div>

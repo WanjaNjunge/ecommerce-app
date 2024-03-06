@@ -4,8 +4,8 @@ import { useFormik } from 'formik';
 import BreadCrumb from '../components/BreadCrumb';
 import Meta from '../components/Meta';
 import * as yup from 'yup';
-import { useDispatch } from 'react-redux';
 import { registerUser } from '../features/user/userSlice';
+import { useDispatch } from "react-redux";
 
 
 const signUpSchema = yup.object({
@@ -17,6 +17,7 @@ const signUpSchema = yup.object({
 
 const Signup = () => {
   const dispatch =useDispatch();
+
   const formik = useFormik({
     initialValues: {
       username: '',
@@ -28,6 +29,9 @@ const Signup = () => {
       dispatch(registerUser(values));
     },
   });
+
+
+
 
   return (
     <>

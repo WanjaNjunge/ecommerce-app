@@ -81,7 +81,7 @@ const Header = () => {
                    className='d-flex align-items-center gap-10 text-white'>
                     <img src={userImg} alt='user' />
                     <p className='mb-0'>
-                      Login <br /> My Account
+                      Login <br /> Sign Up
                     </p>
                   </Link>
                 </div>

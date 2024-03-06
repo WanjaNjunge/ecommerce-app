@@ -7,18 +7,31 @@ import ProductCard from '../components/ProductCard';
 import ReactStars from "react-rating-stars-component";
 import { useDispatch, useSelector } from 'react-redux';
 import ReactImageZoom from 'react-image-zoom';
-import Color from '../components/Color';
+// import Color from '../components/Color';
 import { FaCodeCompare } from "react-icons/fa6";
 import { FaRegHeart } from "react-icons/fa";
 import { getAProduct } from '../features/products/productSlice';
+import { toast } from 'react-toastify';
+import { addProdToCart } from '../features/user/userSlice';
+
 
 
 const SingleProduct = () => {
+  const [quantity, setQuantity] = useState(1);
   const location = useLocation();
   const getProductId = location.pathname.split("/")[2];
   const dispatch = useDispatch();
   const productState = useSelector(state => state.product.product);
-  
+
+  const uploadCart =  () => {
+    if (quantity === "") {
+      
+      toast.error("Please enter valid quantity number");
+      return false
+    } else {
+      dispatch(addProdToCart({ productId: productState?._id, quantity, price: productState?.price} ))
+    }
+  }
   
   
   useEffect(() => {
@@ -102,23 +115,37 @@ const SingleProduct = () => {
                       <div className="d-flex gap-10 align-items-center my-2">
                         <h3 className='product-heading'>Availabitlity :</h3> <p className='product-data'>In Stock</p>
                       </div>
-                      <div className="d-flex gap-10 flex-column mt-2 mb-3">
+                      {/* <div className="d-flex gap-10 flex-column mt-2 mb-3">
                         <h3 className='product-heading'>Size :</h3> <div className='d-flex flex-wrap gap-15'>
                           <span className='badge border border-1 bg-white text-dark border-secondary'>S</span>
                           <span className='badge border border-1 bg-white text-dark border-secondary'>M</span>
                           <span className='badge border border-1 bg-white text-dark border-secondary'>L</span>
                         </div>
-                      </div>
-                      <div className="d-flex gap-10 flex-column mt-2 mb-3">
+                      </div> */}
+                      {/* <div className="d-flex gap-10 flex-column mt-2 mb-3">
                         <h3 className='product-heading product-color'>Color :</h3> <Color />
-                      </div>
+                      </div> */}
                       <div className="d-flex align-items-center gap-15 flex-row mt-2 mb-3"><h3 className='product-heading'>Quantity :</h3>
                       <div className='product-data'>
-                        {productState?.quantity}
+                        <input 
+                          type='number'
+                          name=''
+                          min={1}
+                          max={10}
+                          className='form-control'
+                          style={{ width: "70px" }}
+                          id=''
+                          onChange={(e)=>setQuantity(e.target.value)}
+                          value={quantity}
+
+                        />
                       </div>
                       <div className='d-flex gap-30 align-items-center'>
                         <button
-                          type='submit'
+                        onClick={()=>uploadCart()}
+                        // REVISIT
+                        // data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                          type='button'
                           className='button border-0'>Add To Cart
                         </button>
                         <button

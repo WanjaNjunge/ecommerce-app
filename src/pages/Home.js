@@ -276,17 +276,17 @@ const Home = () => {
                     className="col-3">
         {/**REVISIT */}
         <div
-        className='product-card position-relative'>
+        className='product-card position-relative' onClick={()=>navigate("/product/"+item?._id)} src={viewImg} alt='view'>
             <div className='wishlist-icon position-absolute'>
                 <button className='border-0 bg-transparent' onClick={(e)=>{addToWish(item?._id)}}>
                     <img src={wishListImg} alt="wish list" />
                 </button>
             </div>
-            <div className='product-image'>
+            <div className='product-image' onClick={()=>navigate("/product/"+item?._id)} src={viewImg} alt='view'>
                 <img className='img-fluid mx-auto' src={watchImg1} alt='product'/>
                 <img className='img-fluid mx-auto' src={watchImg} alt='product'/>
             </div>
-            <div className='product-details'>
+            <div className='product-details' onClick={()=>navigate("/product/"+item?._id)} src={viewImg} alt='view'>
                 <h6 className='brand'>{item?.brand}</h6>
                 <h5 className='product-title'>
                     {item?.title}
@@ -422,11 +422,11 @@ const Home = () => {
                     <img src={wishListImg} alt="wish list" />
                 </button>
             </div>
-            <div className='product-image'>
+            <div className='product-image' onClick={()=>navigate("/product/"+item?._id)} src={viewImg} alt='view'>
                 <img className='img-fluid mx-auto' src={watchImg1} alt='product'/>
                 <img className='img-fluid mx-auto' src={watchImg} alt='product'/>
             </div>
-            <div className='product-details'>
+            <div className='product-details' onClick={()=>navigate("/product/"+item?._id)} src={viewImg} alt='view'>
                 <h6 className='brand'>{item?.brand}</h6>
                 <h5 className='product-title'>
                     {item?.title}

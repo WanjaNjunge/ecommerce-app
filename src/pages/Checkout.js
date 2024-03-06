@@ -4,7 +4,7 @@ import Container from '../components/Container';
 import { Link } from 'react-router-dom'
 import { IoIosArrowBack } from "react-icons/io";
 import watch from "../assets/images/watch.jpg";
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
@@ -23,10 +23,11 @@ const billingInfoSchema = yup.object({
 
 
 const Checkout = (/*{ initialSubtotal }*/) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [totalAmount, setTotalAmount] = useState(null);
   const [deliveryPrice, setDeliveryPrice] = useState(0);
   const [billingInfo, setBillingInfo] = useState(null)
+  console.log(billingInfo)
   const cartState = useSelector(state=>state?.auth?.cartProducts);
 
   useEffect(() => {
@@ -101,10 +102,10 @@ const Checkout = (/*{ initialSubtotal }*/) => {
                                 {formik.touched.lastname && formik.errors.lastname}
                             </div>
                 <div className='w-100'>
-                  <select id="county"     name="county"   className="form-control" onChange={formik.handleChange("county")}
+                  <select id="county" name="county" className="form-control" onChange={formik.handleChange("county")}
                               onBlur={formik.handleBlur('county')}
                                 value={formik.values.county}>
-                  <option value="" selected disabled>Select County</option>
+                  <option value="" disabled>Select County</option>
       <option value="baringo">Baringo</option>
       <option value="bomet">Bomet</option>
       <option value="bungoma">Bungoma</option>
@@ -268,7 +269,7 @@ const Checkout = (/*{ initialSubtotal }*/) => {
                   defaultChecked
                   onChange={() => handleDeliveryChange(0)}
                   />
-                  <label className="form-check-label" for="flexRadioDefault1">
+                  <label className="form-check-label" htmlFor="flexRadioDefault1">
                   Self Pickup
                   </label>
                 </div>
@@ -276,7 +277,7 @@ const Checkout = (/*{ initialSubtotal }*/) => {
                   <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" 
                   onChange={() => handleDeliveryChange(100)}
                    />
-                  <label className="form-check-label" for="flexRadioDefault2">
+                  <label className="form-check-label" htmlFor="flexRadioDefault2">
                   Nairobi CBD: <span className='delivery-price'>KShs 100.00</span>
                   </label>
                 </div>
@@ -284,7 +285,7 @@ const Checkout = (/*{ initialSubtotal }*/) => {
                   <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" 
                   onChange={() => handleDeliveryChange(200)}
                    />
-                  <label className="form-check-label" for="flexRadioDefault2">
+                  <label className="form-check-label" htmlFor="flexRadioDefault2">
                   Pick up mtaani: <span className='delivery-price'>KShs 200.00</span>
                   </label>
                 </div>
@@ -292,7 +293,7 @@ const Checkout = (/*{ initialSubtotal }*/) => {
                   <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
                   onChange={() => handleDeliveryChange(550)}
                    />
-                  <label className="form-check-label" for="flexRadioDefault2">
+                  <label className="form-check-label" htmlFor="flexRadioDefault2">
                   Rest of Kenya: <span className='delivery-price'>KShs 550.00</span>
                   </label>
                 </div>

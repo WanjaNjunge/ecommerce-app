@@ -38,11 +38,11 @@ const ProductCard = (props) => {
                     <img src={wishListImg} alt="wish list" />
                 </button>
             </div>
-            <div className='product-image'>
+            <div className='product-image' onClick={()=>navigate("/product/"+item?._id)} src={viewImg} alt='view'>
                 <img className='img-fluid mx-auto' src={watchImg1} alt='product'/>
                 <img className='img-fluid' src={watchImg} alt='product'/>
             </div>
-            <div className='product-details'>
+            <div className='product-details' onClick={()=>navigate("/product/"+item?._id)} src={viewImg} alt='view'>
                 <h6 className='brand'>{item?.brand}</h6>
                 <h5 className='product-title'>
                     {item?.title}

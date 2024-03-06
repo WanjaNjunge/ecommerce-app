@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Container from '../components/Container';
 import BreadCrumb from '../components/BreadCrumb';
 import Meta from '../components/Meta';
@@ -12,16 +12,33 @@ import { FaCodeCompare } from "react-icons/fa6";
 import { FaRegHeart } from "react-icons/fa";
 import { getAProduct } from '../features/products/productSlice';
 import { toast } from 'react-toastify';
-import { addProdToCart } from '../features/user/userSlice';
+import { addProdToCart, getCartDetails } from '../features/user/userSlice';
 
 
 
 const SingleProduct = () => {
   const [quantity, setQuantity] = useState(1);
+  const [alreadyAdded, setAlreadyAdded] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate()
   const getProductId = location.pathname.split("/")[2];
   const dispatch = useDispatch();
+
   const productState = useSelector(state => state.product.product);
+  const cartState = useSelector(state=>state.auth.cartProducts);
+
+  useEffect(() => {
+    dispatch(getAProduct(getProductId));
+    dispatch(getCartDetails());
+  }, []);
+
+  useEffect(() => {
+    for (let index = 0; index < cartState.length; index++) {
+      if (getProductId === cartState[index]?.productId?._id) {
+        setAlreadyAdded(true)
+      }
+    }
+  }, []);
 
   const uploadCart =  () => {
     if (quantity === "") {
@@ -30,13 +47,12 @@ const SingleProduct = () => {
       return false
     } else {
       dispatch(addProdToCart({ productId: productState?._id, quantity, price: productState?.price} ))
+      navigate('/cart')
     }
   }
   
   
-  useEffect(() => {
-    dispatch(getAProduct(getProductId));
-  }, []);
+  
   
 
   const props = {width: "400", height: 600, zoomWidth: 600, img: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg"};
@@ -113,7 +129,7 @@ const SingleProduct = () => {
                         <h3 className='product-heading'>Tags :</h3> <p className='product-data'>{productState?.tags}</p>
                       </div>
                       <div className="d-flex gap-10 align-items-center my-2">
-                        <h3 className='product-heading'>Availabitlity :</h3> <p className='product-data'>In Stock</p>
+                        <h3 className='product-heading'>Availability :</h3> <p className='product-data'>In Stock</p>
                       </div>
                       {/* <div className="d-flex gap-10 flex-column mt-2 mb-3">
                         <h3 className='product-heading'>Size :</h3> <div className='d-flex flex-wrap gap-15'>
@@ -126,7 +142,9 @@ const SingleProduct = () => {
                         <h3 className='product-heading product-color'>Color :</h3> <Color />
                       </div> */}
                       <div className="d-flex align-items-center gap-15 flex-row mt-2 mb-3"><h3 className='product-heading'>Quantity :</h3>
-                      <div className='product-data'>
+                      {
+                        alreadyAdded === false && <>
+                        <div className='product-data'>
                         <input 
                           type='number'
                           name=''
@@ -140,17 +158,21 @@ const SingleProduct = () => {
 
                         />
                       </div>
-                      <div className='d-flex gap-30 align-items-center'>
+                        </>
+                      }
+                      <div className={ alreadyAdded ? "ms-0" : "ms-5 d-flex gap-30 align-items-center"}>
+
                         <button
-                        onClick={()=>uploadCart()}
+                        onClick={()=>{alreadyAdded ? navigate('/cart') : uploadCart()}}
                         // REVISIT
                         // data-bs-toggle="modal" data-bs-target="#staticBackdrop"
                           type='button'
-                          className='button border-0'>Add To Cart
-                        </button>
-                        <button
+                          className='button border-0'>
+                            {alreadyAdded? "Go to cart" : "Add to cart"}
+                          </button>
+                        {/* <button
                           className='button signup'>Buy Now
-                        </button>
+                        </button> */}
                       </div>
                       </div>
                       <div className='d-flex align-items-center gap-15 mt-3 mb-3'>

@@ -1,18 +1,44 @@
 import React from 'react'
+import Container from '../components/Container';
 import Meta from '../components/Meta'
 import BreadCrumb from '../components/BreadCrumb'
 import { FaHome, FaPhoneAlt, FaInfo } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { createQuery } from '../features/contact/contactSlice';
+
+const contactSchema = yup.object({
+  name: yup.string().required("Name is required").min(3, "Must be at least 3 characters"),
+  email: yup.string().email("Invalid Email Address").required("Email is required"),
+  mobile: yup.string().min(10, "Must be at least 3 characters"),
+  comment: yup.string().required("Comment is required").min(3, "Must be at least 3 characters"),
+})
 
 
 const Contact = () => {
+  const dispatch =useDispatch();
+  const formik = useFormik({
+    initialValues: {
+      name: '',
+      email: '',
+      mobile: '',
+      comment: ''
+    },
+    validationSchema: contactSchema,
+    onSubmit: values => {
+      dispatch(createQuery(values));
+    },
+  });
+
+
   return (
     <>
       <Meta title={'Contact Us'}/>
       <BreadCrumb title="Contact Us" />
 
-      <div className='contact-wrapper py-5 home-wrapper-2'>
-        <div className='container-xxl'>
+      <Container class1='contact-wrapper py-5 home-wrapper-2'>
           <div className='row'>
             <div className='col-12'>
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8181397322273!2d36.822819088854985!3d-1.282948899999993!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f112a2e301e1b%3A0x38b759d1c45990ba!2sAccra%20Trade%20Centre!5e0!3m2!1sen!2ske!4v1706781166044!5m2!1sen!2ske" width="600" height="450" className='border-0 w-100' allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
@@ -22,27 +48,45 @@ const Contact = () => {
               <div className='contact-inner-wrapper d-flex justify-content-between'>
                 <div>
                   <h3 className='contact-title mb-4'>Send us an email</h3>
-                  <form action='' className='d-flex flex-column gap-15'>
+                  <form action='' onSubmit={formik.handleSubmit} className='d-flex flex-column gap-15'>
                     <div>
                       <input 
                         type='text'
                         className='form-control'
                         placeholder='Name'
+                        onChange={formik.handleChange('name')}
+                        onBlur={formik.handleBlur('name')}
+                        value={formik.values.name}
                       />
+                      <div className='error'>
+                          {formik.touched.name && formik.errors.name}
+                      </div>
                     </div>
                     <div>
                       <input 
                         type='email'
                         className='form-control'
                         placeholder='Email'
+                        onChange={formik.handleChange('email')}
+                        onBlur={formik.handleBlur('email')}
+                        value={formik.values.email}
                       />
+                      <div className='error'>
+                        {formik.touched.email && formik.errors.email}
+                      </div>
                     </div>
                     <div>
                       <input 
                         type='tel'
                         className='form-control'
                         placeholder='Mobile Number'
+                        onChange={formik.handleChange('mobile')}
+                        onBlur={formik.handleBlur('mobile')}
+                        value={formik.values.mobile}
                       />
+                      <div className='error'>
+                          {formik.touched.mobile && formik.errors.mobile}
+                      </div>
                     </div>
                     <div>
                       <textarea
@@ -52,10 +96,16 @@ const Contact = () => {
                       cols="30"
                       rows="4"
                       placeholder='Comments'
+                      onChange={formik.handleChange('comment')}
+                        onBlur={formik.handleBlur('comment')}
+                        value={formik.values.comment}
                       ></textarea>
+                      <div className='error'>
+                          {formik.touched.comment && formik.errors.comment}
+                      </div>
                     </div>
                     <div>
-                      <button className='button border-0'>Send</button>
+                      <button type="submit" className='button border-0'>Send</button>
                     </div>
                   </form>
                 </div>
@@ -89,8 +139,7 @@ const Contact = () => {
               </div>
             </div>
           </div>
-        </div>
-      </div>
+      </Container>
     </>
   )
 }

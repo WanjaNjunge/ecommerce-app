@@ -13,6 +13,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { getAProduct } from '../features/products/productSlice';
 import { toast } from 'react-toastify';
 import { addProdToCart, getCartDetails } from '../features/user/userSlice';
+import { Link } from 'react-router-dom';
 
 
 
@@ -30,7 +31,7 @@ const SingleProduct = () => {
   useEffect(() => {
     dispatch(getAProduct(getProductId));
     dispatch(getCartDetails());
-  }, []);
+  }, [dispatch, getProductId]);
 
   useEffect(() => {
     if (cartState) {
@@ -40,7 +41,7 @@ const SingleProduct = () => {
         }
       }
     }
-  }, []);
+  }, [cartState, getProductId]);
 
   const uploadCart =  () => {
     if (quantity === "") {
@@ -57,9 +58,10 @@ const SingleProduct = () => {
   
   
 
-  const props = {width: "400", height: 600, zoomWidth: 600, img: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg"};
+  const props = {width: 400, height: 600, zoomWidth: 600, img: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg"};
 
   const [orderedProduct, setorderedProduct] = useState(true);
+  console.log(setorderedProduct);
 
   const copyToClipboard = (text) => {
     console.log('text', text)
@@ -179,10 +181,10 @@ const SingleProduct = () => {
                       </div>
                       <div className='d-flex align-items-center gap-15 mt-3 mb-3'>
                         <div>
-                          <a href=''><FaRegHeart className='fs-5 me-2' />Add to Wishlist</a>
+                          <Link><FaRegHeart className='fs-5 me-2' />Add to Wishlist</Link>
                         </div>
                         <div>
-                          <a href=''><FaCodeCompare className='fs-5 me-2' />Add to Compare</a>
+                          <Link><FaCodeCompare className='fs-5 me-2' />Add to Compare</Link>
                         </div>
                       </div>
                       <div className="d-flex flex-column gap-10 my-3"><h3 className='product-heading'>Delivery & Returns :</h3> <p className='product-data'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
@@ -234,7 +236,7 @@ const SingleProduct = () => {
                 </div>
                 {orderedProduct && (
                   <div>
-                  <a className='text-dark text-decoration-underline' href=''>Write a review</a>
+                  <Link className='text-dark text-decoration-underline'>Write a review</Link>
                 </div>
                 )}
               </div>
@@ -301,7 +303,7 @@ const SingleProduct = () => {
           <div className='row'>
             <div className='col-12'>
               <h3 className='section-heading'>
-              Our Popular Products
+              Relevant Products
               </h3>
             </div>
             <div className='row'>

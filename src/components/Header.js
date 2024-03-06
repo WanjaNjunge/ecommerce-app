@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { NavLink, Link } from 'react-router-dom';
 import {BsSearch} from 'react-icons/bs';
 import compareImg from '../assets/images/compare.svg';
@@ -10,7 +10,7 @@ import menuImg from '../assets/images/menu.svg';
 
 
 const Header = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
     const [total, setTotal] = useState(null);
     const cartState = useSelector(state=>state?.auth?.cartProducts);
 
@@ -72,7 +72,7 @@ const Header = () => {
                     className='d-flex align-items-center gap-10 text-white'>
                     <img src={wishListImg} alt='wishlist' />
                     <p className='mb-0'>
-                      Favourite <br /> Wishlist
+                      View <br /> Wishlist
                     </p>
                   </Link>
                 </div>

@@ -276,7 +276,7 @@ useEffect(()=>{
                     className="col-3">
         {/**REVISIT */}
         <div
-        className='product-card position-relative' onClick={()=>navigate("/product/"+item?._id)} src={viewImg} alt='view'>
+        className='product-card position-relative'>
             <div className='wishlist-icon position-absolute'>
                 <button className='border-0 bg-transparent' onClick={(e)=>{addToWish(item?._id)}}>
                     <img src={wishListImg} alt="wish list" />

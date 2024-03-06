@@ -12,13 +12,13 @@ import { Link } from 'react-router-dom';
 const Wishlist = () => {
     const dispatch = useDispatch();
 
-    const getWishlistFromDb = ()=>{
-      dispatch(getUserProductWishlist());
-    }
-    
     useEffect(()=>{
+        const getWishlistFromDb = () => {
+            dispatch(getUserProductWishlist());
+        };
+        
         getWishlistFromDb();
-    },[]);
+    }, [dispatch]);
 
     const wishlistState = useSelector((state) => state?.auth?.wishlist?.wishlist || []);
 

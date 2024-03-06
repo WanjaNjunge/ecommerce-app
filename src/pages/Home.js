@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Marquee from "react-fast-marquee";
 //import BlogCard from '../components/BlogCard';
@@ -50,18 +50,18 @@ const Home = () => {
   const dispatch = useDispatch();
   const productState = useSelector((state)=> state.product.product);
 
-  const getProducts = () => {
+  const getProducts = useCallback(() => {
     dispatch(getAllProducts());
-  }
+  }, [dispatch]);
 
   const addToWish = (id)=> {
     dispatch(addToWishlist(id));
 }
 
 
-  useEffect(()=>{
-    getProducts();
-  },[])
+useEffect(()=>{
+  getProducts();
+}, [getProducts]);
 
   return (
     <>

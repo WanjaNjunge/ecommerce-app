@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import BreadCrumb from '../components/BreadCrumb';
 import Meta from '../components/Meta';
 import { Link, useNavigate } from "react-router-dom";
@@ -16,6 +16,8 @@ const loginSchema = yup.object({
 const Login = () => {
     const dispatch =useDispatch();
     const navigate = useNavigate();
+    const authState = useSelector((state) => state.auth);
+
     const formik = useFormik({
         initialValues: {
           email: '',
@@ -23,19 +25,17 @@ const Login = () => {
         },
         validationSchema: loginSchema,
         onSubmit: values => {
-          dispatch(loginUser(values))
+          dispatch(loginUser(values)).then(() => {
+            if (authState.isSuccess) {
+              navigate("/");
+            } 
+          });
         },
       });
 
-      const { user, isError, isSuccess, isLoading, } = useSelector((state) => state.auth);
+      
 
-      useEffect(() => {
-        if (isSuccess) {
-          navigate("/");
-        } else {
-          navigate("");
-        }
-      }, [user, isError, isSuccess, isLoading, navigate]);
+      
 
   return (
     <>

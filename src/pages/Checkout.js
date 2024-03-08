@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import Container from '../components/Container';
 // import { useState } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { IoIosArrowBack } from "react-icons/io";
 import watch from "../assets/images/watch.jpg";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { createAnOrder } from '../features/user/userSlice';
+
 
 const billingInfoSchema = yup.object({
   firstname: yup.string().required("Email is required"),
@@ -23,11 +25,11 @@ const billingInfoSchema = yup.object({
 
 
 const Checkout = (/*{ initialSubtotal }*/) => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [totalAmount, setTotalAmount] = useState(null);
   const [deliveryPrice, setDeliveryPrice] = useState(0);
-  const [billingInfo, setBillingInfo] = useState(null)
-  console.log(billingInfo)
+  const [cartProductState, setCartProductState] = useState([]);
   const cartState = useSelector(state=>state?.auth?.cartProducts);
 
   useEffect(() => {
@@ -38,35 +40,56 @@ const Checkout = (/*{ initialSubtotal }*/) => {
     }
   }, [cartState]);
 
+  useEffect(() => {
+    let items=[]
+    for (let index = 0; index < cartState?.length; index++) {
+        items.push({product:cartState[index].productId._id, quantity:cartState[index].quantity, price:cartState[index].price})
+    }
+    setCartProductState(items)
+  }, [cartState]);
+
+  
+
   const handleDeliveryChange = (amount) => {
     setDeliveryPrice(amount);
   };
   const formik = useFormik({
     initialValues: {
-      firstname:"",
-      lastname:"",
-      county:"",
-      city:"",
-      address:"",
-      pincode:"",
-      phonenumber:"" ,
-      email:"",
-      other:""
+      firstname: '',
+      lastname: '',
+      county: '',
+      city: '',
+      address: '',
+      pincode: '',
+      phonenumber: '',
+      email: '',
+      other: '',
     },
     validationSchema: billingInfoSchema,
-    onSubmit: values => {
-      alert(JSON.stringify(values))
-      setBillingInfo(values)
+    onSubmit: async (values) => {
+      try {
+        dispatch(
+          createAnOrder({
+            billingInfo: values,
+            orderItems: cartProductState,
+            totalPrice: totalAmount,
+            totalPriceAfterDiscount: totalAmount + deliveryPrice,
+            paymentInfo: {},
+          })
+        );
+
+        // Navigate to payment page after creating the order
+        navigate('/payment');
+      } catch (error) {
+        console.error('Error creating order:', error);
+        // Handle error
+      }
     },
   });
-    // const [subtotal, setSubtotal] = useState(initialSubtotal);
-    
+   
   
-    // const handleDeliveryChange = (amount) => {
-    //   setSubtotal(initialSubtotal + amount);
-    // };
-    
 
+  
 
   return <>
     <Container class1='checkout-wrapper py-5 home-wrapper-2'>

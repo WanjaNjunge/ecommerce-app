@@ -78,7 +78,7 @@ const Header = () => {
                   </Link>
                 </div>
                 <div>
-                  <Link to={authState.user === null  ? '/login' : ''}
+                  <Link to={authState.user === null  ? '/login' : '/my-profile'}
                    className='d-flex align-items-center gap-10 text-white'>
                     <img src={userImg} alt='user' />
                     {

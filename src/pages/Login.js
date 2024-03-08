@@ -26,9 +26,9 @@ const Login = () => {
         validationSchema: loginSchema,
         onSubmit: values => {
           dispatch(loginUser(values)).then(() => {
-            if (authState.isSuccess) {
+            
               navigate("/");
-            } 
+            
           });
         },
       });

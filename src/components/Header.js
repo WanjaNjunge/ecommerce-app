@@ -13,6 +13,7 @@ const Header = () => {
   // const dispatch = useDispatch();
     const [total, setTotal] = useState(null);
     const cartState = useSelector(state=>state?.auth?.cartProducts);
+    const authState = useSelector((state) => state.auth);
 
     useEffect(() => {
       let sum = 0;
@@ -77,12 +78,16 @@ const Header = () => {
                   </Link>
                 </div>
                 <div>
-                  <Link to='/login'
+                  <Link to={authState.user === null  ? '/login' : ''}
                    className='d-flex align-items-center gap-10 text-white'>
                     <img src={userImg} alt='user' />
-                    <p className='mb-0'>
+                    {
+                      authState.user === null ? <p className='mb-0'>
                       Login <br /> Sign Up
+                    </p> : <p className='mb-0'>
+                      Welcome {authState?.user?.username}
                     </p>
+                    }
                   </Link>
                 </div>
                 <div>

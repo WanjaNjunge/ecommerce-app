@@ -75,7 +75,19 @@ export const createAnOrder = createAsyncThunk(
             return thunkAPI.rejectWithValue(error)
         }
     }
+);
+export const getOrders = createAsyncThunk(
+    "user/get-orders",
+    async (thunkAPI) => {
+        try{
+            return await authService.getUserOrders();
+        } catch(error) {
+            return thunkAPI.rejectWithValue(error)
+        }
+    }
 )
+
+
 const getCustomerfromLocalStorage = localStorage.getItem("customer")
   ? JSON.parse(localStorage.getItem("customer"))
   : null;
@@ -237,6 +249,22 @@ export const authSlice = createSlice({
             if (state.isError === true) {
                 toast.error(action.error)
             }
+        })
+
+        .addCase(getOrders.pending, (state)=>{
+            state.isLoading=true;
+        }).addCase(getOrders.fulfilled, (state, action)=> {
+            state.isError=false;
+            state.isSuccess=true;
+            state.isLoading=false;
+            state.getOrderedProducts=action.payload;
+           
+        }).addCase(getOrders.rejected, (state, action)=>{
+            state.isError=true;
+            state.isSuccess=false;
+            state.isLoading=false;
+            state.message=action.error;
+           
         })
 
     }

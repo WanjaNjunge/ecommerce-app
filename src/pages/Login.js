@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Container from '../components/Container';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginUser } from '../features/user/userSlice';
 
 const loginSchema = yup.object({
@@ -16,7 +16,6 @@ const loginSchema = yup.object({
 const Login = () => {
     const dispatch =useDispatch();
     const navigate = useNavigate();
-    const authState = useSelector((state) => state.auth);
 
     const formik = useFormik({
         initialValues: {

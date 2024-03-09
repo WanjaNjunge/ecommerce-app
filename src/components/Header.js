@@ -61,7 +61,7 @@ const Header = () => {
               <div className='header-upper-links d-flex align-items-center justify-content-between'>
                 <div>
                   <Link to='/compare-product' 
-                    className='d-flex align-items-center gap-10 text-white'>
+                    className='d-flex align-items-center gap-10 text-white mx-4'>
                     <img src={compareImg} alt='compare'/>
                     <p className='mb-0'>
                       Compare <br /> Products
@@ -70,7 +70,7 @@ const Header = () => {
                 </div>
                 <div>
                   <Link to='/wishlist'
-                    className='d-flex align-items-center gap-10 text-white'>
+                    className='d-flex align-items-center gap-10 text-white mx-4'>
                     <img src={wishListImg} alt='wishlist' />
                     <p className='mb-0'>
                       View <br /> Wishlist
@@ -79,7 +79,7 @@ const Header = () => {
                 </div>
                 <div>
                   <Link to={authState.user === null  ? '/login' : '/my-profile'}
-                   className='d-flex align-items-center gap-10 text-white'>
+                   className='d-flex align-items-center gap-10 text-white mx-4'>
                     <img src={userImg} alt='user' />
                     {
                       authState.user === null ? <p className='mb-0'>
@@ -92,14 +92,17 @@ const Header = () => {
                 </div>
                 <div>
                   <Link to='cart'
-                   className='d-flex align-items-center gap-10 text-white'>
+                   className='d-flex align-items-center gap-10 text-white mx-4'>
                     <img src={cartImg} alt='cart' />
                     <div className='d-flex flex-column gap-10'>
                     <span className='badge bg-white text-dark'>{cartState?.length ? cartState?.length : 0}</span>
-                    <p className='mb-0'>KSh. {total ? total : 0}</p>
+                    <p className='mb-0 mx-2'>KSh. {total ? total : 0}</p>
 
                     </div>
                   </Link>
+                </div>
+                <div className='mx-4'>
+                  <button type='button' className='button border-0'>Logout</button>
                 </div>
               </div>
               

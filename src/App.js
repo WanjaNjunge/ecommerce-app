@@ -44,7 +44,7 @@ function App() {
             <Route path="login" element={<OpenRoutes><Login /></OpenRoutes>} />
             <Route path="signup" element={<OpenRoutes><Signup /></OpenRoutes>} />
             <Route path="forgot-password" element={<ForgotPassword />} />
-            <Route path="reset-password" element={<ResetPassword/>} />
+            <Route path="reset-password/:token" element={<ResetPassword/>} />
             <Route path="delivery-policy" element={<DeliveryPolicy />} />
             <Route path="warranty-refund" element={<WarrantyRefundPolicy />} />
             <Route path="terms-service" element={<TermsOfService />} />

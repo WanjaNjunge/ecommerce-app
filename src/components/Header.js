@@ -22,6 +22,12 @@ const Header = () => {
           setTotal(sum)
       }
     }, [cartState]);
+
+    const handleLogout = () => {
+      localStorage.clear();
+      window.location.reload();
+    }
+
   return (
     <>
       <header className='header-top-strip py-3'>
@@ -102,7 +108,7 @@ const Header = () => {
                   </Link>
                 </div>
                 <div className='mx-4'>
-                  <button type='button' className='button border-0'>Logout</button>
+                  <button onClick={handleLogout} type='button' className='button border-0'>Logout</button>
                 </div>
               </div>
               

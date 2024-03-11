@@ -1,14 +1,31 @@
+import axios from 'axios';
+
 export const base_url = "http://localhost:5000/api/";
 
 const getTokenFromLocalStorage = localStorage.getItem("customer")
-  ? JSON.parse(localStorage.getItem("customer"))
+  ? JSON.parse(localStorage.getItem("customer")).token
   : null;
 
-export const config = {
+export const api = axios.create({
+  baseURL: base_url,
   headers: {
-    Authorization: `Bearer ${
-      getTokenFromLocalStorage !== null ? getTokenFromLocalStorage.token : ""
-    }`,
+    Authorization: `Bearer ${getTokenFromLocalStorage}`,
     Accept: "application/json",
   },
-};
+});
+
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("customer")
+      ? JSON.parse(localStorage.getItem("customer")).token
+      : null;
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+

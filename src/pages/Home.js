@@ -48,7 +48,7 @@ import wishListImg from '../assets/images/wish.svg';
 const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const productState = useSelector((state)=> state.product.product);
+  const productState = useSelector((state)=> state?.product?.product);
 
   const getProducts = useCallback(() => {
     dispatch(getAllProducts());

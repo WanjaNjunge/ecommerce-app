@@ -3,17 +3,23 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Container from '../components/Container';
 import BreadCrumb from '../components/BreadCrumb';
 import Meta from '../components/Meta';
-import ProductCard from '../components/ProductCard';
+// import ProductCard from '../components/ProductCard';
 import ReactStars from "react-rating-stars-component";
 import { useDispatch, useSelector } from 'react-redux';
 import ReactImageZoom from 'react-image-zoom';
 // import Color from '../components/Color';
 import { FaCodeCompare } from "react-icons/fa6";
 import { FaRegHeart } from "react-icons/fa";
-import { getAProduct } from '../features/products/productSlice';
+import { addToWishlist, getAProduct, getAllProducts } from '../features/products/productSlice';
 import { toast } from 'react-toastify';
 import { addProdToCart, getCartDetails } from '../features/user/userSlice';
 import { Link } from 'react-router-dom';
+import watchImg from '../assets/images/watch-2.jpg';
+import watchImg1 from '../assets/images/watch.jpg';
+import prodCompareImg from '../assets/images/prodcompare.svg';
+import viewImg from '../assets/images/view.svg';
+import addCartImg from '../assets/images/add-cart.svg';
+import wishListImg from '../assets/images/wish.svg';
 
 
 
@@ -25,12 +31,22 @@ const SingleProduct = () => {
   const getProductId = location.pathname.split("/")[2];
   const dispatch = useDispatch();
 
-  const productState = useSelector(state => state.product.product);
-  const cartState = useSelector(state=>state.auth.cartProducts);
+  const productState = useSelector(state => state?.product?.singleProduct);
+  const productsState = useSelector(state => state?.product?.product);
+  console.log('====================================');
+  console.log(productsState);
+  console.log('====================================');
+  const cartState = useSelector(state=>state?.auth?.cartProducts);
+
+
+  useEffect(() => {
+    localStorage.setItem('productsState', JSON.stringify(productsState));
+  }, [productsState]);
 
   useEffect(() => {
     dispatch(getAProduct(getProductId));
     dispatch(getCartDetails());
+    dispatch(getAllProducts());
   }, [dispatch, getProductId]);
 
   useEffect(() => {
@@ -54,8 +70,9 @@ const SingleProduct = () => {
     }
   }
   
-  
-  
+  const addToWish = (id)=> {
+    dispatch(addToWishlist(id));
+}
   
 
   const props = {width: 400, height: 600, zoomWidth: 600, img: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg"};
@@ -307,7 +324,64 @@ const SingleProduct = () => {
               </h3>
             </div>
             <div className='row'>
-            <ProductCard />
+            {Array.isArray(productsState) && productsState.map((item, index) => {
+              let hasPopularProduct = false;
+              for (let i = 0; i < item.tags.length; i++) {
+                if (item.tags[i] === 'popular') {
+                  hasPopularProduct = true;
+                  break; // Exit the loop since we found a special product
+                }
+              }
+
+                return( hasPopularProduct ? 
+                    <div
+                    key={index}
+                    className="col-3">
+        {/**REVISIT */}
+        <div
+        className='product-card position-relative'>
+            <div className='wishlist-icon position-absolute'>
+                <button className='border-0 bg-transparent' onClick={(e)=>{addToWish(item?._id)}}>
+                    <img src={wishListImg} alt="wish list" />
+                </button>
+            </div>
+            <div className='product-image' onClick={()=>navigate("/product/"+item?._id)} src={viewImg} alt='view'>
+                <img className='img-fluid mx-auto' src={watchImg1} alt='product'/>
+                <img className='img-fluid mx-auto' src={watchImg} alt='product'/>
+            </div>
+            <div className='product-details' onClick={()=>navigate("/product/"+item?._id)} src={viewImg} alt='view'>
+                <h6 className='brand'>{item?.brand}</h6>
+                <h5 className='product-title'>
+                    {item?.title}
+                </h5>
+                <ReactStars
+                    count={5}
+                    size={24}
+                    value={parseFloat(item?.totalrating)}
+                    edit={false}
+                    activeColor="#ffd700"
+                />
+                
+                <p className="price">KSh. {item?.price}</p>
+            </div>
+            <div className='action-bar position-absolute'>
+                <div className='d-flex flex-column gap-15'>
+                    <button className='border-0 bg-transparent'>
+                        <img src={prodCompareImg} alt='compare'/>
+                    </button>
+                    <button onClick={()=>navigate("/product/"+item?._id)} className='border-0 bg-transparent'>
+                        <img src={viewImg} alt='view'/>
+                    </button>
+                    <button className='border-0 bg-transparent'>
+                        <img src={addCartImg} alt='add cart'/>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div> : null
+                )
+            })
+        }
             </div>
           </div>
       </Container>

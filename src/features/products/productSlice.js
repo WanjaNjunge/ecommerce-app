@@ -84,7 +84,7 @@ export const productSlice = createSlice({
             state.isLoading= false;
             state.isSuccess= true;
             state.isError= false;
-            state.product= action.payload;
+            state.singleProduct= action.payload;
             state.message= "Product Fetched Successully!"
         })
         .addCase(getAProduct.rejected, (state,action)=>{

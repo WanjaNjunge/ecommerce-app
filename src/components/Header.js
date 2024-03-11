@@ -108,7 +108,7 @@ const Header = () => {
                   </Link>
                 </div>
                 <div>
-                  <Link to='/wishlist'
+                  <Link to={authState.user === null  ? '/login' : '/wishlist'}
                     className='d-flex align-items-center gap-10 text-white mx-4'>
                     <img src={wishListImg} alt='wishlist' />
                     <p className='mb-0'>

@@ -143,7 +143,7 @@ export const authSlice = createSlice({
             state.isLoading=false;
             state.createdUser=action.payload;
             if (state.isSuccess === true) {
-                toast.info("User registered succesfully")
+                toast.info("Check Email for verification code")
             }
         }).addCase(registerUser.rejected, (state, action)=>{
             state.isError=true;

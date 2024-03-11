@@ -23,6 +23,7 @@ import { PrivateRoutes } from './routing/PrivateRoutes';
 import { OpenRoutes } from './routing/OpenRoutes';
 import Orders from './pages/Orders';
 import Profile from './pages/Profile';
+import VerifyCode from './pages/VerifyCode';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
             <Route path="wishlist" element={<PrivateRoutes><Wishlist /></PrivateRoutes>} />
             <Route path="login" element={<OpenRoutes><Login /></OpenRoutes>} />
             <Route path="signup" element={<OpenRoutes><Signup /></OpenRoutes>} />
+            <Route path="verify" element={<VerifyCode />} />
             <Route path="forgot-password" element={<ForgotPassword />} />
             <Route path="reset-password/:token" element={<ResetPassword/>} />
             <Route path="delivery-policy" element={<DeliveryPolicy />} />

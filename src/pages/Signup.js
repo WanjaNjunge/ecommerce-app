@@ -6,6 +6,7 @@ import Meta from '../components/Meta';
 import * as yup from 'yup';
 import { registerUser } from '../features/user/userSlice';
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 
 const signUpSchema = yup.object({
@@ -17,6 +18,7 @@ const signUpSchema = yup.object({
 
 const Signup = () => {
   const dispatch =useDispatch();
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -26,7 +28,11 @@ const Signup = () => {
     },
     validationSchema: signUpSchema,
     onSubmit: values => {
-      dispatch(registerUser(values));
+      dispatch(registerUser(values)).then(() => {
+            
+        navigate("/verify");
+      
+    });
     },
   });
 

@@ -14,9 +14,9 @@ import catBannerImg1 from '../assets/images/catbanner-01.jpg';
 import catBannerImg2 from '../assets/images/catbanner-02.jpg';
 import catBannerImg3 from '../assets/images/catbanner-03.jpg';
 import catBannerImg4 from '../assets/images/catbanner-04.jpg';
-import cameraImg from '../assets/images/camera.jpg';
-import tvImg from '../assets/images/tv.jpg';
-import headPhoneImg from '../assets/images/headphone.jpg';
+// import cameraImg from '../assets/images/camera.jpg';
+// import tvImg from '../assets/images/tv.jpg';
+// import headPhoneImg from '../assets/images/headphone.jpg';
 import brandImg1 from '../assets/images/brand-01.png';
 import brandImg2 from '../assets/images/brand-02.png';
 import brandImg3 from '../assets/images/brand-03.png';
@@ -27,10 +27,10 @@ import brandImg7 from '../assets/images/brand-07.png';
 import brandImg8 from '../assets/images/brand-08.png';
 import famousImg1 from '../assets/images/famous-1.jpg';
 import famousImg2 from '../assets/images/famous-2.webp';
-import laptopImg from '../assets/images/laptop.jpg';
-import monitorImg from '../assets/images/monitor-01.jpg';
-import phoneImg from '../assets/images/phone-01.jpg';
-import tabletImg from '../assets/images/tab4.webp';
+// import laptopImg from '../assets/images/laptop.jpg';
+// import monitorImg from '../assets/images/monitor-01.jpg';
+// import phoneImg from '../assets/images/phone-01.jpg';
+// import tabletImg from '../assets/images/tab4.webp';
 import watchImg from '../assets/images/watch-2.jpg';
 import phoneImg1 from '../assets/images/phone-03.webp';
 import speakerImg3 from '../assets/images/speaker-3.webp';
@@ -186,7 +186,7 @@ useEffect(()=>{
     </Container>
       
 
-      <Container class1='home-wrapper-2 py-5'>
+      {/* <Container class1='home-wrapper-2 py-5'>
         
           <div className="row">
             <div className="col-12">
@@ -250,7 +250,7 @@ useEffect(()=>{
               </div>
             </div>
           </div>
-      </Container>
+      </Container> */}
 
       <Container class1='featured-wrapper py-5 home-wrapper-2'>
           <div className='row'>

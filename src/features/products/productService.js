@@ -31,8 +31,16 @@ const addToWishlist = async (prodId) => {
     }
   };
 
+  const rateProduct = async (data) => {
+    const response = await api.put("product/rating", data);
+    if (response.data) {
+      return response.data;
+    }
+  };
+
 export const productService={
     getProducts,
     addToWishlist,
-    getSingleProduct
+    getSingleProduct,
+    rateProduct
 }

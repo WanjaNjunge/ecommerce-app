@@ -10,7 +10,7 @@ import ReactImageZoom from 'react-image-zoom';
 // import Color from '../components/Color';
 import { FaCodeCompare } from "react-icons/fa6";
 import { FaRegHeart } from "react-icons/fa";
-import { addToWishlist, getAProduct, getAllProducts } from '../features/products/productSlice';
+import { addRating, addToWishlist, getAProduct, getAllProducts } from '../features/products/productSlice';
 import { toast } from 'react-toastify';
 import { addProdToCart, getCartDetails } from '../features/user/userSlice';
 import { Link } from 'react-router-dom';
@@ -33,16 +33,10 @@ const SingleProduct = () => {
 
   const productState = useSelector(state => state?.product?.singleProduct);
   const productsState = useSelector(state => state?.product?.product);
-  console.log('====================================');
-  console.log(productsState);
-  console.log('====================================');
   const cartState = useSelector(state=>state?.auth?.cartProducts);
 
 
-  useEffect(() => {
-    localStorage.setItem('productsState', JSON.stringify(productsState));
-  }, [productsState]);
-
+  
   useEffect(() => {
     dispatch(getAProduct(getProductId));
     dispatch(getCartDetails());
@@ -75,6 +69,27 @@ const SingleProduct = () => {
 }
   
 
+const [star, setStar] = useState(null);
+const [comment, setComment] = useState(null);
+
+const addRatingToProduct = () => {
+  if (star === null) {
+    toast.error( "Please add star rating!")
+    return false;
+  } else if (comment === null) {
+    toast.error( "Please add comment")
+    return false;
+  } else {
+    dispatch(addRating({star:star, comment:comment, prodId:getProductId})).then(()=>{
+      dispatch(getAProduct(getProductId)); 
+    })
+    
+  }
+  return false;
+}
+
+
+
   const props = {width: 400, height: 600, zoomWidth: 600, img: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg"};
 
   // const [orderedProduct, setorderedProduct] = useState(true);
@@ -92,8 +107,8 @@ const SingleProduct = () => {
 
   return (
     <>
-        <Meta title={'Product Name'}/>
-      <BreadCrumb title="Product Name" />
+        <Meta title={productState?.title}/>
+      <BreadCrumb title={productState?.title} />
 
       <Container class1='main-product-wrapper py-5 home-wrapper-2'>
             <div className='row'>
@@ -198,7 +213,7 @@ const SingleProduct = () => {
                       </div>
                       <div className='d-flex align-items-center gap-15 mt-3 mb-3'>
                         <div>
-                          <Link><FaRegHeart className='fs-5 me-2' />Add to Wishlist</Link>
+                          <Link ><FaRegHeart className='fs-5 me-2' />Add to Wishlist</Link>
                         </div>
                         <div>
                           <Link><FaCodeCompare className='fs-5 me-2' />Add to Compare</Link>
@@ -259,7 +274,7 @@ const SingleProduct = () => {
               </div>
               <div className='review-form py-4'>
               <h4>Write a review</h4>
-              <form action='' className='d-flex flex-column gap-15'>
+              
                     <div>
                     <ReactStars
                       count={5}
@@ -267,6 +282,9 @@ const SingleProduct = () => {
                       value={4}
                       edit={true}
                       activeColor="#ffd700"
+                      onChange={(e)=>{
+                        setStar(e)
+                      }}
                     />
                     </div>
                     <div>
@@ -277,40 +295,36 @@ const SingleProduct = () => {
                       cols="30"
                       rows="4"
                       placeholder='Comments'
+                      onChange={(e)=>{
+                        setComment(e.target.value)
+                      }}
                       ></textarea>
                     </div>
-                    <div className='d-flex justify-content-end'>
-                      <button type="submit" className='button border-0'>Submit Review</button>
+                    <div className='d-flex justify-content-end mt-3'>
+                      <button onClick={addRatingToProduct} type="button" className='button border-0'>Submit Review</button>
                     </div>
-                  </form>
+                  
               </div>
               <div className='reviews mt-4'>
-                <div className='review'>
+                {
+                  productState && productState?.ratings?.map((item,index)=>{
+                    return (
+                      <div key={index} className='review'>
                   <div className='d-flex gap-10 align-items-center'>
                     <h6 className='mb-0'>Jane Doe</h6>
                     <ReactStars
                       count={5}
                       size={24}
-                      value={4}
+                      value={item?.star}
                       edit={false}
                       activeColor="#ffd700"
                     />
                   </div>
-                  <p className='mt-3'>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</p>
+                  <p className='mt-3'>{item?.comment}</p>
                 </div>
-                <div className='review'>
-                  <div className='d-flex gap-10 align-items-center'>
-                    <h6 className='mb-0'>John Doe</h6>
-                    <ReactStars
-                      count={5}
-                      size={24}
-                      value={2}
-                      edit={false}
-                      activeColor="#ffd700"
-                    />
-                  </div>
-                  <p className='mt-3'>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</p>
-                </div>
+                    )
+                  })
+                }
               </div>
               </div>
             </div>

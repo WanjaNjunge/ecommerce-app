@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Container from '../components/Container';
 // import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { IoIosArrowBack } from "react-icons/io";
 import watch from "../assets/images/watch.jpg";
 import { useSelector, useDispatch } from 'react-redux';
@@ -26,7 +26,7 @@ const billingInfoSchema = yup.object({
 
 const Checkout = (/*{ initialSubtotal }*/) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [totalAmount, setTotalAmount] = useState(null);
   const [deliveryPrice, setDeliveryPrice] = useState(0);
   const [cartProductState, setCartProductState] = useState([]);
@@ -81,7 +81,7 @@ const Checkout = (/*{ initialSubtotal }*/) => {
         );
 
         // Navigate to payment page after creating the order
-        navigate('/payment');
+        // navigate('/payment');
       } catch (error) {
         console.error('Error creating order:', error);
         // Handle error

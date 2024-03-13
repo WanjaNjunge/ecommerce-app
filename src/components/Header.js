@@ -9,6 +9,7 @@ import cartImg from '../assets/images/cart.svg';
 import menuImg from '../assets/images/menu.svg';
 import { Typeahead } from 'react-bootstrap-typeahead';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
+// import { getCartDetails } from '../features/user/userSlice';
 
 
 const Header = () => {
@@ -21,7 +22,9 @@ const Header = () => {
     const [productOpt, setProductOpt] = useState([]);
     // const [paginate, setPaginate] = useState(true);
 
-    
+    // useEffect(() => {
+    //   dispatch(getCartDetails());
+    // }, [dispatch]);
 
     useEffect(() => {
       let sum = 0;
@@ -117,16 +120,20 @@ const Header = () => {
                   </Link>
                 </div>
                 <div>
-                  <Link to={authState.user === null  ? '/login' : '/my-profile'}
-                   className='d-flex align-items-center gap-10 text-white mx-4'>
+                  <Link
+                    to={authState.user === null ? '/login' : '/my-profile'}
+                    className='d-flex align-items-center gap-10 text-white mx-4'
+                  >
                     <img src={userImg} alt='user' />
-                    {
-                      authState.user === null ? <p className='mb-0'>
-                      Login <br /> Sign Up
-                    </p> : <p className='mb-0'>
-                      Welcome {authState?.user?.username}
+                    <p className='mb-0'>
+                      {authState.user === null ? (
+                        <>
+                          Login <br /> Sign Up
+                        </>
+                      ) : (
+                        `Welcome ${authState?.user?.username}`
+                      )}
                     </p>
-                    }
                   </Link>
                 </div>
                 <div>
@@ -141,7 +148,9 @@ const Header = () => {
                   </Link>
                 </div>
                 <div className='mx-4'>
-                  <button onClick={handleLogout} type='button' className='button border-0'>Logout</button>
+                  {authState?.user !== null && (
+                    <button onClick={handleLogout} type='button' className='button border-0'>Logout</button>
+                  )}
                 </div>
               </div>
               

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import {BsSearch} from 'react-icons/bs';
-import compareImg from '../assets/images/compare.svg';
+// import compareImg from '../assets/images/compare.svg';
 import wishListImg from '../assets/images/wishlist.svg';
 import userImg from '../assets/images/user.svg';
 import cartImg from '../assets/images/cart.svg';
@@ -103,7 +103,7 @@ const Header = () => {
             </div>
             <div className="col-5">
               <div className='header-upper-links d-flex align-items-center justify-content-between'>
-                <div>
+                {/* <div>
                   <Link to='/compare-product' 
                     className='d-flex align-items-center gap-10 text-white mx-4'>
                     <img src={compareImg} alt='compare'/>
@@ -111,7 +111,7 @@ const Header = () => {
                       Compare <br /> Products
                     </p>
                   </Link>
-                </div>
+                </div> */}
                 <div>
                   <Link to={authState.user === null  ? '/login' : '/wishlist'}
                     className='d-flex align-items-center gap-10 text-white mx-4'>

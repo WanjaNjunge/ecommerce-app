@@ -8,7 +8,7 @@ import ReactStars from "react-rating-stars-component";
 import { useDispatch, useSelector } from 'react-redux';
 import ReactImageZoom from 'react-image-zoom';
 // import Color from '../components/Color';
-import { FaCodeCompare } from "react-icons/fa6";
+// import { FaCodeCompare } from "react-icons/fa6";
 import { FaRegHeart } from "react-icons/fa";
 import { addRating, addToWishlist, getAProduct, getAllProducts } from '../features/products/productSlice';
 import { toast } from 'react-toastify';
@@ -16,9 +16,9 @@ import { addProdToCart, getCartDetails } from '../features/user/userSlice';
 import { Link } from 'react-router-dom';
 import watchImg from '../assets/images/watch-2.jpg';
 import watchImg1 from '../assets/images/watch.jpg';
-import prodCompareImg from '../assets/images/prodcompare.svg';
+// import prodCompareImg from '../assets/images/prodcompare.svg';
 import viewImg from '../assets/images/view.svg';
-import addCartImg from '../assets/images/add-cart.svg';
+// import addCartImg from '../assets/images/add-cart.svg';
 import wishListImg from '../assets/images/wish.svg';
 
 
@@ -215,9 +215,9 @@ const addRatingToProduct = () => {
                         <div>
                           <Link ><FaRegHeart className='fs-5 me-2' />Add to Wishlist</Link>
                         </div>
-                        <div>
+                        {/* <div>
                           <Link><FaCodeCompare className='fs-5 me-2' />Add to Compare</Link>
-                        </div>
+                        </div> */}
                       </div>
                       <div className="d-flex flex-column gap-10 my-3"><h3 className='product-heading'>Delivery & Returns :</h3> <p className='product-data'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 
@@ -380,15 +380,15 @@ const addRatingToProduct = () => {
             </div>
             <div className='action-bar position-absolute'>
                 <div className='d-flex flex-column gap-15'>
-                    <button className='border-0 bg-transparent'>
+                    {/* <button className='border-0 bg-transparent'>
                         <img src={prodCompareImg} alt='compare'/>
-                    </button>
+                    </button> */}
                     <button onClick={()=>navigate("/product/"+item?._id)} className='border-0 bg-transparent'>
                         <img src={viewImg} alt='view'/>
                     </button>
-                    <button className='border-0 bg-transparent'>
+                    {/* <button className='border-0 bg-transparent'>
                         <img src={addCartImg} alt='add cart'/>
-                    </button>
+                    </button> */}
                 </div>
             </div>
         </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import {BsSearch} from 'react-icons/bs';
 import compareImg from '../assets/images/compare.svg';
@@ -9,11 +9,12 @@ import cartImg from '../assets/images/cart.svg';
 import menuImg from '../assets/images/menu.svg';
 import { Typeahead } from 'react-bootstrap-typeahead';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
+import { getAProduct } from '../features/products/productSlice';
 // import { getCartDetails } from '../features/user/userSlice';
 
 
 const Header = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
     const [total, setTotal] = useState(null);
     const cartState = useSelector(state=>state?.auth?.cartProducts);
@@ -85,7 +86,8 @@ const Header = () => {
                 // onPaginate={() => console.log('Results paginated')}
                 onChange={(selected) => {
                   if (selected && selected.length > 0) {
-                    navigate(`/product/${selected[0].prod}`);
+                    navigate(`/product/${selected[0]?.prod}`);
+                    dispatch(getAProduct(selected[0]?.prod))
                   }
                 }}
                 labelKey={"name"}

@@ -2,14 +2,30 @@ import axios from "axios";
 import { base_url, api } from "../../utils/axiosConfig";
 
 
+const getProducts = async (data) => {;
+  const brandParam = data?.selectedBrand ? `brand=${data.selectedBrand}` : '';
+  const tagParams = data?.selectedTag.length ? `tags=${data.selectedTag.join(',')}` : '';
+  const categoryParam = data?.selectedCategory ? `category=${data.selectedCategory}` : '';
+  const minPriceParam = data?.minPrice ? `price[gte]=${data.minPrice}` : '';
+  const maxPriceParam = data?.maxPrice ? `price[lte]=${data.maxPrice}` : '';
+  const sortParam = data?.sort ? `sort=${data.sort}` : '';
+  const queryParams = [brandParam, tagParams, categoryParam, minPriceParam, maxPriceParam, sortParam].filter(Boolean).join('&');
 
+  const url = `${base_url}product?${queryParams}`;
+  const response = await axios.get(url);
 
-const getProducts = async(userData)=>{
-    const response = await axios.get(`${base_url}product`);
-    if (response.data) {
-        return response.data;
-    }
+  if (response.data) {
+      return response.data;
+  }
 };
+
+// const getProducts = async(data)=>{
+//   console.log(data);
+//     const response = await axios.get(`${base_url}product?${data?.selectedBrand?`brand=${data?.selectedBrand}&&`:""}`);
+//     if (response.data) {
+//         return response.data;
+//     }
+// };
 
 const getSingleProduct = async(id)=>{
     const response = await axios.get(`${base_url}product/${id}`);

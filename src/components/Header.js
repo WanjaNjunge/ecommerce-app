@@ -122,7 +122,36 @@ const Header = () => {
                   </Link>
                 </div>
                 <div>
-                  <Link
+                  <div className='d-flex align-items-center gap-10 text-white mx-4 ' 
+                  role="button"
+                  id="dropdownMenuLink"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  <img src={userImg} alt='user' />
+                    <p className='mb-0'>
+                      {authState.user === null ? (
+                        <>
+                          Login <br /> Sign Up
+                        </>
+                      ) : (
+                        `Welcome ${authState?.user?.username}`
+                      )}
+                    </p>
+                  </div>
+                  <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    {authState?.user === null ? (
+                      <>
+                        <Link to="/login" className="dropdown-item">Login</Link>
+                        <Link to="/signup" className="dropdown-item">Sign Up</Link>
+                      </>
+                    ) : (
+                      <>
+                        <Link to="/my-profile" className="dropdown-item">View Profile</Link>
+                        <Link className="dropdown-item" onClick={handleLogout}>Logout</Link>
+                      </>
+                    )}
+                  </div>
+                  {/* <Link
                     to={authState.user === null ? '/login' : '/my-profile'}
                     className='d-flex align-items-center gap-10 text-white mx-4'
                   >
@@ -136,7 +165,7 @@ const Header = () => {
                         `Welcome ${authState?.user?.username}`
                       )}
                     </p>
-                  </Link>
+                  </Link> */}
                 </div>
                 <div>
                   <Link to='cart'

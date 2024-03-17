@@ -2,20 +2,25 @@ import axios from "axios";
 import { base_url, api } from "../../utils/axiosConfig";
 
 
-const getProducts = async (data) => {;
-  const brandParam = data?.selectedBrand ? `brand=${data.selectedBrand}` : '';
-  const tagParams = data?.selectedTag.length ? `tags=${data.selectedTag.join(',')}` : '';
-  const categoryParam = data?.selectedCategory ? `category=${data.selectedCategory}` : '';
-  const minPriceParam = data?.minPrice ? `price[gte]=${data.minPrice}` : '';
-  const maxPriceParam = data?.maxPrice ? `price[lte]=${data.maxPrice}` : '';
-  const sortParam = data?.sort ? `sort=${data.sort}` : '';
-  const queryParams = [brandParam, tagParams, categoryParam, minPriceParam, maxPriceParam, sortParam].filter(Boolean).join('&');
+const getProducts = async (data) => {
+  try {
+    const brandParam = data?.selectedBrand ? `brand=${data.selectedBrand}` : '';
+    const tagParams = data?.selectedTag.length ? `tags=${data.selectedTag.join(',')}` : '';
+    const categoryParam = data?.selectedCategory ? `category=${data.selectedCategory}` : '';
+    const minPriceParam = data?.minPrice ? `price[gte]=${data.minPrice}` : '';
+    const maxPriceParam = data?.maxPrice ? `price[lte]=${data.maxPrice}` : '';
+    const sortParam = data?.sort ? `sort=${data.sort}` : '';
+    const queryParams = [brandParam, tagParams, categoryParam, minPriceParam, maxPriceParam, sortParam].filter(Boolean).join('&');
 
-  const url = `${base_url}product?${queryParams}`;
-  const response = await axios.get(url);
+    const url = `${base_url}product?${queryParams}`;
+    const response = await axios.get(url);
 
-  if (response.data) {
+    if (response.data) {
       return response.data;
+    }
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    throw new Error('Failed to fetch products');
   }
 };
 

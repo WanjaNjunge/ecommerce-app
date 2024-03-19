@@ -8,14 +8,21 @@ export const registerUser = createAsyncThunk("auth/register", async (userData, t
     } catch(error) {
         return thunkAPI.rejectWithValue(error)
     }
-})
+});
+export const verifyUser = createAsyncThunk("auth/verify", async (data, thunkAPI)=>{
+    try{
+        return await authService.verifyCode(data)
+    } catch(error) {
+        return thunkAPI.rejectWithValue(error)
+    }
+});
 export const loginUser = createAsyncThunk("auth/login", async (userData, thunkAPI)=>{
     try{
         return await authService.login(userData)
     } catch(error) {
         return thunkAPI.rejectWithValue(error)
     }
-})
+});
 export const getUserProductWishlist = createAsyncThunk(
     "user/wishlist",
     async (thunkAPI) => {
@@ -35,7 +42,7 @@ export const addProdToCart = createAsyncThunk(
             return thunkAPI.rejectWithValue(error)
         }
     }
-)
+);
 export const getCartDetails = createAsyncThunk(
     "user/cart/get",
     async (thunkAPI) => {
@@ -65,7 +72,7 @@ export const updateCartProd = createAsyncThunk(
             return thunkAPI.rejectWithValue(error)
         }
     }
-)
+);
 export const createAnOrder = createAsyncThunk(
     "user/cart/create-order",
     async (orderDetail, thunkAPI) => {
@@ -154,7 +161,26 @@ export const authSlice = createSlice({
                 toast.error(action.error)
             }
         })
-
+        .addCase(verifyUser.pending, (state)=>{
+            state.isLoading=true;
+        }).addCase(verifyUser.fulfilled, (state, action)=> {
+            state.isError=false;
+            state.isSuccess=true;
+            state.isLoading=false;
+            state.verifiedUser=action.payload;
+            if (state.isSuccess === true) {
+                toast.info("Verification complete.")
+            }
+        }).addCase(verifyUser.rejected, (state, action)=>{
+            state.isError=true;
+            state.isSuccess=false;
+            state.isLoading=false;
+            state.message=action.error;
+            if (state.isError === true) {
+                toast.error(action.error)
+            }
+        })
+        
         // loginMutation will be
         .addCase(loginUser.pending, (state)=>{
             state.isLoading=true;

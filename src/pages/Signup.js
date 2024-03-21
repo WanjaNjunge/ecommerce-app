@@ -1,11 +1,11 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Container from '../components/Container';
 import { useFormik } from 'formik';
 import BreadCrumb from '../components/BreadCrumb';
 import Meta from '../components/Meta';
 import * as yup from 'yup';
 import { registerUser } from '../features/user/userSlice';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 
@@ -20,6 +20,9 @@ const Signup = () => {
   const dispatch =useDispatch();
   const navigate = useNavigate();
 
+
+  const authState = useSelector((state) => state?.auth);
+
   const formik = useFormik({
     initialValues: {
       username: '',
@@ -28,15 +31,21 @@ const Signup = () => {
     },
     validationSchema: signUpSchema,
     onSubmit: values => {
-      dispatch(registerUser(values)).then(() => {
-            
-        navigate("/verify");
+      dispatch(registerUser(values));
+      localStorage.setItem('verificationEmail', values.email);
       
-    });
     },
   });
 
 
+  
+  useEffect(() => {
+    if (authState.isSuccess === true) {
+      navigate("/verify");
+    }
+  }, [authState, navigate]);
+
+ console.log("signup:", authState);
 
 
   return (

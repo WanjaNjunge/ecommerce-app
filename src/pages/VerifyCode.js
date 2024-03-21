@@ -4,37 +4,43 @@ import { useFormik } from 'formik';
 import BreadCrumb from '../components/BreadCrumb';
 import Meta from '../components/Meta';
 import * as yup from 'yup';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { verifyUser } from '../features/user/userSlice';
 
 const verifySchema = yup.object({
- code: yup.string().required('Verification code is required'),
+ verificationCode: yup.string().required('Verification code is required'),
 });
 
 const Verify = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const userState  = useSelector((state) => state?.auth?.createdUser);
+  const verificationEmail = localStorage.getItem('verificationEmail');
+
+  
   const formik = useFormik({
-    initialValues: {
-      email: userState?.email,
-      code: '',
+    initialValues: {  
+      verificationCode: '',
     },
     validationSchema: verifySchema,
     onSubmit: (values) => {
-      console.log('====================================');
-      console.log(values);
-      console.log('====================================');
-      dispatch(verifyUser(values)).then(() => {
-            
-        navigate("/login");
-      
-    });
+      dispatch(verifyUser({email: verificationEmail, verificationCode: values.verificationCode}))
+      .then((action) => {
+        const userState = action.payload.data; 
+        if (userState?.isEmailVerified === true) {
+          navigate("/login");
+        }
+      });
     },
   });
-
+  
+  
+  // useEffect(() => {
+  //   if (userState.isEmailVerified === true) {
+  //     navigate("/login");
+  //   }
+  // }, [userState, navigate]);
   return (
     <>
       <Meta title={'Verify Account'} />
@@ -49,15 +55,15 @@ const Verify = () => {
                 <div>
                   <input
                     type='text'
-                    name='code'
+                    name='verificationCode'
                     placeholder='Verification Code'
                     className='form-control'
-                    value={formik.values.code}
-                    onChange={formik.handleChange('code')}
-                    onBlur={formik.handleBlur('code')}
+                    value={formik.values.verificationCode}
+                    onChange={formik.handleChange('verificationCode')}
+                    onBlur={formik.handleBlur('verificationCode')}
                   />
                 </div>
-                <div className='error'>{formik.touched.code && formik.errors.code}</div>
+                <div className='error'>{formik.touched.verificationCode && formik.errors.verificationCode}</div>
 
                 <div className='mt-3 d-flex justify-content-center gap-15 align-items-center'>
                   <button type='submit' className='button border-0'>

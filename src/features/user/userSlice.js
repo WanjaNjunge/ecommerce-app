@@ -2,18 +2,19 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { authService } from './userService';
 
-export const registerUser = createAsyncThunk("auth/register", async (userData, thunkAPI)=>{
+export const registerUser = createAsyncThunk("auth/register", async (data, thunkAPI)=>{
     try{
-        return await authService.register(userData)
+        return await authService.register(data);
+         
     } catch(error) {
-        return thunkAPI.rejectWithValue(error)
+        return thunkAPI.rejectWithValue(error);
     }
 });
-export const verifyUser = createAsyncThunk("auth/verify", async (data, thunkAPI)=>{
+export const verifyUser = createAsyncThunk("auth/verify-user", async (data, thunkAPI)=>{
     try{
-        return await authService.verifyCode(data)
+        return await authService.verifyCode(data);
     } catch(error) {
-        return thunkAPI.rejectWithValue(error)
+        return thunkAPI.rejectWithValue(error);
     }
 });
 export const loginUser = createAsyncThunk("auth/login", async (userData, thunkAPI)=>{
@@ -134,7 +135,7 @@ const initialState = {
     isError:false,
     isSuccess:false,
     isLoading:false,
-    message:""
+    message:"",
 }
 
 export const authSlice = createSlice({
@@ -156,10 +157,8 @@ export const authSlice = createSlice({
             state.isError=true;
             state.isSuccess=false;
             state.isLoading=false;
-            state.message=action.error;
-            if (state.isError === true) {
-                toast.error(action.error)
-            }
+            state.message = action.payload.response.data.error || "Something went wrong"; // Display the error message from the backend
+            toast.error(state.message);
         })
         .addCase(verifyUser.pending, (state)=>{
             state.isLoading=true;
@@ -169,16 +168,14 @@ export const authSlice = createSlice({
             state.isLoading=false;
             state.verifiedUser=action.payload;
             if (state.isSuccess === true) {
-                toast.info("Verification complete.")
+                toast.info("Verification complete.  You can now login.")
             }
         }).addCase(verifyUser.rejected, (state, action)=>{
             state.isError=true;
             state.isSuccess=false;
             state.isLoading=false;
-            state.message=action.error;
-            if (state.isError === true) {
-                toast.error(action.error)
-            }
+            state.message = action.payload.response.data.error || "Something went wrong"; // Display the error message from the backend
+            toast.error(state.message);
         })
         
         // loginMutation will be
@@ -192,16 +189,16 @@ export const authSlice = createSlice({
             if (state.isSuccess === true) {
                 localStorage.setItem('token', action.payload.token);
                 // window.location.reload();
-                toast.info("User logged in succesfully")
+                toast.info("Logged in succesfully")
             }
         }).addCase(loginUser.rejected, (state, action)=>{
             state.isError=true;
             state.isSuccess=false;
             state.isLoading=false;
-            state.message=action.error;
-            if (state.isError === true) {
-                toast.error(action.error)
-            }
+            state.user=null;
+            state.message = action.payload.response.data.error || "Something went wrong"; // Display the error message from the backend
+            toast.error(state.message);
+            
         })
         .addCase(getUserProductWishlist.pending, (state)=>{
             state.isLoading=true;
@@ -357,10 +354,8 @@ export const authSlice = createSlice({
             state.isError=true;
             state.isSuccess=false;
             state.isLoading=false;
-            state.message=action.error;
-            if (state.isError === true) {
-                toast.info("Something went wrong")
-            }
+            state.message = action.payload.response.data.error || "Something went wrong"; // Display the error message from the backend
+            toast.error(state.message);
         })
         .addCase(resetPassword.pending, (state)=>{
             state.isLoading=true;

@@ -1,17 +1,17 @@
 import axios from "axios";
 import { base_url, api } from "../../utils/axiosConfig";
 
-const register = async(userData)=>{
-    const response = await axios.post(`${base_url}user/register`, userData);
+const register = async(data)=>{
+    const response = await axios.post(`${base_url}user/register`, data);
     if (response.data) {
         return response.data;
     }
 };
 const verifyCode = async(data)=>{
-  const response = await axios.post(`${base_url}user/verify`, data);
+  const response = await axios.post(`${base_url}user/verify-user`, { email:data?.email, verificationCode:data?.verificationCode });
   if (response.data) {
-      return response.data;
-  }
+    return response.data;
+}
 };
 const login = async(userData)=>{
     const response = await axios.post(`${base_url}user/login`, userData);

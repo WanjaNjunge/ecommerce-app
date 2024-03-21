@@ -22,7 +22,7 @@ const OurStore = () => {
 
 
     // FILTER STATES
-    const [selectedTag, setSelectedTag] = useState([]);
+    const [selectedTag, setSelectedTag] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('');
     const [selectedBrand, setSelectedBrand] = useState('');
     const [minPrice, setMinPrice] = useState('');
@@ -32,7 +32,7 @@ const OurStore = () => {
     
     
 
-    const productState = useSelector((state) => state.product.product);
+    const productState = useSelector((state) => state?.product?.product);
 
     
     
@@ -64,11 +64,11 @@ const OurStore = () => {
         const element = productState[index];
           newBrands.push(element.brand);
           newCategories.push(element.category);
-          newTags.push(...element.tags);
+          newTags.push(element.tags);
       }
       setBrands(newBrands);
       setCategories(newCategories);
-      setTags([...new Set(newTags)]);
+      setTags(newTags);
     }, [productState]);
 
     
@@ -194,20 +194,16 @@ const OurStore = () => {
                 <h3 className='sub-title'>Product Tags</h3>
                 <div>
                   <div className='product-tags d-flex flex-wrap align-items-center gap-10'>
-                  {
-                      tags && tags.map((item,index)=>{
+                  
+                    {
+                      tags && [...new Set(tags)].map((item,index)=>{
                         return (
-                          <span key={index} onClick={()=>{
-                            setSelectedTag(prevState => {
-                              if (prevState.includes(item)) {
-                                return prevState.filter(tag => tag !== item);
-                              } else {
-                                return [...prevState, item];
-                              }
-                            });
-                          }} className={`text-capitalize badge bg-light text-secondary rounded-3 py-2 px-3 ${selectedTag.includes(item) ? 'active' : ''}`}>{item}</span>
+                          <li key={index} onClick={()=>{
+                            setSelectedTag(item) 
+                          }} className='text-capitalize'>{item}</li>
                         )
                       })
+                      
                     }
                   </div>
                 </div>
@@ -222,7 +218,7 @@ const OurStore = () => {
                         return (
                           <li key={index} onClick={()=>{
                             setSelectedBrand(item) 
-                          }} >{item}</li>
+                          }} className='text-capitalize'>{item}</li>
                         )
                       })
                       

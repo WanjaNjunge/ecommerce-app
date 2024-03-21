@@ -22,7 +22,8 @@ const Header = () => {
     const productState = useSelector(state=>state?.product?.product);
     const [productOpt, setProductOpt] = useState([]);
 
-    const totalQuantity = cartState.reduce((total, item) => total + item.quantity, 0);
+    const totalQuantity = cartState ? cartState.reduce((total, item) => total + item.quantity, 0) : 0;
+
     
     // const [paginate, setPaginate] = useState(true);
 

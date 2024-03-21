@@ -5,7 +5,7 @@ import { base_url, api } from "../../utils/axiosConfig";
 const getProducts = async (data) => {
   try {
     const brandParam = data?.selectedBrand ? `brand=${data.selectedBrand}` : '';
-    const tagParams = data?.selectedTag.length ? `tags=${data.selectedTag.join(',')}` : '';
+    const tagParams = data?.selectedTag ? `tags=${data.selectedTag}` : '';
     const categoryParam = data?.selectedCategory ? `category=${data.selectedCategory}` : '';
     const minPriceParam = data?.minPrice ? `price[gte]=${data.minPrice}` : '';
     const maxPriceParam = data?.maxPrice ? `price[lte]=${data.maxPrice}` : '';

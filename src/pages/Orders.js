@@ -64,7 +64,7 @@ const Orders = () => {
                     {
                         item?.orderItems?.map((i, index)=>{
                             return (
-                                <div className='col-12'>
+                                <div className='col-12' key={index}>
                 <div className='row bg-secondary py-3'>
                     <div className='col-3'>
                         <p className='text-white'>{i?.product?.title}</p>

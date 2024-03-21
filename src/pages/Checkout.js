@@ -7,7 +7,7 @@ import watch from "../assets/images/watch.jpg";
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { createAnOrder, getCartDetails } from '../features/user/userSlice';
+import { createAnOrder, emptyCart, getCartDetails } from '../features/user/userSlice';
 
 
 const billingInfoSchema = yup.object({
@@ -65,7 +65,8 @@ const Checkout = (/*{ initialSubtotal }*/) => {
       pincode: '',
       phonenumber: '',
       email: '',
-      other: '',
+      ordernotes: '',
+      apartment: '',
     },
     validationSchema: billingInfoSchema,
     onSubmit: async (values) => {
@@ -79,6 +80,7 @@ const Checkout = (/*{ initialSubtotal }*/) => {
             paymentInfo: {},
           })
         );
+        dispatch(emptyCart());
 
         // Navigate to payment page after creating the order
         // navigate('/payment');
@@ -208,12 +210,12 @@ const Checkout = (/*{ initialSubtotal }*/) => {
                                 {formik.touched.address && formik.errors.address}
                             </div>
                 <div>
-                  <input type="text" className='form-control'  placeholder='Apartment/Suite (optional)' name="other" onChange={formik.handleChange("other")}
-                              onBlur={formik.handleBlur('other')}
-                                value={formik.values.other} />
+                  <input type="text" className='form-control'  placeholder='Apartment/Suite (optional)' name="apartment" onChange={formik.handleChange("apartment")}
+                              onBlur={formik.handleBlur('apartment')}
+                                value={formik.values.apartment} />
                 </div>
                 <div className='error'>
-                                {formik.touched.other && formik.errors.other}
+                                {formik.touched.apartment && formik.errors.apartment}
                             </div>
                 <div>
                   <input type="text" className='form-control'  placeholder='Phone Number' name='phonenumber' onChange={formik.handleChange("phonenumber")}
@@ -233,19 +235,19 @@ const Checkout = (/*{ initialSubtotal }*/) => {
                             </div>
                 <div>
                       <textarea
-                      name='other'
+                      name='ordernotes'
                       id=''
                       className='w-100 form-control'
                       cols="30"
                       rows="4"
                       placeholder='Order notes (optional)'
                       
-                      onChange={formik.handleChange("other")}
-                      onBlur={formik.handleBlur('other')}
-                      value={formik.values.other} ></textarea>
+                      onChange={formik.handleChange("ordernotes")}
+                      onBlur={formik.handleBlur('ordernotes')}
+                      value={formik.values.ordernotes} ></textarea>
                     </div>
                     <div className='error'>
-                                {formik.touched.other && formik.errors.other}
+                                {formik.touched.ordernotes && formik.errors.ordernotes}
                             </div>
                 <div className='w-100'>
                   <div className='d-flex justify-content-between align-items-center'>
@@ -269,7 +271,7 @@ const Checkout = (/*{ initialSubtotal }*/) => {
                   </div>
                   <div>
                     <h5 className='title total'>{item?.productId?.title}</h5>
-                    <p className='total'>{item?.productId?.description}</p>
+                    <p className='total'>{item?.productId?.brand}</p>
                   </div>
                 </div>
                 

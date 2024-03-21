@@ -59,8 +59,7 @@ const SingleProduct = () => {
       toast.error("Please enter valid quantity number");
       return false
     } else {
-      dispatch(addProdToCart({ productId: productState?._id, quantity, price: productState?.price} ))
-      navigate('/cart')
+      dispatch(addProdToCart({ productId: productState?._id, quantity, price: productState?.price} ));
     }
   }
   
@@ -204,7 +203,7 @@ const addRatingToProduct = () => {
                         // data-bs-toggle="modal" data-bs-target="#staticBackdrop"
                           type='button'
                           className='button border-0'>
-                            {alreadyAdded? "Go to cart" : "Add to cart"}
+                            {alreadyAdded? "View in cart" : "Add to cart"}
                           </button>
                         {/* <button
                           className='button signup'>Buy Now

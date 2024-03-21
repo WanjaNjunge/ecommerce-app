@@ -83,6 +83,7 @@ const Cart = () => {
                                 </div>
                                 <div className='w-75'>
                                     <p>{item?.productId?.title}</p>
+                                    <p>{item?.productId?.brand}</p>
                                     <p>{item?.productId?.description}</p>
                                 </div>
                             </div>

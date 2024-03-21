@@ -7,7 +7,7 @@ import watch from "../assets/images/watch.jpg";
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { createAnOrder, emptyCart, getCartDetails } from '../features/user/userSlice';
+import { createAnOrder, getCartDetails } from '../features/user/userSlice';
 
 
 const billingInfoSchema = yup.object({
@@ -80,7 +80,10 @@ const Checkout = (/*{ initialSubtotal }*/) => {
             paymentInfo: {},
           })
         );
-        dispatch(emptyCart());
+        // dispatch(emptyCart()).then(()=>{
+        //   dispatch(getCartDetails());
+        // })
+        
 
         // Navigate to payment page after creating the order
         // navigate('/payment');

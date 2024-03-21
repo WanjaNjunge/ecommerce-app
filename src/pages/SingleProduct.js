@@ -27,10 +27,12 @@ const SingleProduct = () => {
   const [quantity, setQuantity] = useState(1);
   const [alreadyAdded, setAlreadyAdded] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate()
-  const getProductId = location.pathname.split("/")[2];
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const getProductId = location.pathname.split("/")[2];
 
+
+  
   const productState = useSelector(state => state?.product?.singleProduct);
   const productsState = useSelector(state => state?.product?.product);
   const cartState = useSelector(state=>state?.auth?.cartProducts);
@@ -60,6 +62,7 @@ const SingleProduct = () => {
       return false
     } else {
       dispatch(addProdToCart({ productId: productState?._id, quantity, price: productState?.price} ));
+      dispatch(getCartDetails());
     }
   }
   

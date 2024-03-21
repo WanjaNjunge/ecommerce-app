@@ -36,11 +36,12 @@ import phoneImg1 from '../assets/images/phone-03.webp';
 import speakerImg3 from '../assets/images/speaker-3.webp';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToWishlist, getAllProducts } from '../features/products/productSlice';
+import { addProdToCart, getCartDetails, updateCartProd } from '../features/user/userSlice';
 import ReactStars from "react-rating-stars-component";
 import watchImg1 from '../assets/images/watch.jpg';
 // import prodCompareImg from '../assets/images/prodcompare.svg';
 import viewImg from '../assets/images/view.svg';
-// import addCartImg from '../assets/images/add-cart.svg';
+import addCartImg from '../assets/images/add-cart.svg';
 import wishListImg from '../assets/images/wish.svg';
 
 
@@ -49,6 +50,10 @@ const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const productState = useSelector((state)=> state?.product?.product);
+
+  
+
+
 
   const getProducts = useCallback(() => {
     dispatch(getAllProducts());
@@ -61,7 +66,27 @@ const Home = () => {
 
 useEffect(()=>{
   getProducts();
-}, [getProducts]);
+  dispatch(getCartDetails());
+}, [getProducts, dispatch]);
+
+  const userCartState = useSelector(state=>state?.auth?.cartProducts);
+
+  const addToCart = (productId, price) => {
+    const existingItem = userCartState.find(item => item.productId._id === productId);
+    if (existingItem) {
+        const newQuantity = existingItem.quantity + 1;
+        dispatch(updateCartProd({ cartItemId: existingItem._id, quantity: newQuantity }))
+        setTimeout (()=>{
+            dispatch(getCartDetails());
+        }, 200);
+    } else {
+        dispatch(addProdToCart({ productId, quantity: 1, price }))
+        setTimeout (()=>{
+            dispatch(getCartDetails());
+        }, 200);
+    }
+};
+
 
   return (
     <>
@@ -306,12 +331,13 @@ useEffect(()=>{
                     {/* <button className='border-0 bg-transparent'>
                         <img src={prodCompareImg} alt='compare'/>
                     </button> */}
+                    
+                    <button onClick={() => addToCart(item?._id, item?.price)} className='border-0 bg-transparent'>
+                        <img src={addCartImg} alt='add cart'/>
+                    </button>
                     <button className='border-0 bg-transparent'>
                         <img onClick={()=>navigate("/product/"+item?._id)} src={viewImg} alt='view'/>
                     </button>
-                    {/* <button className='border-0 bg-transparent'>
-                        <img src={addCartImg} alt='add cart'/>
-                    </button> */}
                 </div>
             </div>
         </div>
@@ -446,12 +472,12 @@ useEffect(()=>{
                     {/* <button className='border-0 bg-transparent'>
                         <img src={prodCompareImg} alt='compare'/>
                     </button> */}
+                    <button onClick={() => addToCart(item?._id, item?.price)} className='border-0 bg-transparent'>
+                        <img src={addCartImg} alt='add cart'/>
+                    </button>
                     <button onClick={()=>navigate("/product/"+item?._id)} className='border-0 bg-transparent'>
                         <img src={viewImg} alt='view'/>
                     </button>
-                    {/* <button className='border-0 bg-transparent'>
-                        <img src={addCartImg} alt='add cart'/>
-                    </button> */}
                 </div>
             </div>
         </div>

@@ -282,7 +282,7 @@ export const authSlice = createSlice({
             state.isLoading=false;
             state.updateCartProduct=action.payload;
             if (state.isSuccess === true) {
-                toast.info("Updated cart successfully")
+                toast.info("Updated cart quantity successfully")
             }
         }).addCase(updateCartProd.rejected, (state, action)=>{
             state.isError=true;

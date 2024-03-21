@@ -16,24 +16,27 @@ import { getAProduct } from '../features/products/productSlice';
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-    const [total, setTotal] = useState(null);
+    // const [total, setTotal] = useState(null);
     const cartState = useSelector(state=>state?.auth?.cartProducts);
     const authState = useSelector((state) => state?.auth);
     const productState = useSelector(state=>state?.product?.product);
     const [productOpt, setProductOpt] = useState([]);
+
+    const totalQuantity = cartState.reduce((total, item) => total + item.quantity, 0);
+    
     // const [paginate, setPaginate] = useState(true);
 
     // useEffect(() => {
     //   dispatch(getCartDetails());
     // }, [dispatch]);
 
-    useEffect(() => {
-      let sum = 0;
-      for (let index = 0; index < cartState?.length; index++) {
-          sum = sum +(Number(cartState[index].quantity)*cartState[index].price)
-          setTotal(sum)
-      }
-    }, [cartState]);
+    // useEffect(() => {
+    //   let sum = 0;
+    //   for (let index = 0; index < cartState?.length; index++) {
+    //       sum = sum +(Number(cartState[index].quantity)*cartState[index].price)
+    //       setTotal(sum)
+    //   }
+    // }, [cartState]);
 
 
     useEffect(()=>{
@@ -122,6 +125,17 @@ const Header = () => {
                   </Link>
                 </div>
                 <div>
+                  <Link to='cart'
+                   className='d-flex align-items-center gap-10 text-white mx-4'>
+                    <img src={cartImg} alt='cart' />
+                    <div className='d-flex flex-column gap-10'>
+                    <span className='badge bg-white text-dark'>{totalQuantity}</span>
+                    {/* <p className='mb-0 mx-2'>KSh. {total ? total : 0}</p> */}
+
+                    </div>
+                  </Link>
+                </div>
+                <div>
                   <div className='d-flex align-items-center gap-10 text-white mx-4 ' 
                   role="button"
                   id="dropdownMenuLink"
@@ -167,17 +181,7 @@ const Header = () => {
                     </p>
                   </Link> */}
                 </div>
-                <div>
-                  <Link to='cart'
-                   className='d-flex align-items-center gap-10 text-white mx-4'>
-                    <img src={cartImg} alt='cart' />
-                    <div className='d-flex flex-column gap-10'>
-                    <span className='badge bg-white text-dark'>{cartState?.length ? cartState?.length : 0}</span>
-                    <p className='mb-0 mx-2'>KSh. {total ? total : 0}</p>
-
-                    </div>
-                  </Link>
-                </div>
+                
                 {/* <div className='mx-4'>
                   {authState?.user !== null && (
                     <button onClick={handleLogout} type='button' className='button border-0'>Logout</button>

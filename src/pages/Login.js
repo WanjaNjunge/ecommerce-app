@@ -33,9 +33,7 @@ const Login = () => {
 
     const authState = useSelector((state) => state?.auth);
 
-    console.log('====================================');
-    console.log(`login state: ${JSON.stringify(authState)}`);
-    console.log('====================================');
+   
       useEffect(() => {
         if (authState.user !== null && authState.isError === false) {
           navigate("/");

@@ -178,11 +178,11 @@ const Header = () => {
                     </div>
                   </Link>
                 </div>
-                <div className='mx-4'>
+                {/* <div className='mx-4'>
                   {authState?.user !== null && (
                     <button onClick={handleLogout} type='button' className='button border-0'>Logout</button>
                   )}
-                </div>
+                </div> */}
               </div>
               
             </div>

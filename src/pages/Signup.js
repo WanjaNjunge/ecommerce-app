@@ -45,7 +45,7 @@ const Signup = () => {
     }
   }, [authState, navigate]);
 
- console.log("signup:", authState);
+
 
 
   return (

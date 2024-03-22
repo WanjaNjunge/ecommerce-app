@@ -245,6 +245,9 @@ footer:not(:first-child) {
 
 /*Product card section*/
 .product-card {
+  display: flex; /* Use flexbox */
+  flex-direction: column; /* Arrange children vertically */
+  height: 100%;
   padding: 15px;
   background-color: white;
   border-radius: 10px;
@@ -252,9 +255,11 @@ footer:not(:first-child) {
   width: 100%;
 }
 .product-card .product-image {
-  height: 270px;
+  flex: 1;
 }
 .product-card .product-image img {
+  width: 100%; /* Make the image fill the container */
+  height: 100%;
   object-fit: contain;
 }
 .product-card .product-image > img:last-child {

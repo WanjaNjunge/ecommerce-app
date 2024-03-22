@@ -55,14 +55,12 @@ const Wishlist = () => {
                         src={crossImg} alt="cross" className='position-absolute cross img-fluid' />
                         <div className='wishlist-card-image bg-white'>
                         <img
-                            className='img-fluid d-block mx-auto'
-                            width={160}
-                            // src={item?.images[0].url ? item?.images[0].url: {watchImg} }
-                            src={watchImg}
-                            alt='watch' />
+                            className='img-fluid mx-auto' src={item?.images[1]?.url} alt='product' />
                         </div>
                         <div className='py-3 px-3'>
                             <h5 className='title'>{item?.title}
+                            </h5>
+                            <h5 className='title'>{item?.brand}
                             </h5>
                             <h6 className='price'>$ {item?.price}</h6>
                         </div>

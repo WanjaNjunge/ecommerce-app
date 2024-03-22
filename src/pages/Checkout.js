@@ -270,7 +270,8 @@ const Checkout = (/*{ initialSubtotal }*/) => {
                 <div className='w-75 d-flex gap-10'>
                   <div className='w-25 position-relative'>
                     <span style={{top: "-10px", right: "2px"}} className='badge bg-secondary text-white rounded-circle p-2 position-absolute'>{item?.quantity}</span>
-                    <img className='img-fluid' src={watch} alt='product'/>
+                    <img 
+                      className='img-fluid mx-auto' src={item?.productId?.images[0]?.url} alt='product'/>
                   </div>
                   <div>
                     <h5 className='title total'>{item?.productId?.title}</h5>

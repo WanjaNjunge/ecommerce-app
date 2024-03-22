@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Marquee from "react-fast-marquee";
-//import BlogCard from '../components/BlogCard';
 import SpecialProduct from '../components/SpecialProduct';
 import Container from '../components/Container';
 import serviceImg1 from '../assets/images/service.png';
@@ -14,9 +13,6 @@ import catBannerImg1 from '../assets/images/catbanner-01.jpg';
 import catBannerImg2 from '../assets/images/catbanner-02.jpg';
 import catBannerImg3 from '../assets/images/catbanner-03.jpg';
 import catBannerImg4 from '../assets/images/catbanner-04.jpg';
-// import cameraImg from '../assets/images/camera.jpg';
-// import tvImg from '../assets/images/tv.jpg';
-// import headPhoneImg from '../assets/images/headphone.jpg';
 import brandImg1 from '../assets/images/brand-01.png';
 import brandImg2 from '../assets/images/brand-02.png';
 import brandImg3 from '../assets/images/brand-03.png';
@@ -27,18 +23,12 @@ import brandImg7 from '../assets/images/brand-07.png';
 import brandImg8 from '../assets/images/brand-08.png';
 import famousImg1 from '../assets/images/famous-1.jpg';
 import famousImg2 from '../assets/images/famous-2.webp';
-// import laptopImg from '../assets/images/laptop.jpg';
-// import monitorImg from '../assets/images/monitor-01.jpg';
-// import phoneImg from '../assets/images/phone-01.jpg';
-// import tabletImg from '../assets/images/tab4.webp';
-import watchImg from '../assets/images/watch-2.jpg';
 import phoneImg1 from '../assets/images/phone-03.webp';
 import speakerImg3 from '../assets/images/speaker-3.webp';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToWishlist, getAllProducts } from '../features/products/productSlice';
 import { addProdToCart, getCartDetails, updateCartProd } from '../features/user/userSlice';
 import ReactStars from "react-rating-stars-component";
-import watchImg1 from '../assets/images/watch.jpg';
 // import prodCompareImg from '../assets/images/prodcompare.svg';
 import viewImg from '../assets/images/view.svg';
 import addCartImg from '../assets/images/add-cart.svg';
@@ -288,11 +278,8 @@ useEffect(()=>{
           <div className='row'>
             {Array.isArray(productState) && productState?.map((item, index) => {
               let hasFeaturedProduct = false;
-              for (let i = 0; i < item.tags.length; i++) {
-                if (item.tags[i] === 'featured') {
-                  hasFeaturedProduct = true;
-                  break; // Exit the loop since we found a special product
-                }
+              if (item?.tags === 'featured') {
+                hasFeaturedProduct = true;
               }
 
                 return( hasFeaturedProduct ? 
@@ -308,10 +295,10 @@ useEffect(()=>{
                 </button>
             </div>
             <div className='product-image' onClick={()=>navigate("/product/"+item?._id)} src={viewImg} alt='view'>
-                <img className='img-fluid mx-auto' src={watchImg1} alt='product'/>
-                <img className='img-fluid mx-auto' src={watchImg} alt='product'/>
+              <img className='img-fluid mx-auto' src={item?.images[0]?.url} alt='product'/>
+              <img className='img-fluid mx-auto' src={item?.images[1]?.url} alt='product'/>
             </div>
-            <div className='product-details' onClick={()=>navigate("/product/"+item?._id)} src={viewImg} alt='view'>
+            <div className='product-details mt-3' onClick={()=>navigate("/product/"+item?._id)} src={viewImg} alt='view'>
                 <h6 className='brand'>{item?.brand}</h6>
                 <h5 className='product-title'>
                     {item?.title}
@@ -346,7 +333,7 @@ useEffect(()=>{
             })
         }
 
-        
+        {(!productState || productState.length === 0) && <p>No Products Available In This Category</p>}
 
     </div>
       </Container>
@@ -406,15 +393,12 @@ useEffect(()=>{
           <div className='row'>
             {Array.isArray(productState) && productState?.map((item, index) => {
               let hasSpecialProduct = false;
-              for (let i = 0; i < item.tags.length; i++) {
-                if (item.tags[i] === 'special') {
-                  hasSpecialProduct = true;
-                  break; // Exit the loop since we found a special product
-                }
+              if (item?.tags === 'special') {
+                hasSpecialProduct = true;
               }
-              return hasSpecialProduct ? <SpecialProduct key={index} id={item?._id} title={item?.title} brand={item?.brand} price={item?.price} quantity={item?.quantity} totalrating={parseFloat(item?.totalrating, 10)} /> : null;
+              return hasSpecialProduct ? <SpecialProduct key={index} id={item?._id} title={item?.title} brand={item?.brand} price={item?.price} stock={item?.stock} totalrating={parseFloat(item?.totalrating, 10)} images={item?.images[0].url} /> : null;
             })}
-            {(!productState || productState.length === 0) && <p>No Products Available</p>}
+            {(!productState || productState.length === 0) && <p>No Products Available In This Category</p>}
           </div>
       </Container>
 
@@ -429,11 +413,8 @@ useEffect(()=>{
             <div className='row'>
             {Array.isArray(productState) && productState.map((item, index) => {
               let hasPopularProduct = false;
-              for (let i = 0; i < item.tags.length; i++) {
-                if (item.tags[i] === 'popular') {
-                  hasPopularProduct = true;
-                  break; // Exit the loop since we found a special product
-                }
+              if (item?.tags === 'popular') {
+                hasPopularProduct = true;
               }
 
                 return( hasPopularProduct ? 
@@ -449,10 +430,10 @@ useEffect(()=>{
                 </button>
             </div>
             <div className='product-image' onClick={()=>navigate("/product/"+item?._id)} src={viewImg} alt='view'>
-                <img className='img-fluid mx-auto' src={watchImg1} alt='product'/>
-                <img className='img-fluid mx-auto' src={watchImg} alt='product'/>
+              <img className='img-fluid mx-auto' src={item?.images[0]?.url} alt='product'/>
+              <img className='img-fluid mx-auto' src={item?.images[1]?.url} alt='product'/>
             </div>
-            <div className='product-details' onClick={()=>navigate("/product/"+item?._id)} src={viewImg} alt='view'>
+            <div className='product-details mt-3' onClick={()=>navigate("/product/"+item?._id)} src={viewImg} alt='view'>
                 <h6 className='brand'>{item?.brand}</h6>
                 <h5 className='product-title'>
                     {item?.title}
@@ -485,6 +466,7 @@ useEffect(()=>{
                 )
             })
         }
+        {(!productState || productState.length === 0) && <p>No Products Available In This Category</p>}
 
         
 

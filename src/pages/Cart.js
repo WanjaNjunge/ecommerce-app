@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import BreadCrumb from '../components/BreadCrumb';
 import Meta from '../components/Meta';
-import watchImg from '../assets/images/watch.jpg';
 import { AiFillDelete } from "react-icons/ai";
 import { Link } from 'react-router-dom';
 import Container from '../components/Container';
@@ -78,13 +77,11 @@ const Cart = () => {
                             <div className='cart-col-1 gap-15 d-flex align-items-center'>
                                 <div className='w-25'>
                                     <img 
-                                    className='img-fluid'
-                                    src={watchImg} alt="product"/>
+                                    className='img-fluid mx-auto' src={item?.productId?.images[0]?.url} alt='product'/>
                                 </div>
                                 <div className='w-75'>
                                     <p>{item?.productId?.title}</p>
                                     <p>{item?.productId?.brand}</p>
-                                    <p>{item?.productId?.description}</p>
                                 </div>
                             </div>
                             <div className='cart-col-2'>

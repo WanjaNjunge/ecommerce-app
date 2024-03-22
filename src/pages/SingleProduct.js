@@ -37,7 +37,9 @@ const SingleProduct = () => {
   const productsState = useSelector(state => state?.product?.product);
   const cartState = useSelector(state=>state?.auth?.cartProducts);
 
-
+console.log('====================================');
+console.log(productState);
+console.log('====================================');
   
   useEffect(() => {
     dispatch(getAProduct(getProductId));
@@ -92,7 +94,7 @@ const addRatingToProduct = () => {
 
 
 
-  const props = {width: 400, height: 600, zoomWidth: 600, img: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg"};
+  const props = {width: 400, height: 600, zoomWidth: 600, img: productState?.images[0]?.url};
 
   // const [orderedProduct, setorderedProduct] = useState(true);
   // console.log(setorderedProduct);
@@ -117,23 +119,32 @@ const addRatingToProduct = () => {
                 <div className='col-6'>
                   <div className='main-product-image'>
                     <div>
-                    <ReactImageZoom {...props} />
+                    {productState && productState?.images && productState?.images?.length > 0 && (
+                      <ReactImageZoom {...props} />
+                    )}
                     </div>
                   </div>
                   <div className='other-product-images d-flex flex-wrap gap-15'>
-                    <div>
-                      <img src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg" alt="product" className='img-fluid' />
-                    </div>
-                    <div>
-                      <img src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg" alt="product" className='img-fluid' />
-                    </div>
-                    <div>
-                      <img src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg" alt="product" className='img-fluid' />
-                    </div>
-                    <div>
-                      <img src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg" alt="product" className='img-fluid' />
-                    </div>
-
+                    {productState?.images?.[0]?.url && (
+                      <div>
+                        <img className='img-fluid mx-auto' src={productState?.images[0]?.url} alt='product' />
+                      </div>
+                    )}
+                    {productState?.images?.[1]?.url && (
+                      <div>
+                        <img className='img-fluid mx-auto' src={productState?.images[1]?.url} alt='product' />
+                      </div>
+                    )}
+                    {productState?.images?.[2]?.url && (
+                      <div>
+                        <img className='img-fluid mx-auto' src={productState?.images[2]?.url} alt='product' />
+                      </div>
+                    )}
+                    {productState?.images?.[3]?.url && (
+                      <div>
+                        <img className='img-fluid mx-auto' src={productState?.images[3]?.url} alt='product' />
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div className='col-6'>
@@ -398,6 +409,7 @@ const addRatingToProduct = () => {
                 )
             })
         }
+        {(!productState || productState.length === 0) && <p>No Products Available In This Category</p>}
             </div>
           </div>
       </Container>

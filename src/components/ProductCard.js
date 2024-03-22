@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToWishlist } from '../features/products/productSlice';
 import { addProdToCart, getCartDetails, updateCartProd } from '../features/user/userSlice';
 import ReactStars from "react-rating-stars-component";
-import watchImg from '../assets/images/watch.jpg';
-import watchImg1 from '../assets/images/watch-01.jpg';
 // import prodCompareImg from '../assets/images/prodcompare.svg';
 import viewImg from '../assets/images/view.svg';
 import addCartImg from '../assets/images/add-cart.svg';
@@ -17,6 +15,10 @@ const ProductCard = (props) => {
     let location = useLocation();
     const { grid, data } = props;
     const dispatch = useDispatch();
+
+    console.log('====================================');
+    console.log(data);
+    console.log('====================================');
 
     useEffect(() => {
         dispatch(getCartDetails());
@@ -67,10 +69,10 @@ const ProductCard = (props) => {
                 </button>
             </div>
             <div className='product-image' onClick={()=>navigate("/product/"+item?._id)} src={viewImg} alt='view'>
-                <img className='img-fluid mx-auto' src={watchImg1} alt='product'/>
-                <img className='img-fluid' src={watchImg} alt='product'/>
+                <img className='img-fluid mx-auto' src={item?.images[0]?.url} alt='product'/>
+                <img className='img-fluid mx-auto' src={item?.images[1]?.url} alt='product'/>
             </div>
-            <div className='product-details' onClick={()=>navigate("/product/"+item?._id)} src={viewImg} alt='view'>
+            <div className='product-details mt-3' onClick={()=>navigate("/product/"+item?._id)} src={viewImg} alt='view'>
                 <h6 className='brand'>{item?.brand}</h6>
                 <h5 className='product-title'>
                     {item?.title}
@@ -82,7 +84,7 @@ const ProductCard = (props) => {
                     edit={false}
                     activeColor="#ffd700"
                 />
-                <p className={`description ${grid === 12 ? "d-block" : "d-none"}`}>{item?.description}</p>
+                <p className={`description ${grid === 12 ? "d-block" : "d-none"}`} dangerouslySetInnerHTML= {{ __html: item?.description }}></p>
                 <p className="price">KSh. {item?.price}</p>
             </div>
             <div className='action-bar position-absolute'>

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Marquee from "react-fast-marquee";
 import SpecialProduct from '../components/SpecialProduct';
@@ -33,8 +33,11 @@ import ReactStars from "react-rating-stars-component";
 import viewImg from '../assets/images/view.svg';
 import addCartImg from '../assets/images/add-cart.svg';
 import wishListImg from '../assets/images/wish.svg';
+import { FcLike } from 'react-icons/fc';
 
-
+const getWishlistfromLocalStorage = localStorage.getItem('wishlist')
+  ? JSON.parse(localStorage.getItem('wishlist'))
+  : [];
 
 const Home = () => {
   const navigate = useNavigate();
@@ -42,22 +45,35 @@ const Home = () => {
   const productState = useSelector((state)=> state?.product?.product);
 
   
-
+  const [wishlist, setWishlist] = useState(getWishlistfromLocalStorage);
 
 
   const getProducts = useCallback(() => {
     dispatch(getAllProducts());
   }, [dispatch]);
 
-  const addToWish = (id)=> {
-    dispatch(addToWishlist(id));
-}
-
+  
 
 useEffect(()=>{
   getProducts();
   dispatch(getCartDetails());
+  const storedWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+    setWishlist(storedWishlist);
 }, [getProducts, dispatch]);
+
+useEffect(() => {
+  localStorage.setItem('wishlist', JSON.stringify(wishlist));
+}, [wishlist]);
+
+const toggleWishlist = (id) => {
+  if (wishlist.includes(id)) {
+    dispatch(addToWishlist(id));
+    setWishlist(wishlist.filter((itemId) => itemId !== id));
+  } else {
+    dispatch(addToWishlist(id));
+    setWishlist([...wishlist, id]);
+  }
+};
 
   const userCartState = useSelector(state=>state?.auth?.cartProducts);
 
@@ -277,6 +293,7 @@ useEffect(()=>{
           </div>
           <div className='row'>
             {Array.isArray(productState) && productState?.map((item, index) => {
+              const isWishlist = wishlist.includes(item?._id);
               let hasFeaturedProduct = false;
               if (item?.tags === 'featured') {
                 hasFeaturedProduct = true;
@@ -290,8 +307,8 @@ useEffect(()=>{
         <div
         className='product-card position-relative'>
             <div className='wishlist-icon position-absolute'>
-                <button className='border-0 bg-transparent' onClick={(e)=>{addToWish(item?._id)}}>
-                    <img src={wishListImg} alt="wish list" />
+                <button className='border-0 bg-transparent' onClick={(e) => toggleWishlist(item?._id)}>
+                {isWishlist ? <FcLike /> : <img src={wishListImg} alt="wish list" />}
                 </button>
             </div>
             <div className='product-image' onClick={()=>navigate("/product/"+item?._id)} src={viewImg} alt='view'>
@@ -412,6 +429,7 @@ useEffect(()=>{
           </div>
             <div className='row'>
             {Array.isArray(productState) && productState.map((item, index) => {
+              const isWishlist = wishlist.includes(item?._id);
               let hasPopularProduct = false;
               if (item?.tags === 'popular') {
                 hasPopularProduct = true;
@@ -425,8 +443,8 @@ useEffect(()=>{
         <div
         className='product-card position-relative'>
             <div className='wishlist-icon position-absolute'>
-                <button className='border-0 bg-transparent' onClick={(e)=>{addToWish(item?._id)}}>
-                    <img src={wishListImg} alt="wish list" />
+            <button className='border-0 bg-transparent' onClick={(e) => toggleWishlist(item?._id)}>
+                {isWishlist ? <FcLike /> : <img src={wishListImg} alt="wish list" />}
                 </button>
             </div>
             <div className='product-image' onClick={()=>navigate("/product/"+item?._id)} src={viewImg} alt='view'>

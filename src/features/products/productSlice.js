@@ -34,13 +34,18 @@ export const addRating = createAsyncThunk("product/rating", async (data, thunkAP
     }
 });
 
+const getWishlistfromLocalStorage = localStorage.getItem("wishlist")
+  ? JSON.parse(localStorage.getItem("wishlist"))
+  : [];
 
 const productState = {
+    wishlist:getWishlistfromLocalStorage,
     product:"",
     isError:false,
     isSuccess:false,
     isLoading:false,
-    message:""
+    message:"",
+    
 }
 
 export const productSlice = createSlice({
@@ -73,7 +78,7 @@ export const productSlice = createSlice({
             state.addToWishlist= action.payload;
             state.message= "Added to wishlist!"
             if (state.isSuccess === true) {
-                toast.info("Added to wishlist succesfully")
+                localStorage.setItem('wishlist', JSON.stringify(action.payload.wishlist));
             }
         })
         .addCase(addToWishlist.rejected, (state,action)=>{

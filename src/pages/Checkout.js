@@ -3,7 +3,6 @@ import Container from '../components/Container';
 // import { useState } from 'react';
 import { Link } from 'react-router-dom'
 import { IoIosArrowBack } from "react-icons/io";
-import watch from "../assets/images/watch.jpg";
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as yup from 'yup';

@@ -3,7 +3,6 @@ import Container from '../components/Container';
 import BreadCrumb from '../components/BreadCrumb';
 import Meta from '../components/Meta';
 import crossImg from '../assets/images/cross.svg';
-import watchImg from '../assets/images/watch-01.jpg'
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserProductWishlist } from '../features/user/userSlice';
 import { addToWishlist } from '../features/products/productSlice';
@@ -12,7 +11,7 @@ import { Link } from 'react-router-dom';
 const Wishlist = () => {
     const dispatch = useDispatch();
 
-    useEffect(()=>{
+    useEffect(() => {
         const getWishlistFromDb = () => {
             dispatch(getUserProductWishlist());
         };
@@ -22,12 +21,13 @@ const Wishlist = () => {
 
     const wishlistState = useSelector((state) => state?.auth?.wishlist?.wishlist);
 
-    const removeFromWishlist = (id)=>{
+    const removeFromWishlist = (id) => {
         dispatch(addToWishlist(id));
-        setTimeout(()=>{
+        setTimeout(() => {
             dispatch(getUserProductWishlist());
-        }, 300)
-      }
+        }, 300);
+    };
+    
 
   return (
     <>
@@ -53,9 +53,9 @@ const Wishlist = () => {
                         <div className='wishlist-card position-relative'>
                         <img onClick={()=>{removeFromWishlist(item?._id)}}
                         src={crossImg} alt="cross" className='position-absolute cross img-fluid' />
-                        <div className='wishlist-card-image bg-white'>
+                        <div className='wishlist-card-image bg-white mt-3'>
                         <img
-                            className='img-fluid mx-auto' src={item?.images[1]?.url} alt='product' />
+                            className='img-fluid mx-auto mt-3' src={item?.images[0]?.url} alt='product' />
                         </div>
                         <div className='py-3 px-3'>
                             <h5 className='title'>{item?.title}

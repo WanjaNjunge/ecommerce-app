@@ -65,9 +65,16 @@ a {
 .header-top-strip {
   border-bottom: 1px solid var(--color-3b4149);
   background-color: var(--color-131921);
+  height: 45px;
+  float: left;
+  width: 100%;
 }
 .header-upper {
   background-color: var(--color-131921);
+  width: 100%;
+  float: left;
+  padding: 16px 0;
+  text-align: center;
 }
 .header-upper .input-group-text {
   background-color: var(--color-febd69);
@@ -211,7 +218,20 @@ footer:not(:first-child) {
 .categories > div:nth-child(7) {
   border-right: 1px solid var(--color-ededed);
 }
+.category-img {
+  width: 110px;
+  height: 110px;
+}
+.zoom {
+  transition: transform .2s;
+  margin: 0 auto;
+}
 
+.zoom:hover {
+  -ms-transform: scale(1.5); /* IE 9 */
+  -webkit-transform: scale(1.5); /* Safari 3-8 */
+  transform: scale(1.5); 
+}
 /*Blog section*/
 .blog-card {
   background-color: white;

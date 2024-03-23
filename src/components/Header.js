@@ -58,11 +58,11 @@ const Header = () => {
 
   return (
     <>
-      <header className='header-top-strip py-3'>
+      <header className='header-top-strip py-3 '>
         <div className='container-xxl'>
-          <div className='row'>
-            <div className="col-6">
-              <p className='text-white mb-0'>Free Shipping & Free Returns</p>
+          <div className='row '>
+            <div className="col-6 mb-3">
+              <p className='text-white mb-0'>Same Day In-store Pickup or Express Delivery</p>
             </div>
             <div className="col-6">
               <p className='text-end text-white'>
@@ -201,29 +201,49 @@ const Header = () => {
         <div className='container-xxl'>
           <div className='row'>
             <div className='col-12'>
-              <div className='menu-bottom d-flex align-items-center gap-30'>
+              <div className='menu-bottom d-flex align-items-center gap-30 mt-2'>
                 <div>
                   <div className="dropdown">
                     <button className="btn btn-secondary dropdown-toggle bg-transparent border-0 gap-15 d-flex align-items-center" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                       <img src={menuImg} alt='menu'/>
                       <span className='me-5 d-inline-block'>
-                      Shop Categories
+                      Product Categories
                       </span>
                     </button>
                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                       <li>
                       <Link className="dropdown-item text-white" to="">
-                      Action
+                      Laptops
                       </Link>
                       </li>
                       <li>
                       <Link className="dropdown-item text-white" to="">
-                      Another action
+                      Monitors
                       </Link>
                       </li>
                       <li>
                       <Link className="dropdown-item text-white" to="">
-                      Something else here
+                      Desktops
+                      </Link>
+                      </li>
+                      <li>
+                      <Link className="dropdown-item text-white" to="">
+                      Printers & Scanners
+                      </Link>
+                      </li>
+                      <li>
+                      <Link className="dropdown-item text-white" to="">
+                      CCTV Cameras
+                      </Link>
+                      </li>
+                      <li>
+                      <Link className="dropdown-item text-white" to="">
+                      Networking
+                      </Link>
+                      </li>
+                      <li>
+                      <Link className="dropdown-item text-white" to="">
+                      Accessories
                       </Link>
                       </li>
                     </ul>

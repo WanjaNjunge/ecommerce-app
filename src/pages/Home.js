@@ -25,6 +25,14 @@ import famousImg1 from '../assets/images/famous-1.jpg';
 import famousImg2 from '../assets/images/famous-2.webp';
 import phoneImg1 from '../assets/images/phone-03.webp';
 import speakerImg3 from '../assets/images/speaker-3.webp';
+import laptopImg from '../assets/images/laptop.jpg'
+import monitorImg from '../assets/images/monitor.png' 
+import desktopImg from '../assets/images/desktop-1.png' 
+import cameraImg from '../assets/images/cctv.jpeg' 
+import printerImg from '../assets/images/printer.jpeg' 
+import routerImg from '../assets/images/router.png'
+import mouseImg from '../assets/images/mouse.png'  
+import webImg from '../assets/images/solution.png'   
 import { useDispatch, useSelector } from 'react-redux';
 import { addToWishlist, getAllProducts } from '../features/products/productSlice';
 import { addProdToCart, getCartDetails, updateCartProd } from '../features/user/userSlice';
@@ -217,71 +225,82 @@ const toggleWishlist = (id) => {
     </Container>
       
 
-      {/* <Container class1='home-wrapper-2 py-5'>
+      <Container class1='home-wrapper-2 py-5'>
+        <div className='row'>
+          <div className='col-12'>
+            <h3 className='section-heading'>
+            Popular Categories
+            </h3>
+          </div>
+        </div>
         
           <div className="row">
             <div className="col-12">
               <div className='categories d-flex justify-content-between flex-wrap align-items-center'>
-                <div className='d-flex gap align-items-center'>
-                  <div>
-                    <h6>Cameras</h6>
-                    <p>10 items</p>
-                  </div>
-                  <img src={cameraImg} alt='camera'/>
-                </div>
-                <div className='d-flex gap align-items-center'>
-                  <div>
-                    <h6>Smart Tvs</h6>
-                    <p>10 items</p>
-                  </div>
-                  <img src={tvImg} alt='camera'/>
-                </div>
-                <div className='d-flex gap align-items-center'>
+              <div className=' d-flex gap align-items-center'>
                   <div>
                     <h6>Laptops</h6>
-                    <p>10 items</p>
+                    
                   </div>
-                  <img src={laptopImg} alt='camera'/>
+                  <img className='img-fluid category-img zoom' src={laptopImg} alt='camera'/>
                 </div>
                 <div className='d-flex gap align-items-center'>
                   <div>
-                    <h6>Headphones</h6>
-                    <p>10 items</p>
+                    <h6>Monitors</h6>
+                    
                   </div>
-                  <img src={headPhoneImg} alt='camera'/>
+                  <img className='img-fluid category-img zoom' src={monitorImg} alt='camera'/>
+                </div>
+                
+                <div className='d-flex gap align-items-center'>
+                  <div>
+                    <h6>Desktops</h6>
+                    
+                  </div>
+                  <img className='img-fluid category-img zoom' src={desktopImg} alt='camera'/>
+                </div>
+                
+                <div className='d-flex gap align-items-center'>
+                  <div>
+                    <h6>Printers & Scanners</h6>
+                    
+                  </div>
+                  <img className='img-fluid category-img zoom' src={printerImg} alt='camera'/>
+                </div>
+                
+                
+                <div className='d-flex gap align-items-center'>
+                  <div>
+                    <h6>CCTV Cameras</h6>
+                    
+                  </div>
+                  <img className='img-fluid category-img zoom' src={cameraImg} alt='camera'/>
                 </div>
                 <div className='d-flex gap align-items-center'>
                   <div>
-                    <h6>All-in-Ones</h6>
-                    <p>10 items</p>
+                    <h6>Networking</h6>
+                    
                   </div>
-                  <img src={monitorImg} alt='camera'/>
+                  <img className='img-fluid category-img zoom' src={routerImg} alt='camera'/>
                 </div>
                 <div className='d-flex gap align-items-center'>
                   <div>
-                    <h6>Mobile Phones</h6>
-                    <p>10 items</p>
+                    <h6>Accessories</h6>
+                    
                   </div>
-                  <img src={phoneImg} alt='camera'/>
+                  <img className='img-fluid category-img zoom' src={mouseImg} alt='camera'/>
                 </div>
                 <div className='d-flex gap align-items-center'>
                   <div>
-                    <h6>Tablets</h6>
-                    <p>10 items</p>
+                    <h6>IT Solutions</h6>
+                    
                   </div>
-                  <img src={tabletImg} alt='camera'/>
-                </div>
-                <div className='d-flex gap align-items-center'>
-                  <div>
-                    <h6>Smart Watches</h6>
-                    <p>10 items</p>
-                  </div>
-                  <img src={watchImg} alt='camera'/>
+                  <img className='img-fluid category-img zoom' src={webImg} alt='camera'/>
                 </div>
               </div>
             </div>
           </div>
-      </Container> */}
+      </Container>
 
       <Container class1='featured-wrapper py-5 home-wrapper-2'>
           <div className='row'>

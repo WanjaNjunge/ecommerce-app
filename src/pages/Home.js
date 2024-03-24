@@ -237,14 +237,14 @@ const toggleWishlist = (id) => {
           <div className="row">
             <div className="col-12">
               <div className='categories d-flex justify-content-between flex-wrap align-items-center'>
-              <div className=' d-flex gap align-items-center'>
+              <div onClick={() => navigate('/product?category=Laptops')} className=' d-flex gap align-items-center ' >
                   <div>
                     <h6>Laptops</h6>
                     
                   </div>
                   <img className='img-fluid category-img zoom' src={laptopImg} alt='camera'/>
                 </div>
-                <div className='d-flex gap align-items-center'>
+                <div onClick={() => navigate('/product?category=Monitors')} className='d-flex gap align-items-center'>
                   <div>
                     <h6>Monitors</h6>
                     
@@ -252,7 +252,7 @@ const toggleWishlist = (id) => {
                   <img className='img-fluid category-img zoom' src={monitorImg} alt='camera'/>
                 </div>
                 
-                <div className='d-flex gap align-items-center'>
+                <div onClick={() => navigate('/product?category=Desktops')} className='d-flex gap align-items-center'>
                   <div>
                     <h6>Desktops</h6>
                     
@@ -260,7 +260,7 @@ const toggleWishlist = (id) => {
                   <img className='img-fluid category-img zoom' src={desktopImg} alt='camera'/>
                 </div>
                 
-                <div className='d-flex gap align-items-center'>
+                <div onClick={() => navigate('/product?category=Printers And Scanners')} className='d-flex gap align-items-center'>
                   <div>
                     <h6>Printers & Scanners</h6>
                     
@@ -269,28 +269,28 @@ const toggleWishlist = (id) => {
                 </div>
                 
                 
-                <div className='d-flex gap align-items-center'>
+                <div onClick={() => navigate('/product?category=CCTV Cameras')} className='d-flex gap align-items-center'>
                   <div>
                     <h6>CCTV Cameras</h6>
                     
                   </div>
                   <img className='img-fluid category-img zoom' src={cameraImg} alt='camera'/>
                 </div>
-                <div className='d-flex gap align-items-center'>
+                <div onClick={() => navigate('/product?category=Networking')} className='d-flex gap align-items-center'>
                   <div>
                     <h6>Networking</h6>
                     
                   </div>
                   <img className='img-fluid category-img zoom' src={routerImg} alt='camera'/>
                 </div>
-                <div className='d-flex gap align-items-center'>
+                <div onClick={() => navigate('/product?category=Accessories')} className='d-flex gap align-items-center'>
                   <div>
                     <h6>Accessories</h6>
                     
                   </div>
                   <img className='img-fluid category-img zoom' src={mouseImg} alt='camera'/>
                 </div>
-                <div className='d-flex gap align-items-center'>
+                <div onClick={() => navigate('/product?category=Laptops')} className='d-flex gap align-items-center'>
                   <div>
                     <h6>IT Solutions</h6>
                     

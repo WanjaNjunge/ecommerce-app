@@ -11,9 +11,12 @@ import gridImg3 from '../assets/images/gr3.svg';
 import gridImg4 from '../assets/images/gr4.svg';
 // import Color from '../components/Color';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom'; 
 import { getAllProducts } from '../features/products/productSlice';
 
 const OurStore = () => {
+  const dispatch = useDispatch();
+  const location = useLocation();
   const [grid, setGrid] = useState(4);
   const [brands, setBrands] = useState([]);
     const [categories, setCategories] = useState([]);
@@ -33,11 +36,6 @@ const OurStore = () => {
     
 
     const productState = useSelector((state) => state?.product?.product);
-
-    
-    
-
-    const dispatch = useDispatch();
 
     
     
@@ -71,6 +69,14 @@ const OurStore = () => {
       setTags(newTags);
     }, [productState]);
 
+    useEffect(() => {
+      const searchParams = new URLSearchParams(location.search);
+      const category = searchParams.get('category');
+      if (category) {
+        setSelectedCategory(category);
+      }
+    }, [location.search]);
+
     
   return (
     <>
@@ -81,7 +87,7 @@ const OurStore = () => {
           <div className='row'>
             <div className='col-3'>
               <div className='filter-card mb-3'>
-                <h3 className='filter-title'>Shop Categories</h3>
+                <h3 className='filter-title'>Browse Categories</h3>
                 <div>
                   <ul className='ps-0'>
                   {
@@ -89,7 +95,7 @@ const OurStore = () => {
                         return (
                           <li key={index} onClick={()=>{
                             setSelectedCategory(item)
-                          }} className='text-capitalize'>{item}</li>
+                          }} className={`text-capitalize${item === selectedCategory ? ' active' : ''}`}>{item}</li>
                         )
                       })
                     }

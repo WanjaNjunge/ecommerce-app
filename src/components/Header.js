@@ -212,38 +212,48 @@ const Header = () => {
                     </button>
                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                       <li>
-                      <Link className="dropdown-item text-white" to="">
+                      <Link className="dropdown-item text-white" to="/product?category=Laptops">
                       Laptops
                       </Link>
                       </li>
                       <li>
-                      <Link className="dropdown-item text-white" to="">
+                      <Link className="dropdown-item text-white" to="/product?category=Monitors">
                       Monitors
                       </Link>
                       </li>
                       <li>
-                      <Link className="dropdown-item text-white" to="">
+                      <Link className="dropdown-item text-white" to="/product?category=Desktops">
                       Desktops
                       </Link>
                       </li>
                       <li>
-                      <Link className="dropdown-item text-white" to="">
-                      Printers & Scanners
+                      <Link className="dropdown-item text-white" to="/product?category=Apple Products">
+                      Apple Products
                       </Link>
                       </li>
                       <li>
-                      <Link className="dropdown-item text-white" to="">
+                      <Link className="dropdown-item text-white" to="/product?category=Printers And Scanners">
+                      Printers And Scanners
+                      </Link>
+                      </li>
+                      <li>
+                      <Link className="dropdown-item text-white" to="/product?category=CCTV Cameras">
                       CCTV Cameras
                       </Link>
                       </li>
                       <li>
-                      <Link className="dropdown-item text-white" to="">
+                      <Link className="dropdown-item text-white" to="/product?category=Networking">
                       Networking
                       </Link>
                       </li>
                       <li>
-                      <Link className="dropdown-item text-white" to="">
+                      <Link className="dropdown-item text-white" to="/product?category=Accessories">
                       Accessories
+                      </Link>
+                      </li>
+                      <li>
+                      <Link className="dropdown-item text-white" to="/product?category=Laptops">
+                      IT Solutions
                       </Link>
                       </li>
                     </ul>

@@ -10,7 +10,11 @@ const getProducts = async (data) => {
     const minPriceParam = data?.minPrice ? `price[gte]=${data.minPrice}` : '';
     const maxPriceParam = data?.maxPrice ? `price[lte]=${data.maxPrice}` : '';
     const sortParam = data?.sort ? `sort=${data.sort}` : '';
-    const queryParams = [brandParam, tagParams, categoryParam, minPriceParam, maxPriceParam, sortParam].filter(Boolean).join('&');
+    const searchTermParam = data?.searchTerm ? `search=${data.searchTerm}` : '';
+
+
+    const queryParams = [brandParam, tagParams, categoryParam, minPriceParam, maxPriceParam, sortParam, searchTermParam].filter(Boolean).join('&');
+    
 
     const url = `${base_url}product?${queryParams}`;
     const response = await axios.get(url);

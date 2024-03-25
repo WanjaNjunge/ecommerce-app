@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import {BsSearch} from 'react-icons/bs';
 // import compareImg from '../assets/images/compare.svg';
@@ -9,18 +9,20 @@ import cartImg from '../assets/images/cart.svg';
 import menuImg from '../assets/images/menu.svg';
 import { Typeahead } from 'react-bootstrap-typeahead';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
-import { getAProduct } from '../features/products/productSlice';
+
+
 // import { getCartDetails } from '../features/user/userSlice';
 
 
 const Header = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
     // const [total, setTotal] = useState(null);
     const cartState = useSelector(state=>state?.auth?.cartProducts);
     const authState = useSelector((state) => state?.auth);
-    const productState = useSelector(state=>state?.product?.product);
-    const [productOpt, setProductOpt] = useState([]);
+    // const productState = useSelector(state=>state?.product?.product);
+    // const [productOpt, setProductOpt] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    
 
     const totalQuantity = cartState ? cartState.reduce((total, item) => total + item.quantity, 0) : 0;
 
@@ -40,17 +42,33 @@ const Header = () => {
     // }, [cartState]);
 
 
-    useEffect(()=>{
-      let data = [];
-      for (let index = 0; index < productState.length; index++) {
-        const element = productState[index];
-        data.push({id:index, prod:element?._id, name:element?.title})
+    // useEffect(()=>{
+    //   let data = [];
+    //   for (let index = 0; index < productState.length; index++) {
+    //     const element = productState[index];
+    //     data.push({id:index, prod:element?._id, name:element?.title})
+    //   }
+
+    //   setProductOpt(data)
+    // }, [productState])
+
+
+    const handleSearch = () => {
+      navigate(`/product?search=${searchTerm}`);
+      
+    };
+  
+    const handleKeyPress = (e) => {
+      if (e.key === 'Enter') {
+        handleSearch();
       }
+    };
+  
+    const handleInputChange = (value) => {
+      setSearchTerm(value);;
+    };
 
-      setProductOpt(data)
-    }, [productState])
-
-
+    
     const handleLogout = () => {
       localStorage.clear();
       window.location.reload();
@@ -85,23 +103,23 @@ const Header = () => {
             </div>
             <div className="col-5">
             <div className="input-group">
-              <Typeahead
-                id="pagination-example"
-                // onPaginate={() => console.log('Results paginated')}
-                onChange={(selected) => {
-                  if (selected && selected.length > 0) {
-                    navigate(`/product/${selected[0]?.prod}`);
-                    dispatch(getAProduct(selected[0]?.prod))
-                  }
-                }}
-                labelKey={"name"}
-                options={productOpt}
-                // paginate={paginate}
-                minLength={2}
-                placeholder="Search for products here..."
-              />
-              <span className="input-group-text p-3" id="basic-addon2">
-              <BsSearch className='fs-6' />
+            <Typeahead
+                  id="pagination-example"
+                  labelKey={"name"}
+                  options={[]}
+                  minLength={100}
+                  placeholder="Search for products here..."
+                  value={searchTerm}
+                  onChange={handleInputChange}
+                  onKeyPress={handleKeyPress}
+                  onInputChange={handleInputChange}
+                />
+              <span
+                className="input-group-text p-3"
+                id="basic-addon2"
+                onClick={handleSearch}
+              >
+                <BsSearch className='fs-6' />
               </span>
             </div>
             </div>

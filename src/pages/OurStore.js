@@ -31,6 +31,7 @@ const OurStore = () => {
     const [minPrice, setMinPrice] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
     const [sort, setSort] = useState('');
+    const [searchTerm, setSearchTerm] = useState('');
 
     
     
@@ -42,8 +43,8 @@ const OurStore = () => {
 
 
     const getProducts = useCallback(() => {
-      dispatch(getAllProducts({sort, maxPrice, minPrice, selectedBrand, selectedCategory, selectedTag}));
-    }, [dispatch, sort, maxPrice, minPrice, selectedBrand, selectedCategory, selectedTag]);
+      dispatch(getAllProducts({sort, maxPrice, minPrice, selectedBrand, selectedCategory, selectedTag, searchTerm}));
+    }, [dispatch, sort, maxPrice, minPrice, selectedBrand, selectedCategory, selectedTag, searchTerm]);
   
     
     useEffect(() => {
@@ -72,11 +73,18 @@ const OurStore = () => {
     useEffect(() => {
       const searchParams = new URLSearchParams(location.search);
       const category = searchParams.get('category');
+      const searchTerm = searchParams.get('search');
+    
       if (category) {
         setSelectedCategory(category);
       }
+    
+      if (searchTerm) {
+        setSearchTerm(searchTerm);
+      }
     }, [location.search]);
 
+    
     
   return (
     <>

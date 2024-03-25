@@ -57,18 +57,18 @@ const Home = () => {
   const [wishlist, setWishlist] = useState(getWishlistfromLocalStorage);
 
 
-  const getProducts = useCallback(() => {
-    dispatch(getAllProducts());
-  }, [dispatch]);
+  // const getProducts = useCallback(() => {
+  //   dispatch(getAllProducts());
+  // }, [dispatch]);
 
   
 
 useEffect(()=>{
-  getProducts();
+  dispatch(getAllProducts());
   dispatch(getCartDetails());
   const storedWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
     setWishlist(storedWishlist);
-}, [getProducts, dispatch]);
+}, [dispatch]);
 
 useEffect(() => {
   localStorage.setItem('wishlist', JSON.stringify(wishlist));

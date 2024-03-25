@@ -9,6 +9,7 @@ import serviceImg3 from '../assets/images/service-03.png';
 import serviceImg4 from '../assets/images/service-04.png';
 import serviceImg5 from '../assets/images/service-05.png';
 import mainBannerImg1 from '../assets/images/main-banner-1.jpg';
+import mainBannerImg2 from '../assets/images/main-banner-2_830x550.webp';
 import catBannerImg1 from '../assets/images/catbanner-01.jpg';
 import catBannerImg2 from '../assets/images/catbanner-02.jpg';
 import catBannerImg3 from '../assets/images/catbanner-03.jpg';
@@ -106,20 +107,44 @@ const toggleWishlist = (id) => {
     <>
     <Container class1='home-wrapper-1 py-5'>
     <div className='row'>
-            <div className="col-6">
-              <div className='main-banner position-relative'>
-                <img
-                  src={mainBannerImg1}
-                  alt='main banner'
-                  className='img-fluid rounded'
-                />
-                <div className='main-banner-content position-absolute'>
-                  <h4>SUPERCHARGED FOR PROS</h4>
-                  <h5>iPad S13+ Pro</h5>
-                  <p>From $999.00 or $41.62/mo</p>
-                  <Link className='button'>BUY NOW</Link>
+      
+            <div className="col-6 carousel slide" id="carouselExampleControls" data-bs-ride="carousel">
+              <div className="carousel-inner">
+                <div className='main-banner position-relative carousel-item active'>
+                  <img
+                    src={mainBannerImg1}
+                    alt='main banner'
+                    className='img-fluid rounded'
+                  />
+                  <div className='main-banner-content position-absolute'>
+                    <h4>SUPERCHARGED FOR PROS</h4>
+                    <h5>iPad S13+ Pro</h5>
+                    <p>From $999.00 or $41.62/mo</p>
+                    <Link className='button'>BUY NOW</Link>
+                  </div>
+                </div>
+                <div className='main-banner position-relative carousel-item'>
+                  <img
+                    src={mainBannerImg2}
+                    alt='main banner'
+                    className='img-fluid rounded'
+                  />
+                  <div className='main-banner-content position-absolute'>
+                    <h4>SUPERCHARGED FOR PROS</h4>
+                    <h5>iPad S13+ Pro</h5>
+                    <p>From $999.00 or $41.62/mo</p>
+                    <Link className='button'>BUY NOW</Link>
+                  </div>
                 </div>
               </div>
+              <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+              <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span className="visually-hidden">Previous</span>
+              </button>
+              <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                <span className="visually-hidden">Next</span>
+              </button>
             </div>
             <div className="col-6">
               <div className='d-flex flex-wrap gap-10 justify-content-between align-items-center'>

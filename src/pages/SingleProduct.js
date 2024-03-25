@@ -36,6 +36,18 @@ const SingleProduct = () => {
   const productState = useSelector(state => state?.product?.singleProduct);
   const productsState = useSelector(state => state?.product?.product);
   const cartState = useSelector(state=>state?.auth?.cartProducts);
+  const [displayedImage, setDisplayedImage] = useState(null); // Initial state is the main product image
+ 
+  
+  useEffect(() => {
+    if (productState?.images?.length > 0) {
+      setDisplayedImage(productState.images[0].url);
+    }
+  }, [productState]);
+
+  const handleClickImage = (imageUrl) => {
+    setDisplayedImage(imageUrl);
+  };
 
   
   useEffect(() => {
@@ -88,11 +100,6 @@ const addRatingToProduct = () => {
   }
   return false;
 }
-
-
-
-  const props = {width: 400, height: 600, zoomWidth: 600, img: productState?.images[0]?.url};
-
   // const [orderedProduct, setorderedProduct] = useState(true);
   // console.log(setorderedProduct);
 
@@ -114,35 +121,27 @@ const addRatingToProduct = () => {
       <Container class1='main-product-wrapper py-5 home-wrapper-2'>
             <div className='row'>
                 <div className='col-6'>
-                  <div className='main-product-image'>
-                    <div>
-                    {productState && productState?.images && productState?.images?.length > 0 && (
-                      <ReactImageZoom {...props} />
-                    )}
-                    </div>
-                  </div>
-                  <div className='other-product-images d-flex flex-wrap gap-15'>
-                    {productState?.images?.[0]?.url && (
-                      <div>
-                        <img className='img-fluid mx-auto' src={productState?.images[0]?.url} alt='product' />
-                      </div>
-                    )}
-                    {productState?.images?.[1]?.url && (
-                      <div>
-                        <img className='img-fluid mx-auto' src={productState?.images[1]?.url} alt='product' />
-                      </div>
-                    )}
-                    {productState?.images?.[2]?.url && (
-                      <div>
-                        <img className='img-fluid mx-auto' src={productState?.images[2]?.url} alt='product' />
-                      </div>
-                    )}
-                    {productState?.images?.[3]?.url && (
-                      <div>
-                        <img className='img-fluid mx-auto' src={productState?.images[3]?.url} alt='product' />
-                      </div>
-                    )}
-                  </div>
+                <div className='main-product-image'>
+        {displayedImage && (
+          <ReactImageZoom
+            width={400}
+            height={600}
+            zoomWidth={600}
+            img={displayedImage}
+          />
+        )}
+      </div>
+      <div className='other-product-images d-flex flex-wrap gap-15'>
+        {/* Display the other four images */}
+        {productState?.images?.map((image, index) => (
+          <div key={index} onClick={() => handleClickImage(image.url)}>
+            <img className='img-fluid mx-auto' src={image.url} alt='product' style={{ transition: 'opacity 0.3s', opacity: 1 }}
+              onMouseOver={(e) => (e.currentTarget.style.opacity = 0.7)}
+              onMouseOut={(e) => (e.currentTarget.style.opacity = 1)} />
+          </div>
+        ))}
+      </div>
+                  
                 </div>
                 <div className='col-6'>
                   <div className='main-product-details'>

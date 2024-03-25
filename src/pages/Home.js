@@ -114,7 +114,7 @@ const toggleWishlist = (id) => {
                   <img
                     src={mainBannerImg1}
                     alt='main banner'
-                    className='img-fluid rounded'
+                    className='img-fluid rounded d-block w-100'
                   />
                   <div className='main-banner-content position-absolute'>
                     <h4>SUPERCHARGED FOR PROS</h4>
@@ -127,7 +127,7 @@ const toggleWishlist = (id) => {
                   <img
                     src={mainBannerImg2}
                     alt='main banner'
-                    className='img-fluid rounded'
+                    className='img-fluid rounded d-block w-100'
                   />
                   <div className='main-banner-content position-absolute'>
                     <h4>SUPERCHARGED FOR PROS</h4>

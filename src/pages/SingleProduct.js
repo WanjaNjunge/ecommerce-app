@@ -74,6 +74,10 @@ const SingleProduct = () => {
     } else {
       dispatch(addProdToCart({ productId: productState?._id, quantity, price: productState?.price} ));
       dispatch(getCartDetails());
+      setTimeout(()=>{
+        navigate("/cart")
+      }, 200)
+      
     }
   }
   
@@ -249,8 +253,7 @@ const addRatingToProduct = () => {
               <h4>Description</h4>
               <div className='bg-white p-3'>
               
-              <p>
-              {productState?.description}
+              <p dangerouslySetInnerHTML={{ __html: productState?.description }}>
               </p>
               </div>
             </div>

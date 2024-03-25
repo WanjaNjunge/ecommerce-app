@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Marquee from "react-fast-marquee";
 import SpecialProduct from '../components/SpecialProduct';

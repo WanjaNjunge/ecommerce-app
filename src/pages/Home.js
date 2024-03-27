@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Marquee from "react-fast-marquee";
 import SpecialProduct from '../components/SpecialProduct';
 import Container from '../components/Container';
@@ -8,12 +8,15 @@ import serviceImg2 from '../assets/images/service-02.png';
 import serviceImg3 from '../assets/images/service-03.png';
 import serviceImg4 from '../assets/images/service-04.png';
 import serviceImg5 from '../assets/images/service-05.png';
-import mainBannerImg1 from '../assets/images/main-banner-1.jpg';
-import mainBannerImg2 from '../assets/images/main-banner-2_830x550.webp';
-import catBannerImg1 from '../assets/images/catbanner-01.jpg';
-import catBannerImg2 from '../assets/images/catbanner-02.jpg';
-import catBannerImg3 from '../assets/images/catbanner-03.jpg';
-import catBannerImg4 from '../assets/images/catbanner-04.jpg';
+import mainBannerImg1 from '../assets/images/Main1.png';
+import mainBannerImg2 from '../assets/images/Main2.png';
+import mainBannerImg3 from '../assets/images/Main3.png';
+import mainBannerImg4 from '../assets/images/Main4.png';
+import mainBannerImg5 from '../assets/images/Main5.png';
+import catBannerImg1 from '../assets/images/catban1.png';
+import catBannerImg2 from '../assets/images/catban2.png';
+import catBannerImg3 from '../assets/images/catban3.png';
+import catBannerImg4 from '../assets/images/catban4.png';
 import brandImg1 from '../assets/images/brand-01.png';
 import brandImg2 from '../assets/images/brand-02.png';
 import brandImg3 from '../assets/images/brand-03.png';
@@ -108,7 +111,7 @@ const toggleWishlist = (id) => {
     <Container class1='home-wrapper-1 py-5'>
     <div className='row'>
       
-            <div className="col-6 carousel slide" id="carouselExampleControls" data-bs-ride="carousel">
+            <div className="col-8 carousel slide" id="carouselExampleControls" data-bs-ride="carousel">
               <div className="carousel-inner">
                 <div className='main-banner position-relative carousel-item active'>
                   <img
@@ -116,12 +119,12 @@ const toggleWishlist = (id) => {
                     alt='main banner'
                     className='img-fluid rounded d-block w-100'
                   />
-                  <div className='main-banner-content position-absolute'>
+                  {/* <div className='main-banner-content position-absolute'>
                     <h4>SUPERCHARGED FOR PROS</h4>
                     <h5>iPad S13+ Pro</h5>
                     <p>From $999.00 or $41.62/mo</p>
                     <Link className='button'>BUY NOW</Link>
-                  </div>
+                  </div> */}
                 </div>
                 <div className='main-banner position-relative carousel-item'>
                   <img
@@ -129,12 +132,47 @@ const toggleWishlist = (id) => {
                     alt='main banner'
                     className='img-fluid rounded d-block w-100'
                   />
-                  <div className='main-banner-content position-absolute'>
+                  {/* <div className='main-banner-content position-absolute'>
                     <h4>SUPERCHARGED FOR PROS</h4>
                     <h5>iPad S13+ Pro</h5>
                     <p>From $999.00 or $41.62/mo</p>
-                    <Link className='button'>BUY NOW</Link>
-                  </div>
+                    <Link className='text-black'>BUY NOW</Link>
+                  </div> */}
+                </div>
+                <div className='main-banner position-relative carousel-item'>
+                <img
+                    src={mainBannerImg3}
+                    alt='main banner'
+                    className='img-fluid rounded d-block w-100'
+                  />
+                </div>
+                <div className='main-banner position-relative carousel-item'>
+                <img
+                    src={mainBannerImg4}
+                    alt='main banner'
+                    className='img-fluid rounded d-block w-100'
+                  />
+                </div>
+                <div className='main-banner position-relative carousel-item'>
+                <img
+                    src={mainBannerImg5}
+                    alt='main banner'
+                    className='img-fluid rounded d-block w-100'
+                  />
+                </div>
+                <div className='main-banner position-relative carousel-item'>
+                <img
+                    src={catBannerImg3}
+                    alt='main banner'
+                    className='img-fluid rounded d-block w-100'
+                  />
+                </div>
+                <div className='main-banner position-relative carousel-item'>
+                <img
+                    src={catBannerImg4}
+                    alt='main banner'
+                    className='img-fluid rounded d-block w-100'
+                  />
                 </div>
               </div>
               <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -146,20 +184,20 @@ const toggleWishlist = (id) => {
                 <span className="visually-hidden">Next</span>
               </button>
             </div>
-            <div className="col-6">
-              <div className='d-flex flex-wrap gap-10 justify-content-between align-items-center'>
+            <div className="col-4">
+              <div className='d-flex flex-wrap gap-15 justify-content-between align-items-center'>
               <div className='small-banner position-relative'>
                 <img
                   src={catBannerImg1}
                   alt='main banner'
                   className='img-fluid rounded'
                 />
-                <div className='small-banner-content position-absolute'>
+                {/* <div className='small-banner-content position-absolute'>
                   <h4>BEST SALE</h4>
                   <h5>Laptops Max</h5>
                   <p>From $1699.00 <br/> or $64.62/mo</p>
                   
-                </div>
+                </div> */}
               </div>
               <div className='small-banner position-relative'>
                 <img
@@ -167,38 +205,12 @@ const toggleWishlist = (id) => {
                   alt='main banner'
                   className='img-fluid rounded'
                 />
-                <div className='small-banner-content position-absolute'>
+                {/* <div className='small-banner-content position-absolute'>
                   <h4>NEW ARRIVAL</h4>
                   <h5>Buy iPad Air</h5>
                   <p>From $599.00 <br/> or $41.62/mo</p>
                   
-                </div>
-              </div>
-              <div className='small-banner position-relative'>
-                <img
-                  src={catBannerImg3}
-                  alt='main banner'
-                  className='img-fluid rounded'
-                />
-                <div className='small-banner-content position-absolute'>
-                  <h4>15% OFF</h4>
-                  <h5>Smartwatch 7</h5>
-                  <p>Shop the latest band <br/> styles and colors</p>
-                  
-                </div>
-              </div>
-              <div className='small-banner position-relative'>
-                <img
-                  src={catBannerImg4}
-                  alt='main banner'
-                  className='img-fluid rounded'
-                />
-                <div className='small-banner-content position-absolute'>
-                  <h4>FREE ENGRAVING</h4>
-                  <h5>AirPods Max</h5>
-                  <p>High-fidelity playback <br/> & ultra-low distortion</p>
-                  
-                </div>
+                </div> */}
               </div>
               </div>
             </div>

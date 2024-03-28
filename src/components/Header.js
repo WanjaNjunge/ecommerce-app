@@ -99,7 +99,7 @@ const Header = () => {
     <div className='row align-items-center justify-content-between'>
       <div className="col-auto">
         <h2>
-          <Link className='logo text-black'>
+          <Link className='logo text-black' to="/">
             <img className='logo' src={logo} alt="logo" />
           </Link>
         </h2>
@@ -251,7 +251,7 @@ const Header = () => {
                 <div className='d-flex align-items-center gap-15'>
                   <NavLink to="/">Home</NavLink>
                   <NavLink to="/product">Our Store</NavLink>
-                  <NavLink to="/">About</NavLink>
+                  <NavLink to="/services">IT Solutions</NavLink>
                   <NavLink to="/contact">Contact</NavLink>
                   <NavLink to="/my-orders">My Orders</NavLink>
                 </div>

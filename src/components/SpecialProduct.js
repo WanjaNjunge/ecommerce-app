@@ -46,7 +46,7 @@ const SpecialProduct = (props) => {
                             <div className="progress-bar" role="progressbar" style={{ width: "25%" }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div> */}
-                    <button className='button' onClick={()=>navigate("/product/"+id)} >
+                    <button className='button' onClick={()=>{navigate("/product/"+id); window.scrollTo({ top: 0, behavior: 'smooth' });}} >
                         View
                     </button>
                 </div>

@@ -24,6 +24,7 @@ import { OpenRoutes } from './routing/OpenRoutes';
 import Orders from './pages/Orders';
 import Profile from './pages/Profile';
 import VerifyCode from './pages/VerifyCode';
+import Services from './pages/Services';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path="about" element={<About />} />
             <Route path="contact" element={<Contact />} />
+            <Route path="services" element={<Services />} />
             <Route path="product" element={<OurStore />} />
             <Route path="product/:id" element={<SingleProduct />} />
             <Route path="cart" element={<PrivateRoutes><Cart /></PrivateRoutes>} />

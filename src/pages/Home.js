@@ -111,7 +111,7 @@ const toggleWishlist = (id) => {
     <Container class1='home-wrapper-1 py-5'>
     <div className='row'>
       
-            <div className="col-8 carousel slide" id="carouselExampleControls" data-bs-ride="carousel">
+            <div className="col-8 carousel slide" id="carouselExampleControls" data-bs-ride="carousel" data-bs-interval="2500" >
               <div className="carousel-inner">
                 <div className='main-banner position-relative carousel-item active'>
                   <img
@@ -191,6 +191,7 @@ const toggleWishlist = (id) => {
                   src={catBannerImg1}
                   alt='main banner'
                   className='img-fluid rounded'
+                  style={{ objectFit: "cover" }}
                 />
                 {/* <div className='small-banner-content position-absolute'>
                   <h4>BEST SALE</h4>
@@ -274,14 +275,17 @@ const toggleWishlist = (id) => {
           <div className="row">
             <div className="col-12">
               <div className='categories d-flex justify-content-between flex-wrap align-items-center'>
-              <div onClick={() => navigate('/product?category=Laptops')} className=' d-flex gap align-items-center ' >
+              <div onClick={() => {
+      navigate('/product?category=Laptops');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }} className=' d-flex gap align-items-center ' >
                   <div>
                     <h6>Laptops</h6>
                     
                   </div>
                   <img className='img-fluid category-img zoom' src={laptopImg} alt='camera'/>
                 </div>
-                <div onClick={() => navigate('/product?category=Monitors')} className='d-flex gap align-items-center'>
+                <div onClick={() => {navigate('/product?category=Monitors'); window.scrollTo({ top: 0, behavior: 'smooth' });}} className='d-flex gap align-items-center'>
                   <div>
                     <h6>Monitors</h6>
                     
@@ -289,7 +293,7 @@ const toggleWishlist = (id) => {
                   <img className='img-fluid category-img zoom' src={monitorImg} alt='camera'/>
                 </div>
                 
-                <div onClick={() => navigate('/product?category=Desktops')} className='d-flex gap align-items-center'>
+                <div onClick={() => {navigate('/product?category=Desktops'); window.scrollTo({ top: 0, behavior: 'smooth' });}} className='d-flex gap align-items-center'>
                   <div>
                     <h6>Desktops</h6>
                     
@@ -297,7 +301,7 @@ const toggleWishlist = (id) => {
                   <img className='img-fluid category-img zoom' src={desktopImg} alt='camera'/>
                 </div>
                 
-                <div onClick={() => navigate('/product?category=Printers And Scanners')} className='d-flex gap align-items-center'>
+                <div onClick={() => {navigate('/product?category=Printers And Scanners'); window.scrollTo({ top: 0, behavior: 'smooth' });}} className='d-flex gap align-items-center'>
                   <div>
                     <h6>Printers & Scanners</h6>
                     
@@ -306,28 +310,28 @@ const toggleWishlist = (id) => {
                 </div>
                 
                 
-                <div onClick={() => navigate('/product?category=CCTV Cameras')} className='d-flex gap align-items-center'>
+                <div onClick={() => {navigate('/product?category=CCTV Cameras'); window.scrollTo({ top: 0, behavior: 'smooth' });}} className='d-flex gap align-items-center'>
                   <div>
                     <h6>CCTV Cameras</h6>
                     
                   </div>
                   <img className='img-fluid category-img zoom' src={cameraImg} alt='camera'/>
                 </div>
-                <div onClick={() => navigate('/product?category=Networking')} className='d-flex gap align-items-center'>
+                <div onClick={() => {navigate('/product?category=Networking'); window.scrollTo({ top: 0, behavior: 'smooth' });}} className='d-flex gap align-items-center'>
                   <div>
                     <h6>Networking</h6>
                     
                   </div>
                   <img className='img-fluid category-img zoom' src={routerImg} alt='camera'/>
                 </div>
-                <div onClick={() => navigate('/product?category=Accessories')} className='d-flex gap align-items-center'>
+                <div onClick={() => {navigate('/product?category=Accessories'); window.scrollTo({ top: 0, behavior: 'smooth' });}} className='d-flex gap align-items-center'>
                   <div>
                     <h6>Accessories</h6>
                     
                   </div>
                   <img className='img-fluid category-img zoom' src={mouseImg} alt='camera'/>
                 </div>
-                <div onClick={() => navigate('/product?category=Laptops')} className='d-flex gap align-items-center'>
+                <div onClick={() => {navigate('/services'); window.scrollTo({ top: 0, behavior: 'smooth' });}} className='d-flex gap align-items-center'>
                   <div>
                     <h6>IT Solutions</h6>
                     
@@ -367,11 +371,11 @@ const toggleWishlist = (id) => {
                 {isWishlist ? <FcLike /> : <img src={wishListImg} alt="wish list" />}
                 </button>
             </div>
-            <div className='product-image' onClick={()=>navigate("/product/"+item?._id)} src={viewImg} alt='view'>
+            <div className='product-image' onClick={()=>{navigate("/product/"+item?._id); window.scrollTo({ top: 0, behavior: 'smooth' });}} src={viewImg} alt='view'>
               <img className='img-fluid mx-auto' src={item?.images[0]?.url} alt='product'/>
               <img className='img-fluid mx-auto' src={item?.images[1]?.url} alt='product'/>
             </div>
-            <div className='product-details mt-3' onClick={()=>navigate("/product/"+item?._id)} src={viewImg} alt='view'>
+            <div className='product-details mt-3' onClick={()=>{navigate("/product/"+item?._id); window.scrollTo({ top: 0, behavior: 'smooth' });}} src={viewImg} alt='view'>
                 <h6 className='brand'>{item?.brand}</h6>
                 <h5 className='product-title'>
                     {item?.title}
@@ -396,7 +400,7 @@ const toggleWishlist = (id) => {
                         <img src={addCartImg} alt='add cart'/>
                     </button>
                     <button className='border-0 bg-transparent'>
-                        <img onClick={()=>navigate("/product/"+item?._id)} src={viewImg} alt='view'/>
+                        <img onClick={()=>{navigate("/product/"+item?._id); window.scrollTo({ top: 0, behavior: 'smooth' });}} src={viewImg} alt='view'/>
                     </button>
                 </div>
             </div>
@@ -503,11 +507,11 @@ const toggleWishlist = (id) => {
                 {isWishlist ? <FcLike /> : <img src={wishListImg} alt="wish list" />}
                 </button>
             </div>
-            <div className='product-image' onClick={()=>navigate("/product/"+item?._id)} src={viewImg} alt='view'>
+            <div className='product-image' onClick={()=>{navigate("/product/"+item?._id); window.scrollTo({ top: 0, behavior: 'smooth' });}} src={viewImg} alt='view'>
               <img className='img-fluid mx-auto' src={item?.images[0]?.url} alt='product'/>
               <img className='img-fluid mx-auto' src={item?.images[1]?.url} alt='product'/>
             </div>
-            <div className='product-details mt-3' onClick={()=>navigate("/product/"+item?._id)} src={viewImg} alt='view'>
+            <div className='product-details mt-3' onClick={()=>{navigate("/product/"+item?._id); window.scrollTo({ top: 0, behavior: 'smooth' });}} src={viewImg} alt='view'>
                 <h6 className='brand'>{item?.brand}</h6>
                 <h5 className='product-title'>
                     {item?.title}
@@ -530,7 +534,7 @@ const toggleWishlist = (id) => {
                     <button onClick={() => addToCart(item?._id, item?.price)} className='border-0 bg-transparent'>
                         <img src={addCartImg} alt='add cart'/>
                     </button>
-                    <button onClick={()=>navigate("/product/"+item?._id)} className='border-0 bg-transparent'>
+                    <button onClick={()=>{navigate("/product/"+item?._id); window.scrollTo({ top: 0, behavior: 'smooth' });}} className='border-0 bg-transparent'>
                         <img src={viewImg} alt='view'/>
                     </button>
                 </div>
